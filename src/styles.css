@@ -1,0 +1,134 @@
+/* You can add global styles to this file, and also import other style files */
+@import '~bootstrap/dist/css/bootstrap.min.css';
+
+
+/* You can add global styles to this file, and also import other style files */
+
+* {
+    font-family: 'Inter', 'Material Icons', sans-serif !important; 
+    /* Add !important to overwrite all elements */
+  }
+  .material-icons {
+    font-family: 'Material Icons' !important;
+  }
+  html,
+  body {
+      height: 100%;
+  }
+  
+  body {
+      margin: 0;
+      font-family: 'Inter', sans-serif !important;
+  }
+  
+  p {
+      font-size: 16px;
+      font-weight: normal;
+  }
+  
+  /* Sidebar css start */
+  .sidebar-toggle-menu {
+      float: left;
+  }
+  
+  .main-content {
+      position: relative;
+      float: right;
+      background-color: #fff;
+      padding: 20px 0px;
+  }
+  
+  .sidebar-main {
+      padding: 20px 16px;
+  }
+  
+  /* footer css start */
+  footer {
+      display: inline-block;
+      width: 100%;
+  }
+  
+  body.mat-typography .sidebar-toggle-menu .treeview-area {
+      display: block;
+      animation: animateright 0.4s;
+      position: relative;
+  }
+  
+  body.mat-typography.site-menubar-fold .sidebar-toggle-menu .treeview-area {
+      display: none;
+  }
+  
+  body.mat-typography .sidebar-toggle-menu {
+      width: 250px;
+  }
+  
+  body.mat-typography.site-menubar-fold .sidebar-toggle-menu {
+      width: 0px;
+  }
+  
+  body.mat-typography .main-content {
+      width: calc(100% - 250px);
+  }
+  
+  body.mat-typography.site-menubar-fold .main-content {
+      width: calc(100% - 0px);
+  }
+  
+  .mat-tab-label-active {
+      color: #64D3BB;
+      opacity: 1;
+  }
+  
+  .mat-ink-bar {
+      background-color: #64D3BB !important;
+  }
+  .mat-tab-label.mat-tab-label-active{
+    opacity: 1 !important;
+  }
+  @media only screen and (max-width:990px) {
+      body.mat-typography .sidebar-toggle-menu {
+          width: 250px;
+          position: absolute;
+          z-index: 9999;
+          height: 100vh;
+          background: #fff;
+          left: 0;
+          display: none;
+      }
+  
+      body.mat-typography.site-menubar-fold .sidebar-toggle-menu {
+          width: 250px;
+          position: absolute;
+          z-index: 9999;
+          height: 100vh;
+          background: #fff;
+          left: 0;
+          display: block;
+      }
+  
+      body.mat-typography.site-menubar-fold .sidebar-toggle-menu .treeview-area {
+          display: block;
+      }
+      body.mat-typography .main-content {
+          width: calc(100% - 0px);
+      }
+  }
+    .mat-tab-label-content {
+      font-weight: 600;
+      font-size: 15px;
+  }
+  .data-table table th {
+    padding-left: 0;
+  }
+  @media (max-width:1680px){
+      body.mat-typography .sidebar-toggle-menu {
+          width: 230px;
+      }
+      body.mat-typography .main-content {
+          width: calc(100% - 230px);
+      }
+      .sidebar-main {
+          padding: 20px 0px 20px 15px;
+      }
+  }
+
