@@ -1,0 +1,150 @@
+.panel-heading {
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.panel-heading h2 {
+    margin-bottom: 0;
+}
+
+.panel-heading button {
+    border-color: #128FFE !important;
+    color: #128FFE !important;
+    font-weight: normal;
+    font-size: 12px;
+}
+
+.panel {
+    padding: 25px 15px;
+    box-shadow: 0px 0px 9px 1px rgb(204 204 204 / 50%);
+    margin-bottom: 30px;
+}
+
+.health-card {
+    padding: 20px 15px;
+    border: none;
+    box-shadow: 0px 4px 8px 3px rgb(204 204 204 / 70%);
+    border-radius: 26px;
+}
+
+.top-card {
+    background: #CED6E3;
+    text-align: center;
+    color: rgba(113, 113, 113, 1);
+    font-weight: 600;
+    padding: 3px 15px;
+    border-radius: 25px;
+    margin-bottom: 15px;
+    font-size: 14px;
+    width: 100%;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.bottom-card .col .progress-style {
+    background: #CED6E3;
+    padding: 5px 10px;
+    border-radius: 6px;
+}
+
+.bottom-card span {
+    font-weight: 500;
+    font-size: 12px;
+}
+.row.bottom-card {
+    margin-top: 15px;
+}
+.progress {
+    height: 10px;
+    box-shadow: 0px 0px 6px 1px #93a6c3;
+    margin: 5px 0px;
+}
+
+
+/* language filter start */
+.example-sidenav-content {
+    display: flex;
+    height: 38px;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    right: 0;
+    z-index: 33;
+}
+
+.example-sidenav {
+    padding: 20px;
+}
+
+::ng-deep mat-drawer-container.mat-drawer-container {
+    height: 100vh;
+    position: absolute;
+    right: 0;
+    z-index: 999;
+    top:0;
+}
+
+::ng-deep .mat-drawer.mat-drawer-side {
+    background: #fff;
+    width: 250px;
+    padding: 10px;
+    margin: 10px;
+    box-shadow: -5px -4px 29px rgb(0 0 0 / 5%);
+    border-top-left-radius: 25px;
+}
+
+.selected-language {
+    display: flex;
+    align-items: center;
+}
+
+.example-sidenav-content button {
+    box-shadow: -3px 2px 6px 2px rgb(204 204 204 / 50%);
+    border-top-left-radius: 25px;
+    border-bottom-left-radius: 25px;
+    height: 39px;
+    padding: 0;
+}
+
+.col-md-3.col-sm-6.col-xs-12 {
+    width: 318px;
+    margin-bottom: 25px;
+}
+.spinner {
+    margin:25% auto;
+}
+
+.health-availability {
+    background-color: #06D5AA!important;
+}
+
+.health-readiness {
+    background-color: #1181B2;
+}
+
+.health-capacity-building {
+    background-color: #2F4770;
+}
+
+.health-development-strategy {
+    background-color: #0860FE;
+}
+
+
+.digital-availability {
+    background-color: #1F914F;
+}
+
+.digital-readiness {
+    background-color: #71ADB5;
+}
+
+.digital-capacity-building {
+    background-color: #14CCAA;
+}
+
+.digital-development-strategy {
+    background-color: #41565A;
+}

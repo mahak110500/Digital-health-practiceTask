@@ -1,0 +1,58 @@
+{
+    "data": [
+        {
+            "2021": [
+                {
+                    "id": 1,
+                    "name": "France",
+                    "lat": 48.8567,
+                    "lng": 2.351,
+                    "iso_code": "FR",
+                    "flag": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/62/Flag_of_France.png/1280px-Flag_of_France.png"
+                },
+                {
+                    "id": 2,
+                    "name": "Russia",
+                    "lat": 55.7558,
+                    "lng": 37.6176,
+                    "iso_code": "RU",
+                    "flag": "https://ak.picdn.net/shutterstock/videos/1053933155/thumb/1.jpg"
+                }
+            ],
+            "2022": [
+                {
+                    "id": 3,
+                    "name": "India",
+                    "lat": 28.6353,
+                    "lng": 77.225,
+                    "iso_code": "IN",
+                    "flag": "https://upload.wikimedia.org/wikipedia/en/thumb/4/41/Flag_of_India.svg/255px-Flag_of_India.svg.png"
+                },
+                {
+                    "id": 4,
+                    "name": "Tokyo",
+                    "lat": 35.6785,
+                    "lng": 139.6823,
+                    "iso_code": "JP",
+                    "flag": "https://upload.wikimedia.org/wikipedia/en/thumb/9/9e/Flag_of_Japan.svg/1200px-Flag_of_Japan.svg.png"
+                },
+                {
+                    "id": 4,
+                    "name": "United States",
+                    "lat": 38.8921,
+                    "lng": -77.0241,
+                    "iso_code": "US",
+                    "flag": "https://upload.wikimedia.org/wikipedia/en/thumb/a/a4/Flag_of_the_United_States.svg/2560px-Flag_of_the_United_States.svg.png"
+                },
+                {
+                    "id": 5,
+                    "name": "United Kingdom",
+                    "lat": 51.5002,
+                    "lng": -0.1262,
+                    "iso_code": "UK",
+                    "flag": "https://upload.wikimedia.org/wikipedia/en/thumb/a/ae/Flag_of_the_United_Kingdom.svg/1200px-Flag_of_the_United_Kingdom.svg.png"
+                }
+            ]
+        }
+    ]
+}

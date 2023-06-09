@@ -1,0 +1,92 @@
+
+.example-spacer {
+    flex: 1 1 auto;
+}
+
+::ng-deep .mat-toolbar-single-row {
+    height: 75px;
+}
+
+.header-area button {
+    background: transparent;
+    border: none;
+}
+
+.logo {
+    display: inline-block;
+    margin-right: 20px;
+    width: 175px;
+}
+
+.brand-img {
+    display: flex;
+    align-items: center;
+}
+
+.logo-title h1 {
+    font-weight: 600;
+    color: #5380CD;
+}
+
+.logo-title a {
+    font-size: 13px;
+    text-decoration: none;
+    color: #5380CD;
+    padding: 2px 5px;
+    border-radius: 3px;
+}
+.logo-title a svg {
+    width: 13px;
+    height: 13px;
+}
+.header-area nav.navbar ul li a {
+    font-size: 16px;
+    color: #5380CD !important;
+    padding-right: 1rem !important;
+    padding-left: 1rem !important;
+    font-weight: 400;
+}
+
+.header-tabs button.active {
+    border-top: 3px solid #64D3BB !important;
+    border-radius: 0;
+    color: #64D3BB;
+}
+
+.header-tabs button {
+    color: #848484;
+    font-weight: 400;
+}
+
+@media only screen and (max-width:990px) {
+    .header-area div#navbarNav {
+        position: absolute;
+        top: 53px;
+        right: 1rem;
+    }
+
+    button.navbar-toggler:focus {
+        box-shadow: none;
+        outline: none;
+    }
+}
+
+@media only screen and (max-width:767px) {
+    .logo-title h1 {
+        display: none;
+    }
+    .header-tabs button {
+        padding: 0 5px;
+    }
+}
+
+.togglebtn{
+    font-size: 15px;
+    border-radius: 0%;
+}
+
+
+/* .active {
+    background-color: #ccc;
+    font-weight: bold;
+} */

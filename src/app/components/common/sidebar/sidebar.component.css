@@ -1,0 +1,132 @@
+.sidebar-main a {
+    cursor: pointer;
+}
+
+.treeview-area {
+    margin: 0rem 0;
+}
+
+.breadcrumb button {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    color: #5380CD;
+    font-size: 15px;
+    font-weight: 400;
+}
+
+.breadcrumb button svg {
+    font-size: 24px;
+    width: 24px;
+    height: 24px;
+    margin-right: 10px;
+    position: relative;
+    top: -2px;
+}
+
+body.mat-typography .sidebar-toggle-menu {
+    width: 75px;
+}
+
+a.md-text {
+    font-size: 14px !important;
+}
+
+.vertical-tree ul:first-child {
+    padding-left: 0 !important;
+}
+
+.vertical-tree ul.active li a.active svg {
+    stroke: #fff !important;
+    fill: #fff !important;
+}
+
+a.router-link-active {
+    background: #5380CD !important;
+    color: #fff !important;
+}
+
+
+
+
+
+
+
+/*-------------vertical-tree-view------------*/
+.vertical-tree ul {
+    padding-left: 15px;
+}
+
+.vertical-tree li {
+    margin: 0px 0;
+    list-style-type: none;
+    position: relative;
+    padding: 20px 5px 0px 5px;
+}
+
+.vertical-tree li::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    width: 1px;
+    height: 100%;
+    right: auto;
+    left: -6px;
+    border-left: 1px solid #ccc;
+    bottom: 50px;
+}
+
+.vertical-tree li::after {
+    content: '';
+    position: absolute;
+    top: 34px;
+    width: 17px;
+    height: 20px;
+    right: auto;
+    left: -6px;
+    border-top: 1px solid #ccc;
+}
+
+.vertical-tree li a {
+    display: inline-block;
+    padding: 8px;
+    text-decoration: none;
+    color: #5380CD;
+    font-size: 14px;
+    border-radius: 10px;
+    width: 100%;
+    position: relative;
+    z-index: 22;
+}
+
+.vertical-tree li a svg {
+    fill: #5380CD;
+    stroke: #5380CD;
+}
+
+.vertical-tree li a.active {
+    background-color: #5380CD;
+    color: #fff;
+}
+
+.vertical-tree>ul>li::before,
+.vertical-tree>ul>li::after {
+    border: 0;
+}
+
+.vertical-tree li:last-child::before {
+    height: 34px;
+}
+
+
+.vertical-tree li a:hover+ul li::after,
+.vertical-tree li a:hover+ul li::before,
+.vertical-tree li a:hover+ul::before,
+.vertical-tree li a:hover+ul ul::before {
+    border-color: #cccccc;
+}
+
+li.sm-text a {
+    font-size: 13px !important;
+    line-height: 17px;
+}

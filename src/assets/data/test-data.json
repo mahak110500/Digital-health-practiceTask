@@ -1,0 +1,1583 @@
+{
+    "Present Development": {
+        "Availability": {
+            "AI Workforce/Infrastructure": {
+                "Number of companies working in AI field ": [
+                    {
+                        "questions_question_score": 20,
+                        "countries_id": 107,
+                        "countries_name": "India",
+                        "development_id": 1,
+                        "development_name": "Present Development",
+                        "ultimate_id": 2,
+                        "ultimate_name": "Availability",
+                        "taxonomy_id": 5,
+                        "taxonomy_name": "AI Workforce/Infrastructure",
+                        "indicators_id": 10826,
+                        "indicator_name": "Number of companies working in AI field ",
+                        "question_id": 13134,
+                        "question_name": "Number of AI startups 500-1000 ",
+                        "score": 0,
+                        "ststus": "No",
+                        "texts": [
+                            "N/A"
+                        ],
+                        "links": []
+                    },
+                    {
+                        "questions_question_score": 25,
+                        "countries_id": 107,
+                        "countries_name": "India",
+                        "development_id": 1,
+                        "development_name": "Present Development",
+                        "ultimate_id": 2,
+                        "ultimate_name": "Availability",
+                        "taxonomy_id": 5,
+                        "taxonomy_name": "AI Workforce/Infrastructure",
+                        "indicators_id": 10826,
+                        "indicator_name": "Number of companies working in AI field ",
+                        "question_id": 13133,
+                        "question_name": "Number of AI startups >1000 ",
+                        "score": 0,
+                        "ststus": "No",
+                        "texts": [
+                            "N/A"
+                        ],
+                        "links": []
+                    },
+                    {
+                        "questions_question_score": 5,
+                        "countries_id": 107,
+                        "countries_name": "India",
+                        "development_id": 1,
+                        "development_name": "Present Development",
+                        "ultimate_id": 2,
+                        "ultimate_name": "Availability",
+                        "taxonomy_id": 5,
+                        "taxonomy_name": "AI Workforce/Infrastructure",
+                        "indicators_id": 10826,
+                        "indicator_name": "Number of companies working in AI field ",
+                        "question_id": 13137,
+                        "question_name": "Number of AI startups <50",
+                        "score": 0,
+                        "ststus": "No",
+                        "texts": [
+                            "N/A"
+                        ],
+                        "links": []
+                    },
+                    {
+                        "questions_question_score": 10,
+                        "countries_id": 107,
+                        "countries_name": "India",
+                        "development_id": 1,
+                        "development_name": "Present Development",
+                        "ultimate_id": 2,
+                        "ultimate_name": "Availability",
+                        "taxonomy_id": 5,
+                        "taxonomy_name": "AI Workforce/Infrastructure",
+                        "indicators_id": 10826,
+                        "indicator_name": "Number of companies working in AI field ",
+                        "question_id": 13136,
+                        "question_name": "Number of AI startups 50-199",
+                        "score": 10,
+                        "ststus": "Yes",
+                        "texts": [
+                            "86"
+                        ],
+                        "links": [
+                            "https://tracxn.com/explore/Artificial-Intelligence-Startups-in-Chile"
+                        ]
+                    },
+                    {
+                        "questions_question_score": 15,
+                        "countries_id": 107,
+                        "countries_name": "India",
+                        "development_id": 1,
+                        "development_name": "Present Development",
+                        "ultimate_id": 2,
+                        "ultimate_name": "Availability",
+                        "taxonomy_id": 5,
+                        "taxonomy_name": "AI Workforce/Infrastructure",
+                        "indicators_id": 10826,
+                        "indicator_name": "Number of companies working in AI field ",
+                        "question_id": 13135,
+                        "question_name": "Number of AI startups 200-499",
+                        "score": 0,
+                        "ststus": "No",
+                        "texts": [
+                            "N/A"
+                        ],
+                        "links": []
+                    }
+                ],
+                "AI Research Hubs ": [
+                    {
+                        "questions_question_score": 10,
+                        "countries_id": 107,
+                        "countries_name": "India",
+                        "development_id": 1,
+                        "development_name": "Present Development",
+                        "ultimate_id": 2,
+                        "ultimate_name": "Availability",
+                        "taxonomy_id": 5,
+                        "taxonomy_name": "AI Workforce/Infrastructure",
+                        "indicators_id": 10825,
+                        "indicator_name": "AI Research Hubs ",
+                        "question_id": 13132,
+                        "question_name": "Does the country have AI research hub? ",
+                        "score": 10,
+                        "ststus": "Yes",
+                        "texts": [
+                            "Created in 2012, Inria Chile is the first Inria centre outside France. It is a driving force for technological innovation and knowledge transfer through effective collaboration with companies, institutions and start-ups to meet the challenges of the digital revolution. The centre aims to inspire and train future generations of scientists and engineers to play a leading role in this transformation. It also promotes the R&D activities of French companies and start-ups in Chile and Latin America."
+                        ],
+                        "links": [
+                            "https://www.inria.fr/en/centre-inria-chile"
+                        ]
+                    }
+                ],
+                "Availability of data for AI Models - Open Data ": [
+                    {
+                        "questions_question_score": 10,
+                        "countries_id": 107,
+                        "countries_name": "India",
+                        "development_id": 1,
+                        "development_name": "Present Development",
+                        "ultimate_id": 2,
+                        "ultimate_name": "Availability",
+                        "taxonomy_id": 5,
+                        "taxonomy_name": "AI Workforce/Infrastructure",
+                        "indicators_id": 10824,
+                        "indicator_name": "Availability of data for AI Models - Open Data ",
+                        "question_id": 13131,
+                        "question_name": "Does the country have open data source of AI models  ",
+                        "score": 10,
+                        "ststus": "Yes",
+                        "texts": [
+                            "Official Chile government open data site."
+                        ],
+                        "links": [
+                            "https://dataportals.org/portal/chile-government"
+                        ]
+                    }
+                ],
+                "Digital Infrastructure for AI ": [
+                    {
+                        "questions_question_score": 5,
+                        "countries_id": 107,
+                        "countries_name": "India",
+                        "development_id": 1,
+                        "development_name": "Present Development",
+                        "ultimate_id": 2,
+                        "ultimate_name": "Availability",
+                        "taxonomy_id": 5,
+                        "taxonomy_name": "AI Workforce/Infrastructure",
+                        "indicators_id": 10823,
+                        "indicator_name": "Digital Infrastructure for AI ",
+                        "question_id": 13130,
+                        "question_name": "TII, UN data <0.70",
+                        "score": 0,
+                        "ststus": "No",
+                        "texts": [
+                            "N/A"
+                        ],
+                        "links": []
+                    },
+                    {
+                        "questions_question_score": 10,
+                        "countries_id": 107,
+                        "countries_name": "India",
+                        "development_id": 1,
+                        "development_name": "Present Development",
+                        "ultimate_id": 2,
+                        "ultimate_name": "Availability",
+                        "taxonomy_id": 5,
+                        "taxonomy_name": "AI Workforce/Infrastructure",
+                        "indicators_id": 10823,
+                        "indicator_name": "Digital Infrastructure for AI ",
+                        "question_id": 13129,
+                        "question_name": "TII, UN data 0.70-0.79 ",
+                        "score": 10,
+                        "ststus": "Yes",
+                        "texts": [
+                            "0.7606"
+                        ],
+                        "links": [
+                            "https://publicadministration.un.org/egovkb/Portals/egovkb/Documents/un/2020-Survey/2020%20UN%20E-Government%20Survey%20(Full%20Report).pdf"
+                        ]
+                    },
+                    {
+                        "questions_question_score": 15,
+                        "countries_id": 107,
+                        "countries_name": "India",
+                        "development_id": 1,
+                        "development_name": "Present Development",
+                        "ultimate_id": 2,
+                        "ultimate_name": "Availability",
+                        "taxonomy_id": 5,
+                        "taxonomy_name": "AI Workforce/Infrastructure",
+                        "indicators_id": 10823,
+                        "indicator_name": "Digital Infrastructure for AI ",
+                        "question_id": 13128,
+                        "question_name": "TII, UN data 0.80-0.89 ",
+                        "score": 0,
+                        "ststus": "No",
+                        "texts": [
+                            "N/A"
+                        ],
+                        "links": []
+                    },
+                    {
+                        "questions_question_score": 20,
+                        "countries_id": 107,
+                        "countries_name": "India",
+                        "development_id": 1,
+                        "development_name": "Present Development",
+                        "ultimate_id": 2,
+                        "ultimate_name": "Availability",
+                        "taxonomy_id": 5,
+                        "taxonomy_name": "AI Workforce/Infrastructure",
+                        "indicators_id": 10823,
+                        "indicator_name": "Digital Infrastructure for AI ",
+                        "question_id": 13127,
+                        "question_name": "TII, UN data 0.90-0.95 ",
+                        "score": 0,
+                        "ststus": "No",
+                        "texts": [
+                            "N/A"
+                        ],
+                        "links": []
+                    },
+                    {
+                        "questions_question_score": 25,
+                        "countries_id": 107,
+                        "countries_name": "India",
+                        "development_id": 1,
+                        "development_name": "Present Development",
+                        "ultimate_id": 2,
+                        "ultimate_name": "Availability",
+                        "taxonomy_id": 5,
+                        "taxonomy_name": "AI Workforce/Infrastructure",
+                        "indicators_id": 10823,
+                        "indicator_name": "Digital Infrastructure for AI ",
+                        "question_id": 13126,
+                        "question_name": "TII, UN data >0.95   ",
+                        "score": 0,
+                        "ststus": "No",
+                        "texts": [
+                            "N/A"
+                        ],
+                        "links": []
+                    },
+                    {
+                        "questions_question_score": 5,
+                        "countries_id": 107,
+                        "countries_name": "India",
+                        "development_id": 1,
+                        "development_name": "Present Development",
+                        "ultimate_id": 2,
+                        "ultimate_name": "Availability",
+                        "taxonomy_id": 5,
+                        "taxonomy_name": "AI Workforce/Infrastructure",
+                        "indicators_id": 10823,
+                        "indicator_name": "Digital Infrastructure for AI ",
+                        "question_id": 13125,
+                        "question_name": "5G network is just launched",
+                        "score": 5,
+                        "ststus": "Yes",
+                        "texts": [
+                            "8/4/2020nThe President of Chile announced the start of a process to implement 5G technology in Chile. In this process, 1,600 MHz of spectrum will be tendered, four times more than what has been tendered in the entire history of the sector. This will mean an estimated investment of US$ 3,000 million in the next 5 years, allowing 10 times the speed of navigation and having 100 times more capacity than current 4G networks.nnThe implementation of 5G technology will allow Chile to enter the world of the Internet of Things and achieve advances in the field of smart cities, modernization of the State, telemedicine, production and distribution of goods and services. Likewise, Chile is promoting digital highways, through the National Fiber Optic, the Southern Fiber Optic and the Fiber Optic cable that will connect Chile and South America with Asia and Oceania."
+                        ],
+                        "links": [
+                            "https://www.gob.cl/en/news/government-will-connect-366-areas-chile-through-5g-public-tender/"
+                        ]
+                    },
+                    {
+                        "questions_question_score": 10,
+                        "countries_id": 107,
+                        "countries_name": "India",
+                        "development_id": 1,
+                        "development_name": "Present Development",
+                        "ultimate_id": 2,
+                        "ultimate_name": "Availability",
+                        "taxonomy_id": 5,
+                        "taxonomy_name": "AI Workforce/Infrastructure",
+                        "indicators_id": 10823,
+                        "indicator_name": "Digital Infrastructure for AI ",
+                        "question_id": 13124,
+                        "question_name": "5G network is available in good extent ",
+                        "score": 0,
+                        "ststus": "No",
+                        "texts": [
+                            "N/A"
+                        ],
+                        "links": []
+                    }
+                ],
+                "AI expertise in existing IT workforce ": [
+                    {
+                        "questions_question_score": 5,
+                        "countries_id": 107,
+                        "countries_name": "India",
+                        "development_id": 1,
+                        "development_name": "Present Development",
+                        "ultimate_id": 2,
+                        "ultimate_name": "Availability",
+                        "taxonomy_id": 5,
+                        "taxonomy_name": "AI Workforce/Infrastructure",
+                        "indicators_id": 10822,
+                        "indicator_name": "AI expertise in existing IT workforce ",
+                        "question_id": 13123,
+                        "question_name": "As per government report, country is lacking AI experts",
+                        "score": 5,
+                        "ststus": "Yes",
+                        "texts": [
+                            "On the one hand, regarding talent development, Chile suffers at all levels of skill and talent gaps related to digital transformation. There is a need to reconvert parts of the workforce. Today, professionals with knowledge in AI are scarce, and have specialised mainly through work experience or by attending courses"
+                        ],
+                        "links": [
+                            "https://www.dataguidance.com/opinion/chile-principles-and-axes-chiles-ai-policy"
+                        ]
+                    },
+                    {
+                        "questions_question_score": 10,
+                        "countries_id": 107,
+                        "countries_name": "India",
+                        "development_id": 1,
+                        "development_name": "Present Development",
+                        "ultimate_id": 2,
+                        "ultimate_name": "Availability",
+                        "taxonomy_id": 5,
+                        "taxonomy_name": "AI Workforce/Infrastructure",
+                        "indicators_id": 10822,
+                        "indicator_name": "AI expertise in existing IT workforce ",
+                        "question_id": 13122,
+                        "question_name": "As per government report, huge number of AI experts are present ",
+                        "score": 0,
+                        "ststus": "No",
+                        "texts": [
+                            "N/A"
+                        ],
+                        "links": []
+                    }
+                ]
+            },
+            "Healthcare Governance": {
+                "Dedicated workforce to monitor development in local/regional level": [
+                    {
+                        "questions_question_score": 5,
+                        "countries_id": 107,
+                        "countries_name": "India",
+                        "development_id": 1,
+                        "development_name": "Present Development",
+                        "ultimate_id": 2,
+                        "ultimate_name": "Availability",
+                        "taxonomy_id": 1,
+                        "taxonomy_name": "Healthcare Governance",
+                        "indicators_id": 10745,
+                        "indicator_name": "Dedicated workforce to monitor development in local/regional level",
+                        "question_id": 12758,
+                        "question_name": "Is there any dedicated workforce for enforcement in state/local/municipal level?",
+                        "score": 5,
+                        "ststus": "Yes",
+                        "texts": [
+                            "SEREMIS also have an opportunity to develop cross-sectoral programmes according tonthe ‘Health in All Policies’ (Salud en Todas las Políticas) approach. The Health in allnPolicies approach in Chile has been systematically led by the Foros Regionales de SaludnPública (Regional Public Health Forums) since 2014. The Foros Regionales bringntogether regional authorities along with representatives of the community to developnstrategic plans and actions. For example, Foros have been working to prevent Hepatitis B,nimprove PAP and mammography rates, reduce. nnThis chapter sheds light on the organisation of the Chilean territory and its distributionnof regulatory powers. It looks at how in most OECD member countries, different levels ofngovernment coexist and how they deal with the each one’s set of rules and attributions. Itnexplains why promoting regulatory quality at the sub-national level would benefit citizensnand business, especially with the ongoing initiatives of decentralization. It furtherndescribes the multi-level regulatory framework necessary to design, implement, andnenforce regulation in order for one level not to undermine the other level’s regulatoryneffectiveness. Finally, it proposes a multi-level co-ordination mechanism in order tonattain regulatory goals, as well as sharing good practices and possible learningnexperiences."
+                        ],
+                        "links": [
+                            "http://5aldia.cl/wp-content/uploads/2019/01/OECD-Reviews-of-Public-Health-Chile.pdfnnnhttps://www.economia.gob.cl/wp-content/uploads/2017/03/01-Chile-Review-OCDE.pdf"
+                        ]
+                    }
+                ],
+                "Percentage of GDP Spent on Public Health ": [
+                    {
+                        "questions_question_score": 10,
+                        "countries_id": 107,
+                        "countries_name": "India",
+                        "development_id": 1,
+                        "development_name": "Present Development",
+                        "ultimate_id": 2,
+                        "ultimate_name": "Availability",
+                        "taxonomy_id": 1,
+                        "taxonomy_name": "Healthcare Governance",
+                        "indicators_id": 10747,
+                        "indicator_name": "Percentage of GDP Spent on Public Health ",
+                        "question_id": 12762,
+                        "question_name": "Total GDP expenditure value range 5-8   ",
+                        "score": 0,
+                        "ststus": "No",
+                        "texts": [
+                            "N/A"
+                        ],
+                        "links": []
+                    },
+                    {
+                        "questions_question_score": 5,
+                        "countries_id": 107,
+                        "countries_name": "India",
+                        "development_id": 1,
+                        "development_name": "Present Development",
+                        "ultimate_id": 2,
+                        "ultimate_name": "Availability",
+                        "taxonomy_id": 1,
+                        "taxonomy_name": "Healthcare Governance",
+                        "indicators_id": 10747,
+                        "indicator_name": "Percentage of GDP Spent on Public Health ",
+                        "question_id": 12764,
+                        "question_name": "Total GDP expenditure value range <5    ",
+                        "score": 0,
+                        "ststus": "No",
+                        "texts": [
+                            "N/A"
+                        ],
+                        "links": []
+                    },
+                    {
+                        "questions_question_score": 15,
+                        "countries_id": 107,
+                        "countries_name": "India",
+                        "development_id": 1,
+                        "development_name": "Present Development",
+                        "ultimate_id": 2,
+                        "ultimate_name": "Availability",
+                        "taxonomy_id": 1,
+                        "taxonomy_name": "Healthcare Governance",
+                        "indicators_id": 10747,
+                        "indicator_name": "Percentage of GDP Spent on Public Health ",
+                        "question_id": 12766,
+                        "question_name": "4. Domestic general government health expenditure (% of GDP) value >5    ",
+                        "score": 0,
+                        "ststus": "No",
+                        "texts": [
+                            "N/A"
+                        ],
+                        "links": []
+                    },
+                    {
+                        "questions_question_score": 10,
+                        "countries_id": 107,
+                        "countries_name": "India",
+                        "development_id": 1,
+                        "development_name": "Present Development",
+                        "ultimate_id": 2,
+                        "ultimate_name": "Availability",
+                        "taxonomy_id": 1,
+                        "taxonomy_name": "Healthcare Governance",
+                        "indicators_id": 10747,
+                        "indicator_name": "Percentage of GDP Spent on Public Health ",
+                        "question_id": 12768,
+                        "question_name": "5. Domestic general government health expenditure (% of GDP) value 3-5     ",
+                        "score": 10,
+                        "ststus": "Yes",
+                        "texts": [
+                            "4.752"
+                        ],
+                        "links": [
+                            "https://data.worldbank.org/indicator/SH.XPD.GHED.GD.ZS?locations=CL"
+                        ]
+                    },
+                    {
+                        "questions_question_score": 5,
+                        "countries_id": 107,
+                        "countries_name": "India",
+                        "development_id": 1,
+                        "development_name": "Present Development",
+                        "ultimate_id": 2,
+                        "ultimate_name": "Availability",
+                        "taxonomy_id": 1,
+                        "taxonomy_name": "Healthcare Governance",
+                        "indicators_id": 10747,
+                        "indicator_name": "Percentage of GDP Spent on Public Health ",
+                        "question_id": 12770,
+                        "question_name": "6. Domestic general government health expenditure (% of GDP) value <3   ",
+                        "score": 0,
+                        "ststus": "No",
+                        "texts": [
+                            "N/A"
+                        ],
+                        "links": []
+                    },
+                    {
+                        "questions_question_score": 15,
+                        "countries_id": 107,
+                        "countries_name": "India",
+                        "development_id": 1,
+                        "development_name": "Present Development",
+                        "ultimate_id": 2,
+                        "ultimate_name": "Availability",
+                        "taxonomy_id": 1,
+                        "taxonomy_name": "Healthcare Governance",
+                        "indicators_id": 10747,
+                        "indicator_name": "Percentage of GDP Spent on Public Health ",
+                        "question_id": 12760,
+                        "question_name": "Total GDP expenditure value range >8 ",
+                        "score": 15,
+                        "ststus": "Yes",
+                        "texts": [
+                            "9.333"
+                        ],
+                        "links": [
+                            "https://data.worldbank.org/indicator/SH.XPD.CHEX.GD.ZS?locations=CL"
+                        ]
+                    }
+                ],
+                "Availability of Web based National Health portals ": [
+                    {
+                        "questions_question_score": 10,
+                        "countries_id": 107,
+                        "countries_name": "India",
+                        "development_id": 1,
+                        "development_name": "Present Development",
+                        "ultimate_id": 2,
+                        "ultimate_name": "Availability",
+                        "taxonomy_id": 1,
+                        "taxonomy_name": "Healthcare Governance",
+                        "indicators_id": 10750,
+                        "indicator_name": "Availability of Web based National Health portals ",
+                        "question_id": 12772,
+                        "question_name": "Does the Country have Web based National Health Portals? ",
+                        "score": 10,
+                        "ststus": "Yes",
+                        "texts": [
+                            "Gob.cl"
+                        ],
+                        "links": [
+                            "https://www.gob.cl/en/"
+                        ]
+                    }
+                ],
+                "Health Insurance for Citizens ": [
+                    {
+                        "questions_question_score": 10,
+                        "countries_id": 107,
+                        "countries_name": "India",
+                        "development_id": 1,
+                        "development_name": "Present Development",
+                        "ultimate_id": 2,
+                        "ultimate_name": "Availability",
+                        "taxonomy_id": 1,
+                        "taxonomy_name": "Healthcare Governance",
+                        "indicators_id": 10751,
+                        "indicator_name": "Health Insurance for Citizens ",
+                        "question_id": 12774,
+                        "question_name": "Is the Health Insurance Available in an Equitable Manner (To every Citizen of the Country)? ",
+                        "score": 10,
+                        "ststus": "Yes",
+                        "texts": [
+                            "Fonasa covers a universe of 14,244,833 people throughout Chile (Data: 2019). It is a supportive Institution that does not discriminate based on age, sex, gender, income level, number of family responsibilities, pre-existing illnesses or nationality.nOn the official website of the National Health Fund (Fonasa) you can answer questions and find out the details of the coverage provided by public insurance and how to make the most of the benefits."
+                        ],
+                        "links": [
+                            "https://www.fonasa.cl/sites/fonasa/conoce-fonasa"
+                        ]
+                    },
+                    {
+                        "questions_question_score": 5,
+                        "countries_id": 107,
+                        "countries_name": "India",
+                        "development_id": 1,
+                        "development_name": "Present Development",
+                        "ultimate_id": 2,
+                        "ultimate_name": "Availability",
+                        "taxonomy_id": 1,
+                        "taxonomy_name": "Healthcare Governance",
+                        "indicators_id": 10751,
+                        "indicator_name": "Health Insurance for Citizens ",
+                        "question_id": 12776,
+                        "question_name": "Is the Health Insurance for all citizen is in plan ?",
+                        "score": 0,
+                        "ststus": "No",
+                        "texts": [
+                            "N/A"
+                        ],
+                        "links": []
+                    },
+                    {
+                        "questions_question_score": 4,
+                        "countries_id": 107,
+                        "countries_name": "India",
+                        "development_id": 1,
+                        "development_name": "Present Development",
+                        "ultimate_id": 2,
+                        "ultimate_name": "Availability",
+                        "taxonomy_id": 1,
+                        "taxonomy_name": "Healthcare Governance",
+                        "indicators_id": 10751,
+                        "indicator_name": "Health Insurance for Citizens ",
+                        "question_id": 12778,
+                        "question_name": "Is the Health Insurance Available only to low income group/elderly people ?",
+                        "score": 4,
+                        "ststus": "Yes",
+                        "texts": [
+                            "Fonasa does not exclude anyone. It incorporates all those people who live in the national territory, regardless of their age, sex, gender, income level, number of family responsibilities, pre-existing illnesses and nationality of origin.nnBeneficiaries do not pay extra for family burden. With the 7% contribution they are covered.nnFonasa provides its beneficiaries with financial coverage, according to their income level and economic vulnerability. To this end, four sections are established:t"
+                        ],
+                        "links": [
+                            "https://www.fonasa.cl/sites/fonasa/conoce-fonasa"
+                        ]
+                    },
+                    {
+                        "questions_question_score": 6,
+                        "countries_id": 107,
+                        "countries_name": "India",
+                        "development_id": 1,
+                        "development_name": "Present Development",
+                        "ultimate_id": 2,
+                        "ultimate_name": "Availability",
+                        "taxonomy_id": 1,
+                        "taxonomy_name": "Healthcare Governance",
+                        "indicators_id": 10751,
+                        "indicator_name": "Health Insurance for Citizens ",
+                        "question_id": 12780,
+                        "question_name": "Is there a Federal Health Insurance Fund Available ?",
+                        "score": 6,
+                        "ststus": "Yes",
+                        "texts": [
+                            "The National Health Fund is the public body in charge of granting health protection and coverage to its contributors and to all those people who lack resources, along with their respective charges.nIts main functions are: collect, manage and distribute the financial resources of the health sector, finance the health benefits granted to its users, characterize the people benefited by Fonasa, manage the health contributions and the resources allocated to the benefits, as well as Also, inform about your rights and the benefits that the Public Health Insurance has."
+                        ],
+                        "links": [
+                            "https://www.fonasa.cl/sites/fonasa/conoce-fonasa"
+                        ]
+                    }
+                ],
+                "Government's Engagement with the Private Sector for Stronger Implementation of the National Health Policy ": [
+                    {
+                        "questions_question_score": 20,
+                        "countries_id": 107,
+                        "countries_name": "India",
+                        "development_id": 1,
+                        "development_name": "Present Development",
+                        "ultimate_id": 2,
+                        "ultimate_name": "Availability",
+                        "taxonomy_id": 1,
+                        "taxonomy_name": "Healthcare Governance",
+                        "indicators_id": 10753,
+                        "indicator_name": "Government's Engagement with the Private Sector for Stronger Implementation of the National Health Policy ",
+                        "question_id": 12782,
+                        "question_name": "Has the country adopted the PPP for better implementation of national health policy?",
+                        "score": 20,
+                        "ststus": "Yes",
+                        "texts": [
+                            "To support this effort, the NationalnDevelopment Agency (CORFO, for its acronym in Spanish)ncreated the Health + Development program (S+D, for itsnacronym in Spanish), whose aim is to set up a public-privatencollaboration to establish the needs, current gaps and prioritiesnfor the health information technology sector. With the supportnof the RAND Corporation and different national private andnpublic stakeholders from government, industry andnuniversities, a roadmap emerged to streamline thendevelopment of the Chilean health information technologynsector. S+D’s main objetive is to promote competition andninnovation among health information technology providers bynfacilitating the adoption of standards and promoting thencoordination among the different stakeholders"
+                        ],
+                        "links": [
+                            "https://scian.cl/scientific-image-analysis/wp-content/uploads/2021/10/SHTI245-0693.pdf"
+                        ]
+                    }
+                ],
+                "Agency for monitoring policy enforcement ": [
+                    {
+                        "questions_question_score": 10,
+                        "countries_id": 107,
+                        "countries_name": "India",
+                        "development_id": 1,
+                        "development_name": "Present Development",
+                        "ultimate_id": 2,
+                        "ultimate_name": "Availability",
+                        "taxonomy_id": 1,
+                        "taxonomy_name": "Healthcare Governance",
+                        "indicators_id": 10744,
+                        "indicator_name": "Agency for monitoring policy enforcement ",
+                        "question_id": 12756,
+                        "question_name": "Is there a National agency monitoring the policy enforcement ",
+                        "score": 10,
+                        "ststus": "Yes",
+                        "texts": [
+                            "The Ministry of Health is organised through two Subsecretariat: i) thenSubsecretariat of Public Health; and ii) The Subsecretariat of AssistancenNetworks. The Subsecretariat of Public Health ensures all Chileans’ right tonhealth protection, exercising regulatory functions to ensure access and quality,nand sustained improvement of population health. The Subsecretariat of AssistancenNetworks mission is to regulate and supervise the function of health networksnwhich deliver health care servicesChile has a decentralised administration, and the responsibility for organising education,nsocial services, primary health care, parks and recreation lies with municipalities rathernthan the central government.nAt the regional level the Regional Health Authorities in Chile (SEREMIS) – of whichnthere are 15 – have an important role in designing and delivering public health actions.nThe SEREMI are responsible for both key public health safety controls, and enforcementnof national public health priorities. For example the SEREMI monitor food products andn1. THE PUBLIC HEALTH SYSTEM IN CHILE │ 63nOECD REVIEWS OF PUBLIC HEALTH: CHILE © OECD 2019nnutritional labelling, and have the power to issue warnings, administer fines and recalls ofnfood products if they identify anomalies.nThe SEREMIS convene and coordinate a series of social participation initiatives, amongnwhich are the Consejos Asesores Regionales, (CAR, Regional Advisory Councils), whichnhelp to deliver the national ‘Elige Vivir Sano en Comunidad’ (Healthy Living in thenCommunity) policy (see also Chapter 2). From 2014 the SEREMIS were also expected tondevelop local plans for the health promotion (Planes Comunales de Promoción de Salud)n(Departamento de Promoción de Salud, 2013[33])."
+                        ],
+                        "links": [
+                            "http://5aldia.cl/wp-content/uploads/2019/01/OECD-Reviews-of-Public-Health-Chile.pdf"
+                        ]
+                    }
+                ]
+            },
+            "Healthcare workforce and Infrastructure": {
+                "Availability of Hospital Beds ": [
+                    {
+                        "questions_question_score": 12,
+                        "countries_id": 107,
+                        "countries_name": "India",
+                        "development_id": 1,
+                        "development_name": "Present Development",
+                        "ultimate_id": 2,
+                        "ultimate_name": "Availability",
+                        "taxonomy_id": 4,
+                        "taxonomy_name": "Healthcare workforce and Infrastructure",
+                        "indicators_id": 10774,
+                        "indicator_name": "Availability of Hospital Beds ",
+                        "question_id": 13048,
+                        "question_name": "Number of Hospital Beds/1000 populations (5-10) ",
+                        "score": 0,
+                        "ststus": "No",
+                        "texts": [
+                            "N/A"
+                        ],
+                        "links": []
+                    },
+                    {
+                        "questions_question_score": 15,
+                        "countries_id": 107,
+                        "countries_name": "India",
+                        "development_id": 1,
+                        "development_name": "Present Development",
+                        "ultimate_id": 2,
+                        "ultimate_name": "Availability",
+                        "taxonomy_id": 4,
+                        "taxonomy_name": "Healthcare workforce and Infrastructure",
+                        "indicators_id": 10774,
+                        "indicator_name": "Availability of Hospital Beds ",
+                        "question_id": 13046,
+                        "question_name": "Number of Hospital Beds/1000 populations >10 ",
+                        "score": 0,
+                        "ststus": "No",
+                        "texts": [
+                            "N/A"
+                        ],
+                        "links": []
+                    },
+                    {
+                        "questions_question_score": 10,
+                        "countries_id": 107,
+                        "countries_name": "India",
+                        "development_id": 1,
+                        "development_name": "Present Development",
+                        "ultimate_id": 2,
+                        "ultimate_name": "Availability",
+                        "taxonomy_id": 4,
+                        "taxonomy_name": "Healthcare workforce and Infrastructure",
+                        "indicators_id": 10774,
+                        "indicator_name": "Availability of Hospital Beds ",
+                        "question_id": 13050,
+                        "question_name": "Number of Hospital Beds/1000 populations (3-4.9)  ",
+                        "score": 0,
+                        "ststus": "No",
+                        "texts": [
+                            "N/A"
+                        ],
+                        "links": []
+                    },
+                    {
+                        "questions_question_score": 5,
+                        "countries_id": 107,
+                        "countries_name": "India",
+                        "development_id": 1,
+                        "development_name": "Present Development",
+                        "ultimate_id": 2,
+                        "ultimate_name": "Availability",
+                        "taxonomy_id": 4,
+                        "taxonomy_name": "Healthcare workforce and Infrastructure",
+                        "indicators_id": 10774,
+                        "indicator_name": "Availability of Hospital Beds ",
+                        "question_id": 13052,
+                        "question_name": "Number of Hospital Beds/1000 populations (2-2.9) ",
+                        "score": 5,
+                        "ststus": "Yes",
+                        "texts": [
+                            "2.1"
+                        ],
+                        "links": [
+                            "https://data.worldbank.org/indicator/SH.MED.BEDS.ZS?locations=CL"
+                        ]
+                    },
+                    {
+                        "questions_question_score": 2,
+                        "countries_id": 107,
+                        "countries_name": "India",
+                        "development_id": 1,
+                        "development_name": "Present Development",
+                        "ultimate_id": 2,
+                        "ultimate_name": "Availability",
+                        "taxonomy_id": 4,
+                        "taxonomy_name": "Healthcare workforce and Infrastructure",
+                        "indicators_id": 10774,
+                        "indicator_name": "Availability of Hospital Beds ",
+                        "question_id": 13053,
+                        "question_name": "Number of Hospital Beds/1000 populations <2 ",
+                        "score": 0,
+                        "ststus": "No",
+                        "texts": [
+                            "N/A"
+                        ],
+                        "links": []
+                    }
+                ],
+                "Practicing Doctors / 1000 People ": [
+                    {
+                        "questions_question_score": 15,
+                        "countries_id": 107,
+                        "countries_name": "India",
+                        "development_id": 1,
+                        "development_name": "Present Development",
+                        "ultimate_id": 2,
+                        "ultimate_name": "Availability",
+                        "taxonomy_id": 4,
+                        "taxonomy_name": "Healthcare workforce and Infrastructure",
+                        "indicators_id": 10765,
+                        "indicator_name": "Practicing Doctors / 1000 People ",
+                        "question_id": 13022,
+                        "question_name": "Number of Practicing Doctors / 1000 People range  >4  ",
+                        "score": 15,
+                        "ststus": "Yes",
+                        "texts": [
+                            "5.2"
+                        ],
+                        "links": [
+                            "https://data.worldbank.org/indicator/SH.MED.PHYS.ZS?locations=CL"
+                        ]
+                    },
+                    {
+                        "questions_question_score": 10,
+                        "countries_id": 107,
+                        "countries_name": "India",
+                        "development_id": 1,
+                        "development_name": "Present Development",
+                        "ultimate_id": 2,
+                        "ultimate_name": "Availability",
+                        "taxonomy_id": 4,
+                        "taxonomy_name": "Healthcare workforce and Infrastructure",
+                        "indicators_id": 10765,
+                        "indicator_name": "Practicing Doctors / 1000 People ",
+                        "question_id": 13023,
+                        "question_name": "Number of Practicing Doctors / 1000 People range  (3-4) ",
+                        "score": 0,
+                        "ststus": "No",
+                        "texts": [
+                            "N/A"
+                        ],
+                        "links": []
+                    },
+                    {
+                        "questions_question_score": 8,
+                        "countries_id": 107,
+                        "countries_name": "India",
+                        "development_id": 1,
+                        "development_name": "Present Development",
+                        "ultimate_id": 2,
+                        "ultimate_name": "Availability",
+                        "taxonomy_id": 4,
+                        "taxonomy_name": "Healthcare workforce and Infrastructure",
+                        "indicators_id": 10765,
+                        "indicator_name": "Practicing Doctors / 1000 People ",
+                        "question_id": 13025,
+                        "question_name": "Number of Practicing Doctors / 1000 People range  (2-2.9)",
+                        "score": 0,
+                        "ststus": "No",
+                        "texts": [
+                            "N/A"
+                        ],
+                        "links": []
+                    },
+                    {
+                        "questions_question_score": 3,
+                        "countries_id": 107,
+                        "countries_name": "India",
+                        "development_id": 1,
+                        "development_name": "Present Development",
+                        "ultimate_id": 2,
+                        "ultimate_name": "Availability",
+                        "taxonomy_id": 4,
+                        "taxonomy_name": "Healthcare workforce and Infrastructure",
+                        "indicators_id": 10765,
+                        "indicator_name": "Practicing Doctors / 1000 People ",
+                        "question_id": 13027,
+                        "question_name": "Number of Practicing Doctors / 1000 People range  <2",
+                        "score": 0,
+                        "ststus": "No",
+                        "texts": [
+                            "N/A"
+                        ],
+                        "links": []
+                    }
+                ],
+                "Practicing Nurses / 1000 People ": [
+                    {
+                        "questions_question_score": 15,
+                        "countries_id": 107,
+                        "countries_name": "India",
+                        "development_id": 1,
+                        "development_name": "Present Development",
+                        "ultimate_id": 2,
+                        "ultimate_name": "Availability",
+                        "taxonomy_id": 4,
+                        "taxonomy_name": "Healthcare workforce and Infrastructure",
+                        "indicators_id": 10769,
+                        "indicator_name": "Practicing Nurses / 1000 People ",
+                        "question_id": 13029,
+                        "question_name": "Number of Nurses / 1000 People range  >12 ",
+                        "score": 15,
+                        "ststus": "Yes",
+                        "texts": [
+                            "13.3"
+                        ],
+                        "links": [
+                            "https://data.worldbank.org/indicator/SH.MED.NUMW.P3?locations=CL"
+                        ]
+                    },
+                    {
+                        "questions_question_score": 10,
+                        "countries_id": 107,
+                        "countries_name": "India",
+                        "development_id": 1,
+                        "development_name": "Present Development",
+                        "ultimate_id": 2,
+                        "ultimate_name": "Availability",
+                        "taxonomy_id": 4,
+                        "taxonomy_name": "Healthcare workforce and Infrastructure",
+                        "indicators_id": 10769,
+                        "indicator_name": "Practicing Nurses / 1000 People ",
+                        "question_id": 13031,
+                        "question_name": "Number of Nurses / 1000 People range  10-12 ",
+                        "score": 0,
+                        "ststus": "No",
+                        "texts": [
+                            "N/A"
+                        ],
+                        "links": []
+                    },
+                    {
+                        "questions_question_score": 8,
+                        "countries_id": 107,
+                        "countries_name": "India",
+                        "development_id": 1,
+                        "development_name": "Present Development",
+                        "ultimate_id": 2,
+                        "ultimate_name": "Availability",
+                        "taxonomy_id": 4,
+                        "taxonomy_name": "Healthcare workforce and Infrastructure",
+                        "indicators_id": 10769,
+                        "indicator_name": "Practicing Nurses / 1000 People ",
+                        "question_id": 13032,
+                        "question_name": "Number of Nurses / 1000 People range  7-9.9",
+                        "score": 0,
+                        "ststus": "No",
+                        "texts": [
+                            "N/A"
+                        ],
+                        "links": []
+                    },
+                    {
+                        "questions_question_score": 5,
+                        "countries_id": 107,
+                        "countries_name": "India",
+                        "development_id": 1,
+                        "development_name": "Present Development",
+                        "ultimate_id": 2,
+                        "ultimate_name": "Availability",
+                        "taxonomy_id": 4,
+                        "taxonomy_name": "Healthcare workforce and Infrastructure",
+                        "indicators_id": 10769,
+                        "indicator_name": "Practicing Nurses / 1000 People ",
+                        "question_id": 13034,
+                        "question_name": "Number of Nurses / 1000 People range  5-6.9",
+                        "score": 0,
+                        "ststus": "No",
+                        "texts": [
+                            "N/A"
+                        ],
+                        "links": []
+                    },
+                    {
+                        "questions_question_score": 2,
+                        "countries_id": 107,
+                        "countries_name": "India",
+                        "development_id": 1,
+                        "development_name": "Present Development",
+                        "ultimate_id": 2,
+                        "ultimate_name": "Availability",
+                        "taxonomy_id": 4,
+                        "taxonomy_name": "Healthcare workforce and Infrastructure",
+                        "indicators_id": 10769,
+                        "indicator_name": "Practicing Nurses / 1000 People ",
+                        "question_id": 13036,
+                        "question_name": "Number of Nurses / 1000 People range  <5",
+                        "score": 0,
+                        "ststus": "No",
+                        "texts": [
+                            "N/A"
+                        ],
+                        "links": []
+                    }
+                ],
+                "Number of Hospitals  ": [
+                    {
+                        "questions_question_score": 15,
+                        "countries_id": 107,
+                        "countries_name": "India",
+                        "development_id": 1,
+                        "development_name": "Present Development",
+                        "ultimate_id": 2,
+                        "ultimate_name": "Availability",
+                        "taxonomy_id": 4,
+                        "taxonomy_name": "Healthcare workforce and Infrastructure",
+                        "indicators_id": 10772,
+                        "indicator_name": "Number of Hospitals  ",
+                        "question_id": 13039,
+                        "question_name": "Number of Hospitals and clinics (>1000) ",
+                        "score": 0,
+                        "ststus": "No",
+                        "texts": [
+                            "N/A"
+                        ],
+                        "links": []
+                    },
+                    {
+                        "questions_question_score": 10,
+                        "countries_id": 107,
+                        "countries_name": "India",
+                        "development_id": 1,
+                        "development_name": "Present Development",
+                        "ultimate_id": 2,
+                        "ultimate_name": "Availability",
+                        "taxonomy_id": 4,
+                        "taxonomy_name": "Healthcare workforce and Infrastructure",
+                        "indicators_id": 10772,
+                        "indicator_name": "Number of Hospitals  ",
+                        "question_id": 13041,
+                        "question_name": "Number of Hospitals and clinics (500-1000) ",
+                        "score": 0,
+                        "ststus": "No",
+                        "texts": [
+                            "N/A"
+                        ],
+                        "links": []
+                    },
+                    {
+                        "questions_question_score": 8,
+                        "countries_id": 107,
+                        "countries_name": "India",
+                        "development_id": 1,
+                        "development_name": "Present Development",
+                        "ultimate_id": 2,
+                        "ultimate_name": "Availability",
+                        "taxonomy_id": 4,
+                        "taxonomy_name": "Healthcare workforce and Infrastructure",
+                        "indicators_id": 10772,
+                        "indicator_name": "Number of Hospitals  ",
+                        "question_id": 13042,
+                        "question_name": "Number of Hospitals and clinics (200-499)",
+                        "score": 8,
+                        "ststus": "Yes",
+                        "texts": [
+                            "347"
+                        ],
+                        "links": [
+                            "https://stats.oecd.org/Index.aspx?DataSetCode=HEALTH_REAC"
+                        ]
+                    },
+                    {
+                        "questions_question_score": 5,
+                        "countries_id": 107,
+                        "countries_name": "India",
+                        "development_id": 1,
+                        "development_name": "Present Development",
+                        "ultimate_id": 2,
+                        "ultimate_name": "Availability",
+                        "taxonomy_id": 4,
+                        "taxonomy_name": "Healthcare workforce and Infrastructure",
+                        "indicators_id": 10772,
+                        "indicator_name": "Number of Hospitals  ",
+                        "question_id": 13044,
+                        "question_name": "Number of Hospitals and clinics (50-199)",
+                        "score": 0,
+                        "ststus": "No",
+                        "texts": [
+                            "N/A"
+                        ],
+                        "links": []
+                    }
+                ],
+                "Digital Data Access in Health Care Facilities ": [
+                    {
+                        "questions_question_score": 7,
+                        "countries_id": 107,
+                        "countries_name": "India",
+                        "development_id": 1,
+                        "development_name": "Present Development",
+                        "ultimate_id": 2,
+                        "ultimate_name": "Availability",
+                        "taxonomy_id": 4,
+                        "taxonomy_name": "Healthcare workforce and Infrastructure",
+                        "indicators_id": 10779,
+                        "indicator_name": "Digital Data Access in Health Care Facilities ",
+                        "question_id": 13055,
+                        "question_name": "Does the country use digital healthcare data in good extent?",
+                        "score": 7,
+                        "ststus": "Yes",
+                        "texts": [
+                            "To better understand the many aspects of the health system and the impact on the citizen, MINSAL has put into operation a big data platform to analyze healthcare information. The ministry also partners with the Statistics Ministry (INE) to improve data collection, develop new metrics, and  elevate analysis of the health sector. Within the health sector, the new API framework greatly simplifies the acquisition of data, which in turn unlocks the value of big data and analysis technologies that yield better insight.MINSAL has found that social determinants greatly influence health decisions: choices in food, selection of facilities, participation in social circles, etc. By tapping into the wider ecosystem of software developers in Chile, new solutions could measurably affect underserved populations and change behavior. For example, data from the Ministry of Education of Chile (MINEDUC) could be mashed up with MINSAL data as well as data from other APIs to create useful applications and insights. One specific area of interest is raising awareness of the nutritional profiles of traditional and packaged foods, not only using labeling and information standards, but also integrating this information into the classroom and the daily lifestyles of families."
+                        ],
+                        "links": [
+                            "https://hitconsultant.net/2017/12/04/telemedicine-better-data-apis-improved-health-chile/"
+                        ]
+                    },
+                    {
+                        "questions_question_score": 3,
+                        "countries_id": 107,
+                        "countries_name": "India",
+                        "development_id": 1,
+                        "development_name": "Present Development",
+                        "ultimate_id": 2,
+                        "ultimate_name": "Availability",
+                        "taxonomy_id": 4,
+                        "taxonomy_name": "Healthcare workforce and Infrastructure",
+                        "indicators_id": 10779,
+                        "indicator_name": "Digital Data Access in Health Care Facilities ",
+                        "question_id": 13057,
+                        "question_name": "Country just launched digital healthcare facilities",
+                        "score": 0,
+                        "ststus": "No",
+                        "texts": [
+                            "N/A"
+                        ],
+                        "links": []
+                    }
+                ],
+                "Access to Critical Care, surgery, intensive": [
+                    {
+                        "questions_question_score": 5,
+                        "countries_id": 107,
+                        "countries_name": "India",
+                        "development_id": 1,
+                        "development_name": "Present Development",
+                        "ultimate_id": 2,
+                        "ultimate_name": "Availability",
+                        "taxonomy_id": 4,
+                        "taxonomy_name": "Healthcare workforce and Infrastructure",
+                        "indicators_id": 10782,
+                        "indicator_name": "Access to Critical Care, surgery, intensive",
+                        "question_id": 13059,
+                        "question_name": "Does the country have strong critical care unit?",
+                        "score": 5,
+                        "ststus": "Yes",
+                        "texts": [
+                            "RAPID RESPONSE - 60.2 (Above Global Average i.e. 38.4)"
+                        ],
+                        "links": [
+                            "https://www.ghsindex.org/wp-content/uploads/2019/10/2019-Global-Health-Security-Index.pdf"
+                        ]
+                    }
+                ],
+                "Medical/Imaging devices ": [
+                    {
+                        "questions_question_score": 15,
+                        "countries_id": 107,
+                        "countries_name": "India",
+                        "development_id": 1,
+                        "development_name": "Present Development",
+                        "ultimate_id": 2,
+                        "ultimate_name": "Availability",
+                        "taxonomy_id": 4,
+                        "taxonomy_name": "Healthcare workforce and Infrastructure",
+                        "indicators_id": 10784,
+                        "indicator_name": "Medical/Imaging devices ",
+                        "question_id": 13061,
+                        "question_name": "Number of Medical Technology units >50  ",
+                        "score": 15,
+                        "ststus": "Yes",
+                        "texts": [
+                            "CT scan (2017):446; MRI (2017):226; PET scan (2014) :0.56; gamma camera (2014): 1.63: mammographs (2014):14.79;  radioimmunotherapy (2014):2.3"
+                        ],
+                        "links": [
+                            "https://stats.oecd.org/Index.aspx?DataSetCode=HEALTH_REAC#"
+                        ]
+                    },
+                    {
+                        "questions_question_score": 10,
+                        "countries_id": 107,
+                        "countries_name": "India",
+                        "development_id": 1,
+                        "development_name": "Present Development",
+                        "ultimate_id": 2,
+                        "ultimate_name": "Availability",
+                        "taxonomy_id": 4,
+                        "taxonomy_name": "Healthcare workforce and Infrastructure",
+                        "indicators_id": 10784,
+                        "indicator_name": "Medical/Imaging devices ",
+                        "question_id": 13063,
+                        "question_name": "Number of Medical Technology units <50  ",
+                        "score": 0,
+                        "ststus": "No",
+                        "texts": [
+                            "N/A"
+                        ],
+                        "links": []
+                    }
+                ],
+                "Healthcare Research Hubs ": [
+                    {
+                        "questions_question_score": 10,
+                        "countries_id": 107,
+                        "countries_name": "India",
+                        "development_id": 1,
+                        "development_name": "Present Development",
+                        "ultimate_id": 2,
+                        "ultimate_name": "Availability",
+                        "taxonomy_id": 4,
+                        "taxonomy_name": "Healthcare workforce and Infrastructure",
+                        "indicators_id": 10787,
+                        "indicator_name": "Healthcare Research Hubs ",
+                        "question_id": 13065,
+                        "question_name": "Healthcare research hubs are present ",
+                        "score": 10,
+                        "ststus": "Yes",
+                        "texts": [
+                            "The process of strengthening essential national health research (ENHR) in Chile impliesnan intentional channelling of resources toward policy-oriented research as distinct fromnbasic and biomedical research. Lamentably, the success of basic and biomedicalnresearch in Chile, often oriented toward international audiences, has obscured for manynpeople the paucity of research aimed at informing health policy in Chile itself. It isncrucial that essential national health research be institutionalised in order directnresources and researchers to this area."
+                        ],
+                        "links": [
+                            "http://www.cohred.org/downloads/695.pdf"
+                        ]
+                    }
+                ]
+            },
+            "IT Governance": {
+                "National agency monitoring the policy enforcement ": [
+                    {
+                        "questions_question_score": 10,
+                        "countries_id": 107,
+                        "countries_name": "India",
+                        "development_id": 1,
+                        "development_name": "Present Development",
+                        "ultimate_id": 2,
+                        "ultimate_name": "Availability",
+                        "taxonomy_id": 2,
+                        "taxonomy_name": "IT Governance",
+                        "indicators_id": 10778,
+                        "indicator_name": "National agency monitoring the policy enforcement ",
+                        "question_id": 13121,
+                        "question_name": "Is there a National agency monitoring the policy enforcement ",
+                        "score": 0,
+                        "ststus": "Data not available",
+                        "texts": [
+                            "Not Found"
+                        ],
+                        "links": []
+                    },
+                    {
+                        "questions_question_score": 15,
+                        "countries_id": 107,
+                        "countries_name": "India",
+                        "development_id": 1,
+                        "development_name": "Present Development",
+                        "ultimate_id": 2,
+                        "ultimate_name": "Availability",
+                        "taxonomy_id": 2,
+                        "taxonomy_name": "IT Governance",
+                        "indicators_id": 10778,
+                        "indicator_name": "National agency monitoring the policy enforcement ",
+                        "question_id": 12840,
+                        "question_name": "Is there a National agency monitoring the policy enforcement ",
+                        "score": 15,
+                        "ststus": "Yes",
+                        "texts": [
+                            "To comply with the aforementioned, the President created the Committee ofnMinisters for Digital Development andnentrusted it with the following tasks:n1) The Committee must take thenexperience accumulated fromnprevious governments’ “DigitalnAgendas” to a new level. For this,nthey must coordinate the design,nimplementation and monitoring of then2007-2010 Digital Strategy as thenoperational expression of the impactnexpected by Information andnCommunication Technology policies."
+                        ],
+                        "links": [
+                            "https://www.economia.cl/1540/articles-186523_recurso_2.pdf"
+                        ]
+                    },
+                    {
+                        "questions_question_score": 10,
+                        "countries_id": 107,
+                        "countries_name": "India",
+                        "development_id": 1,
+                        "development_name": "Present Development",
+                        "ultimate_id": 2,
+                        "ultimate_name": "Availability",
+                        "taxonomy_id": 2,
+                        "taxonomy_name": "IT Governance",
+                        "indicators_id": 10778,
+                        "indicator_name": "National agency monitoring the policy enforcement ",
+                        "question_id": 12889,
+                        "question_name": "Is there a National agency monitoring the policy enforcement ",
+                        "score": 10,
+                        "ststus": "Yes",
+                        "texts": [
+                            "As part of the environmental scan and key informant interviews, we identified lack ofnstakeholder coordination as a key challenge to the successful growth of health IT in Chile. Tonaddress this challenge, the first activity within objective 1 is to create an institution whosenpurpose is to facilitate and monitor the implementation of the roadmap. This institution wouldnideally be independent of the government, with a separate board of governors and the possibilitynof receiving funding from outside private donors. However, the primary funding stream wouldnlikely be the government. Because government administrations are in office for only four-yearnterms, independent leadership of an oversight body would enable the institution to focus on thenlong-term objectives and changes necessary to achieve those objectives, without being concernednabout short-term changes within a given governmental administration. (Of note is the fact that annorganization called Salud + Desarrollo [Health and Development] has already been created. ThisnObjective 1: Develop institutional capacitynto implement health IT projects in the health systemnShort term Medium term Long termn1. Create an institution tonfacilitate and monitornimplementationn2. Identify and allocatenthe necessary resourcesn3. Create a task force tondetermine key changesn4. Provide support tonstandard and certificationnorganizationn5. Develop technicalninfrastructurenActivity 2016 2024 2018 2022 2020 2026n 11norganization is intended to serve as the overseer for activities related to the broad Health andnDevelopment Strategic Program and will likely serve the role described as part of this activity.)"
+                        ],
+                        "links": [
+                            "https://www.rand.org/content/dam/rand/pubs/research_reports/RR1300/RR1358z2/RAND_RR1358z2.pdf"
+                        ]
+                    }
+                ],
+                "Availability of Government Online Services ": [
+                    {
+                        "questions_question_score": 35,
+                        "countries_id": 107,
+                        "countries_name": "India",
+                        "development_id": 1,
+                        "development_name": "Present Development",
+                        "ultimate_id": 2,
+                        "ultimate_name": "Availability",
+                        "taxonomy_id": 2,
+                        "taxonomy_name": "IT Governance",
+                        "indicators_id": 10782,
+                        "indicator_name": "Availability of Government Online Services ",
+                        "question_id": 12846,
+                        "question_name": "OSI Index >0.95   ",
+                        "score": 0,
+                        "ststus": "No",
+                        "texts": [
+                            "N/A"
+                        ],
+                        "links": []
+                    },
+                    {
+                        "questions_question_score": 5,
+                        "countries_id": 107,
+                        "countries_name": "India",
+                        "development_id": 1,
+                        "development_name": "Present Development",
+                        "ultimate_id": 2,
+                        "ultimate_name": "Availability",
+                        "taxonomy_id": 2,
+                        "taxonomy_name": "IT Governance",
+                        "indicators_id": 10782,
+                        "indicator_name": "Availability of Government Online Services ",
+                        "question_id": 12853,
+                        "question_name": "OSI Index <0.7 (20)",
+                        "score": 0,
+                        "ststus": "No",
+                        "texts": [
+                            "N/A"
+                        ],
+                        "links": []
+                    },
+                    {
+                        "questions_question_score": 10,
+                        "countries_id": 107,
+                        "countries_name": "India",
+                        "development_id": 1,
+                        "development_name": "Present Development",
+                        "ultimate_id": 2,
+                        "ultimate_name": "Availability",
+                        "taxonomy_id": 2,
+                        "taxonomy_name": "IT Governance",
+                        "indicators_id": 10782,
+                        "indicator_name": "Availability of Government Online Services ",
+                        "question_id": 12851,
+                        "question_name": "OSI Index (0.7-0.79) ",
+                        "score": 0,
+                        "ststus": "No",
+                        "texts": [
+                            "N/A"
+                        ],
+                        "links": []
+                    },
+                    {
+                        "questions_question_score": 20,
+                        "countries_id": 107,
+                        "countries_name": "India",
+                        "development_id": 1,
+                        "development_name": "Present Development",
+                        "ultimate_id": 2,
+                        "ultimate_name": "Availability",
+                        "taxonomy_id": 2,
+                        "taxonomy_name": "IT Governance",
+                        "indicators_id": 10782,
+                        "indicator_name": "Availability of Government Online Services ",
+                        "question_id": 12849,
+                        "question_name": "OSI Index (0.8-0.89) ",
+                        "score": 20,
+                        "ststus": "Yes",
+                        "texts": [
+                            "0.8529"
+                        ],
+                        "links": [
+                            "https://publicadministration.un.org/egovkb/Portals/egovkb/Documents/un/2020-Survey/2020%20UN%20E-Government%20Survey%20(Full%20Report).pdf"
+                        ]
+                    },
+                    {
+                        "questions_question_score": 30,
+                        "countries_id": 107,
+                        "countries_name": "India",
+                        "development_id": 1,
+                        "development_name": "Present Development",
+                        "ultimate_id": 2,
+                        "ultimate_name": "Availability",
+                        "taxonomy_id": 2,
+                        "taxonomy_name": "IT Governance",
+                        "indicators_id": 10782,
+                        "indicator_name": "Availability of Government Online Services ",
+                        "question_id": 12848,
+                        "question_name": "OSI Index (0.9-0.95) ",
+                        "score": 0,
+                        "ststus": "No",
+                        "texts": [
+                            "N/A"
+                        ],
+                        "links": []
+                    },
+                    {
+                        "questions_question_score": 15,
+                        "countries_id": 107,
+                        "countries_name": "India",
+                        "development_id": 1,
+                        "development_name": "Present Development",
+                        "ultimate_id": 2,
+                        "ultimate_name": "Availability",
+                        "taxonomy_id": 2,
+                        "taxonomy_name": "IT Governance",
+                        "indicators_id": 10782,
+                        "indicator_name": "Availability of Government Online Services ",
+                        "question_id": 12844,
+                        "question_name": "Is there any official website for the Government services /E-service portal ? ",
+                        "score": 15,
+                        "ststus": "Yes",
+                        "texts": [
+                            "Your portal to access information of the Government of Chile in a simple and fast way."
+                        ],
+                        "links": [
+                            "https://www.gob.cl/en/"
+                        ]
+                    }
+                ],
+                "Dedicated workforce to monitor locally/regionally": [
+                    {
+                        "questions_question_score": 5,
+                        "countries_id": 107,
+                        "countries_name": "India",
+                        "development_id": 1,
+                        "development_name": "Present Development",
+                        "ultimate_id": 2,
+                        "ultimate_name": "Availability",
+                        "taxonomy_id": 2,
+                        "taxonomy_name": "IT Governance",
+                        "indicators_id": 10780,
+                        "indicator_name": "Dedicated workforce to monitor locally/regionally",
+                        "question_id": 12842,
+                        "question_name": "Is there any dedicated workforce for enforcement in state/local/municipal level?",
+                        "score": 5,
+                        "ststus": "Yes",
+                        "texts": [
+                            "Chile's telecommunications regulatory body is the Undersecretariat of Telecommunications (Subsecretaria de Telecomunicaciones, SUBTEL).nRegional ICT Boards These were created in 2002 under thenguidance of the National Coordination ofnInfo-centers in the Undersecretary ofnTelecommunications and have been thenpromotion and participation channels fornthose involved in ICT development innChilean territories, and will continue to benthe key regional players in the newninstitutional approach and workingnstructure.nThese boards follow a public-privatenmodel and are expected to becomenreferences for local and regional digitalndevelopment, defining lines of actionnrelated to their local and/or regionalndevelopment strategies."
+                        ],
+                        "links": [
+                            "State of Privacy Chile | Privacy International"
+                        ]
+                    }
+                ],
+                "Agencies to monitor Laws/Acts ": [
+                    {
+                        "questions_question_score": 5,
+                        "countries_id": 107,
+                        "countries_name": "India",
+                        "development_id": 1,
+                        "development_name": "Present Development",
+                        "ultimate_id": 2,
+                        "ultimate_name": "Availability",
+                        "taxonomy_id": 2,
+                        "taxonomy_name": "IT Governance",
+                        "indicators_id": 10787,
+                        "indicator_name": "Agencies to monitor Laws/Acts ",
+                        "question_id": 12859,
+                        "question_name": "Does the country have a Cyber security centre",
+                        "score": 5,
+                        "ststus": "Yes",
+                        "texts": [
+                            "The Industrial Cybersecurity Center in ChileGabriel Bergel and Jesus Peña Martinez are the Industrial Cibersecurity Center Coordinators in Chile (CCI Coordinators Team).nBoth, in collaboration with Eduardo Di Monte (who was CCI Coordinator in Chile, but he changes to CCI Expert Team Member CCI Experts Team), help us to get in context of the state of the industrial cybersecurity in their country, and to do so, they share with us their impressions."
+                        ],
+                        "links": [
+                            "https://www.cci-es.org/en/maps/chile-en/"
+                        ]
+                    },
+                    {
+                        "questions_question_score": 10,
+                        "countries_id": 107,
+                        "countries_name": "India",
+                        "development_id": 1,
+                        "development_name": "Present Development",
+                        "ultimate_id": 2,
+                        "ultimate_name": "Availability",
+                        "taxonomy_id": 2,
+                        "taxonomy_name": "IT Governance",
+                        "indicators_id": 10787,
+                        "indicator_name": "Agencies to monitor Laws/Acts ",
+                        "question_id": 12858,
+                        "question_name": "Is there any National agency monitoring the Law enforcement ",
+                        "score": 10,
+                        "ststus": "Yes",
+                        "texts": [
+                            "Law No. 19.974, which regulates intelligence services, also refers to the interception of communications. Article 24 allows for “the interception of telephone, computer, radio communications and correspondence in any form”, in the context of investigations related to national security and organised crime matters. Article 25 clarifies that “the directors or heads of intelligence agencies shall request, personally or through an official subordinate expressly authorised to do so, the court authorization to use [that] procedure.”nThe function and mandate of the ANI is defined by Law 19.974, which regulates intelligence agencies. The National Intelligence Agency is a centralised public service dependent on the President of the Republic through the Minister of the Interior. It aims to produce intelligence to advise the President and the various higher levels of leadership of the State."
+                        ],
+                        "links": [
+                            "State of Privacy Chile | Privacy International"
+                        ]
+                    }
+                ],
+                "Government Open Data Portal ": [
+                    {
+                        "questions_question_score": 15,
+                        "countries_id": 107,
+                        "countries_name": "India",
+                        "development_id": 1,
+                        "development_name": "Present Development",
+                        "ultimate_id": 2,
+                        "ultimate_name": "Availability",
+                        "taxonomy_id": 2,
+                        "taxonomy_name": "IT Governance",
+                        "indicators_id": 10786,
+                        "indicator_name": "Government Open Data Portal ",
+                        "question_id": 12855,
+                        "question_name": "Is there any official open data portal ? ",
+                        "score": 15,
+                        "ststus": "Yes",
+                        "texts": [
+                            "Data.gob the centralized open data repository of the State.nIn this portal you will find data and statistics from the public sector, for different purposes, such as applications, visualizations, research, etc."
+                        ],
+                        "links": [
+                            "http://datos.gob.cl/"
+                        ]
+                    }
+                ]
+            },
+            "IT Workforce & Infrastructure": {
+                "Availability of Disruptive Technologies (IoT and AI Services)": [
+                    {
+                        "questions_question_score": 5,
+                        "countries_id": 107,
+                        "countries_name": "India",
+                        "development_id": 1,
+                        "development_name": "Present Development",
+                        "ultimate_id": 2,
+                        "ultimate_name": "Availability",
+                        "taxonomy_id": 3,
+                        "taxonomy_name": "IT Workforce & Infrastructure",
+                        "indicators_id": 10720,
+                        "indicator_name": "Availability of Disruptive Technologies (IoT and AI Services)",
+                        "question_id": 12955,
+                        "question_name": "Has the country already started to integarte IOT and AI in the different sectors?",
+                        "score": 5,
+                        "ststus": "Yes",
+                        "texts": [
+                            "Artificial Intelligence (AI) and Internet of Things (IoT) are two technologies that are revolutionizing the mining industry. Training workers and strengthening telecommunications are among the main challenges that the sector must face.nnIn the middle of the 18th century, the term \"industrial revolution\" was coined to refer to the incorporation of technology in production processes. After decades of progress, today the sector is experiencing a new disruptive process. This is the fourth industrial revolution or Industry 4.0, which is marked by the use of Cyber-Physical Systems (CPS), Big Data, AI and Internet of Things, among other technologies."
+                        ],
+                        "links": [
+                            "https://blog.investchile.gob.cl/how-artificial-intelligence-and-internet-of-things-are-revolutionizing-mining"
+                        ]
+                    }
+                ],
+                "IT research hubs/labs": [
+                    {
+                        "questions_question_score": 5,
+                        "countries_id": 107,
+                        "countries_name": "India",
+                        "development_id": 1,
+                        "development_name": "Present Development",
+                        "ultimate_id": 2,
+                        "ultimate_name": "Availability",
+                        "taxonomy_id": 3,
+                        "taxonomy_name": "IT Workforce & Infrastructure",
+                        "indicators_id": 10728,
+                        "indicator_name": "IT research hubs/labs",
+                        "question_id": 12973,
+                        "question_name": "Does the country pose the number of Government research labs?",
+                        "score": 5,
+                        "ststus": "Yes",
+                        "texts": [
+                            "Laboratorio de Gobierno, the first public service innovation lab inside the Chilean government, was set up for a range of reasons. The country has made much progress in recent years, including a new focus on government delivery, but there remained more to do. While the country's populace can now enjoy a far higher standard of living than previous generations, there is still much scope for further improvement - which is where the Lab came in."
+                        ],
+                        "links": [
+                            "https://www.centreforpublicimpact.org/insights/charging-up-chile-lab"
+                        ]
+                    }
+                ]
+            }
+        }
+    }
+}

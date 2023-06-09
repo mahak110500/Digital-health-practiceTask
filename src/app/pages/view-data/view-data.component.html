@@ -1,7 +1,11 @@
-<div class="two-column-layout">
+<div *ngIf="isLoading" class="loader-container">
+    <div class="loader"></div>
+</div>
+
+<div class="two-column-layout" *ngIf="!isLoading">
     <div class="container-fluid">
         <div class="row">
-            <div class="print-btn" >
+            <div class="print-btn">
                 <a mat-raised-button><svg xmlns="http://www.w3.org/2000/svg" width="13" height="17" viewBox="0 0 13 17"
                         fill="none">
                         <path
@@ -9,11 +13,11 @@
                             fill="white" />
                     </svg>Print</a>
             </div>
-
-            <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
+           
+            <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12" *ngIf="!isLoading">
                 <div class="panel">
                     <div class="table-layout-main">
-                        <h2 >{{developmentName[0]}}</h2>
+                        <h2>{{developmentName[0]}}</h2>
 
                         <!-- Availability start -->
                         <ng-container *ngFor="let data of Availability; let i=index;">
@@ -146,10 +150,10 @@
                 </div>
             </div>
 
-            <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
+            <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12" *ngIf="!isLoading">
                 <div class="panel">
                     <div class="table-layout-main">
-                        <h2 >{{developmentName[1]}}</h2>
+                        <h2>{{developmentName[1]}}</h2>
 
                         <!-- Capacity Building starts -->
                         <ng-container *ngFor="let data of CapacityBuilding; let i=index;">
@@ -183,7 +187,7 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <ng-container *ngFor="let value of data7; let i=index">
+                                                <ng-container *ngFor="let value of capacityBuildArray; let i=index">
                                                     <tr class="border-less" *ngFor="let val of value[1]; let j=index">
                                                         <ng-container *ngIf="data[0]==val.taxonomy_name">
                                                             <td style="width: 30%;">
@@ -249,7 +253,7 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <ng-container *ngFor="let value of data9; let i=index">
+                                                <ng-container *ngFor="let value of DevelopmentStratArray; let i=index">
                                                     <tr class="border-less" *ngFor="let val of value[1]; let j=index">
                                                         <ng-container *ngIf="data[0]==val.taxonomy_name">
                                                             <td style="width: 30%;">

@@ -1,0 +1,20 @@
+<div class="container-fluid">
+    <div class="filter-area">
+        <!-- <div class="togglebtn">
+            <div class="header-tabs" *ngIf="showHeaderMenu" >
+                <button class="active" (click)="toggle(1)" [ngClass]="{ 'active' : governance_id == 1 }" mat-button>Health & IT</button>
+                <button (click)="toggle(2)" [ngClass]="{ 'active' : governance_id == 2 }" mat-button>Digital Health</button>
+            </div>
+        </div> -->
+
+        <div class="togglebtn">
+            <div class="header-tabs" *ngIf="showHeaderMenu">
+                <button class="toggle-btn" (click)="toggle(1)" [ngClass]="{ 'active' : governance_id == 1 }"
+                    mat-button>Health & IT</button>
+                <button class="toggle-btn" (click)="toggle(2)" [ngClass]="{ 'active' : governance_id == 2 }"
+                    mat-button>Digital Health</button>
+            </div>
+        </div>
+
+    </div>
+</div>

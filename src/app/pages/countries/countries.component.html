@@ -1,0 +1,102 @@
+<div class="two-column-layout">
+    <div class="language-sidebar">
+        <div class="example-sidenav-content">
+            <button type="button" mat-button (click)="drawer.toggle()" disableRipple>
+                <div class="selected-language">
+                    <mat-icon>arrow_left</mat-icon><img src="assets/flags/{{ country_flag }}" />{{ country_name }}
+                </div>
+            </button>
+        </div>
+        <mat-drawer-container class="example-container" autosize>
+            <mat-drawer #drawer class="example-sidenav" mode="side">
+                <div class="search-content">
+                    <div class="mat-search">
+                        <a>
+                            <mat-icon>arrow_right</mat-icon>
+                        </a>
+                        <div class="mat-serach-input">
+                            <input type="text" placeholder="search" />
+                        </div>
+                    </div>
+                    <div class="country-list">
+                        <ul>
+                            <li *ngFor="let country of country_list" (click)="drawer.close()">
+                                <div class="selected-language" style="cursor: pointer;"
+                                    [ngClass]="{ 'active' : country_id == country.country_id }"
+                                    (click)="getSelectedCountry(country)">
+                                    <img src="assets/flags/{{country.flag}}" />{{country.country_name}}
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <p>
+                    Lorem, ipsum dolor sit amet consectetur.
+                </p>
+            </mat-drawer>
+        </mat-drawer-container>
+    </div>
+
+    <!-- panel one start -->
+    <div class="container-fluid">
+        <div class="tab-section" [ngClass]="governance_id == 1 ? 'showTab' : 'hideTtab'">
+            <div class="panel">
+                <div class="panel-heading d-flex">
+                    <h2>Present Development</h2>
+                    <!-- <div id="chartdiv_health_present" style="width: 45%; height: 32vh"></div> -->
+                    <button mat-stroked-button color="primary" [routerLink]="[]">
+                        View Data
+                    </button>
+                </div>
+                <div class="panel-content">
+                    <pie-chart-card [chartdiv]="health_taxonomy_present"></pie-chart-card>
+                </div>
+            </div>
+
+            <div class="panel">
+                <div class="panel-heading d-flex">
+                    <h2>Prospective Development</h2>
+                   
+                    <button mat-stroked-button color="primary" [routerLink]="[]">
+                        View Data
+                    </button>
+                </div>
+                <div class="panel-content">
+                    <pie-chart-card [chartdiv]="health_taxonomy_prospective"></pie-chart-card>
+                </div>
+            </div>
+        </div>
+        <!-- panel one End -->
+
+        <!-- panel two Start -->
+
+        <div class="tab-section" [ngClass]="governance_id == 2 ? 'showTab' : 'hideTtab'">
+            <div class="panel">
+                <div class="panel-heading d-flex">
+                    <h2>Present Development</h2>
+                    <button mat-stroked-button color="primary" [routerLink]="[]">
+                        View Data
+                    </button>
+                </div>
+                <div class="panel-content">
+                    <pie-chart-card [chartdiv]="digital_taxonomy_present"></pie-chart-card>
+                </div>
+            </div>
+
+            <div class="panel">
+                <div class="panel-heading d-flex">
+                    <h2>Prospective Development</h2>
+                    <button mat-stroked-button color="primary" [routerLink]="[]">
+                        View Data
+                    </button>
+                </div>
+                <div class="panel-content">
+                    <pie-chart-card [chartdiv]="digital_taxonomy_prospective"></pie-chart-card>
+                </div>
+            </div>
+        </div>
+        <!-- panel two End -->
+
+
+    </div>
+</div>

@@ -1,0 +1,239 @@
+<div class="sidebar-main">
+    <div class="treeview-area">
+        <div class="breadcrumb">
+            <!-- <button disableRipple mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon"
+                [routerLink]="['/home']">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                    <path
+                        d="M5 12.7595C5 11.4018 5 10.7229 5.27446 10.1262C5.54892 9.52943 6.06437 9.08763 7.09525 8.20401L8.09525 7.34687C9.95857 5.74974 10.8902 4.95117 12 4.95117C13.1098 4.95117 14.0414 5.74974 15.9047 7.34687L16.9047 8.20401C17.9356 9.08763 18.4511 9.52943 18.7255 10.1262C19 10.7229 19 11.4018 19 12.7595V16.9999C19 18.8856 19 19.8284 18.4142 20.4142C17.8284 20.9999 16.8856 20.9999 15 20.9999H9C7.11438 20.9999 6.17157 20.9999 5.58579 20.4142C5 19.8284 5 18.8856 5 16.9999V12.7595Z"
+                        stroke="#5380CD" stroke-opacity="0.8" stroke-width="2" />
+                    <path d="M14.5 21V16C14.5 15.4477 14.0523 15 13.5 15H10.5C9.94772 15 9.5 15.4477 9.5 16V21"
+                        stroke="#5380CD" stroke-opacity="0.8" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round" />
+                </svg><span>Home</span>
+            </button> -->
+        </div>
+        <div class="vertical-tree">
+            <ul>
+                <li>
+                    <a (click)="toggle(1)" [ngClass]="{ 'active' : activeTabs.includes(1)}" href="javascript:void(0);"
+                        [routerLink]="[]" routerLinkActive="router-link-active"><svg
+                            xmlns="http://www.w3.org/2000/svg" width="23" height="23" viewBox="0 0 23 23" fill="none">
+                            <rect x="1" y="1" width="21" height="21" rx="3" stroke="white" stroke-opacity="0.8"
+                                stroke-width="2" />
+                            <line x1="0.696777" y1="3.68164" x2="22.3028" y2="3.68164" stroke="white"
+                                stroke-opacity="0.8" />
+                            <rect x="3.5" y="8.5" width="5.67" height="5.9697" rx="0.5" stroke="white"
+                                stroke-opacity="0.8" />
+                            <rect x="11.5" y="8.5" width="9" height="1" rx="0.5" stroke="white" stroke-opacity="0.8" />
+                            <rect x="11.5" y="13.5" width="9" height="1" rx="0.5" stroke="white" stroke-opacity="0.8" />
+                            <rect x="2.5" y="17.5" width="18" height="1" rx="0.5" stroke="white" stroke-opacity="0.8" />
+                        </svg>&nbsp;&nbsp;&nbsp;NDHS Map
+                        <mat-icon style="float:right;" *ngIf="!expanded" aria-hidden="false" aria-label="expand-more"
+                            fontIcon="expand_more">expand_more
+                        </mat-icon>
+                        <mat-icon *ngIf="expanded" style="float:right;" aria-hidden="false" aria-label="expand-less"
+                            fontIcon="expand_less">expand_less
+                        </mat-icon>
+                    </a>
+                    <ul>
+                        <li>
+                            <a class="md-text" [routerLink]="['/countries']" routerLinkActive="router-link-active"
+                                href="javascript:void(0);" (click)="toggle(3)"
+                                [ngClass]="{ 'active' : activeTabs.includes(3)}"><svg xmlns="http://www.w3.org/2000/svg"
+                                    width="21" height="16" viewBox="0 0 21 16" fill="none">
+                                    <path
+                                        d="M18.5834 0.757813C18.2855 0.757944 17.9918 0.853187 17.7255 1.03598C17.4593 1.21877 17.2278 1.48408 17.0495 1.81084C16.8711 2.1376 16.7508 2.51681 16.6982 2.91837C16.6455 3.31993 16.6619 3.73277 16.7461 4.12413L13.7734 8.19565C13.3814 8.01676 12.9576 8.01676 12.5656 8.19565L10.3618 5.17681C10.4343 4.78918 10.4411 4.38397 10.3818 3.99215C10.3225 3.60034 10.1985 3.23229 10.0194 2.91616C9.84034 2.60003 9.61085 2.34418 9.3485 2.16818C9.08616 1.99217 8.79791 1.90067 8.50579 1.90067C8.21367 1.90067 7.92542 1.99217 7.66307 2.16818C7.40073 2.34418 7.17124 2.60003 6.99214 2.91616C6.81305 3.23229 6.6891 3.60034 6.62976 3.99215C6.57043 4.38397 6.57728 4.78918 6.6498 5.17681L2.96406 10.2223C2.55487 10.0564 2.11697 10.082 1.71959 10.2951C1.32221 10.5082 0.988018 10.8967 0.76983 11.3991C0.551642 11.9015 0.461906 12.4892 0.514806 13.0692C0.567707 13.6493 0.760226 14.1887 1.06193 14.6021C1.36364 15.0155 1.75733 15.2794 2.18077 15.3521C2.60421 15.4247 3.03325 15.302 3.40007 15.0033C3.7669 14.7045 4.05058 14.2469 4.20628 13.7026C4.36199 13.1583 4.38083 12.5585 4.25984 11.9979L7.89893 7.01345C8.29095 7.19247 8.71479 7.19247 9.10682 7.01345L11.311 10.0329C11.2385 10.4205 11.2316 10.8257 11.291 11.2175C11.3503 11.6093 11.4743 11.9774 11.6534 12.2935C11.8324 12.6096 12.0619 12.8655 12.3243 13.0415C12.5866 13.2175 12.8749 13.309 13.167 13.309C13.4591 13.309 13.7474 13.2175 14.0097 13.0415C14.2721 12.8655 14.5016 12.6096 14.6806 12.2935C14.8597 11.9774 14.9837 11.6093 15.043 11.2175C15.1024 10.8257 15.0955 10.4205 15.023 10.0329L18.0419 5.89971C18.3054 6.00623 18.5826 6.03383 18.8547 5.98067C19.1267 5.9275 19.3872 5.7948 19.6185 5.59158C19.8498 5.38835 20.0464 5.11935 20.1952 4.80283C20.3439 4.48631 20.4411 4.12967 20.4804 3.75712C20.5196 3.38457 20.4999 3.00481 20.4225 2.64362C20.3452 2.28243 20.212 1.94825 20.0321 1.66377C19.8522 1.37928 19.6297 1.15114 19.3797 0.994827C19.1297 0.838512 18.8581 0.757679 18.5834 0.757813Z"
+                                        fill="white" />
+                                </svg>&nbsp;&nbsp;&nbsp;Countries</a>
+                            <ul>
+                                <li>
+                                    <a [routerLink]="['/view-data']" routerLinkActive="router-link-active"
+                                        href="javascript:void(0);" (click)="toggle(4)"
+                                        [ngClass]="{ 'active' : activeTabs.includes(4)}"><svg
+                                            xmlns="http://www.w3.org/2000/svg" width="16" height="15"
+                                            viewBox="0 0 16 15" fill="none">
+                                            <path
+                                                d="M4.25 10.3125C4.25 10.0639 4.34877 9.8254 4.52459 9.64959C4.7004 9.47377 4.93886 9.375 5.1875 9.375C5.43614 9.375 5.6746 9.47377 5.85041 9.64959C6.02623 9.8254 6.125 10.0639 6.125 10.3125V11.25C6.125 11.4986 6.02623 11.7371 5.85041 11.9129C5.6746 12.0887 5.43614 12.1875 5.1875 12.1875C4.93886 12.1875 4.7004 12.0887 4.52459 11.9129C4.34877 11.7371 4.25 11.4986 4.25 11.25V10.3125ZM9.875 6.5625C9.875 6.31386 9.97377 6.0754 10.1496 5.89959C10.3254 5.72377 10.5639 5.625 10.8125 5.625C11.0611 5.625 11.2996 5.72377 11.4754 5.89959C11.6512 6.0754 11.75 6.31386 11.75 6.5625V11.25C11.75 11.4986 11.6512 11.7371 11.4754 11.9129C11.2996 12.0887 11.0611 12.1875 10.8125 12.1875C10.5639 12.1875 10.3254 12.0887 10.1496 11.9129C9.97377 11.7371 9.875 11.4986 9.875 11.25V6.5625ZM7.0625 8.4375C7.0625 8.18886 7.16127 7.9504 7.33709 7.77459C7.5129 7.59877 7.75136 7.5 8 7.5C8.24864 7.5 8.4871 7.59877 8.66291 7.77459C8.83873 7.9504 8.9375 8.18886 8.9375 8.4375V11.25C8.9375 11.4986 8.83873 11.7371 8.66291 11.9129C8.4871 12.0887 8.24864 12.1875 8 12.1875C7.75136 12.1875 7.5129 12.0887 7.33709 11.9129C7.16127 11.7371 7.0625 11.4986 7.0625 11.25V8.4375Z"
+                                               *ngIf="isValue != 4"  fill="#5380CD" />
+                                            <path
+                                                d="M4.25 1.40625H3.3125C2.81522 1.40625 2.33831 1.60379 1.98667 1.95542C1.63504 2.30706 1.4375 2.78397 1.4375 3.28125V13.125C1.4375 13.6223 1.63504 14.0992 1.98667 14.4508C2.33831 14.8025 2.81522 15 3.3125 15H12.6875C13.1848 15 13.6617 14.8025 14.0133 14.4508C14.365 14.0992 14.5625 13.6223 14.5625 13.125V3.28125C14.5625 2.78397 14.365 2.30706 14.0133 1.95542C13.6617 1.60379 13.1848 1.40625 12.6875 1.40625H11.75V2.34375H12.6875C12.9361 2.34375 13.1746 2.44252 13.3504 2.61834C13.5262 2.79415 13.625 3.03261 13.625 3.28125V13.125C13.625 13.3736 13.5262 13.6121 13.3504 13.7879C13.1746 13.9637 12.9361 14.0625 12.6875 14.0625H3.3125C3.06386 14.0625 2.8254 13.9637 2.64959 13.7879C2.47377 13.6121 2.375 13.3736 2.375 13.125V3.28125C2.375 3.03261 2.47377 2.79415 2.64959 2.61834C2.8254 2.44252 3.06386 2.34375 3.3125 2.34375H4.25V1.40625Z"
+                                               *ngIf="isValue != 4"  fill="#5380CD" />
+                                            <path
+                                                d="M9.40625 0.9375C9.53057 0.9375 9.6498 0.986886 9.73771 1.07479C9.82561 1.1627 9.875 1.28193 9.875 1.40625V2.34375C9.875 2.46807 9.82561 2.5873 9.73771 2.67521C9.6498 2.76311 9.53057 2.8125 9.40625 2.8125H6.59375C6.46943 2.8125 6.3502 2.76311 6.26229 2.67521C6.17439 2.5873 6.125 2.46807 6.125 2.34375V1.40625C6.125 1.28193 6.17439 1.1627 6.26229 1.07479C6.3502 0.986886 6.46943 0.9375 6.59375 0.9375H9.40625ZM6.59375 0C6.22079 0 5.8631 0.148158 5.59938 0.411881C5.33566 0.675604 5.1875 1.03329 5.1875 1.40625V2.34375C5.1875 2.71671 5.33566 3.0744 5.59938 3.33812C5.8631 3.60184 6.22079 3.75 6.59375 3.75H9.40625C9.77921 3.75 10.1369 3.60184 10.4006 3.33812C10.6643 3.0744 10.8125 2.71671 10.8125 2.34375V1.40625C10.8125 1.03329 10.6643 0.675604 10.4006 0.411881C10.1369 0.148158 9.77921 0 9.40625 0L6.59375 0Z"
+                                               *ngIf="isValue != 4"  fill="#5380CD" />
+                                            <path
+                                                d="M4.25 10.3125C4.25 10.0639 4.34877 9.8254 4.52459 9.64959C4.7004 9.47377 4.93886 9.375 5.1875 9.375C5.43614 9.375 5.6746 9.47377 5.85041 9.64959C6.02623 9.8254 6.125 10.0639 6.125 10.3125V11.25C6.125 11.4986 6.02623 11.7371 5.85041 11.9129C5.6746 12.0887 5.43614 12.1875 5.1875 12.1875C4.93886 12.1875 4.7004 12.0887 4.52459 11.9129C4.34877 11.7371 4.25 11.4986 4.25 11.25V10.3125ZM9.875 6.5625C9.875 6.31386 9.97377 6.0754 10.1496 5.89959C10.3254 5.72377 10.5639 5.625 10.8125 5.625C11.0611 5.625 11.2996 5.72377 11.4754 5.89959C11.6512 6.0754 11.75 6.31386 11.75 6.5625V11.25C11.75 11.4986 11.6512 11.7371 11.4754 11.9129C11.2996 12.0887 11.0611 12.1875 10.8125 12.1875C10.5639 12.1875 10.3254 12.0887 10.1496 11.9129C9.97377 11.7371 9.875 11.4986 9.875 11.25V6.5625ZM7.0625 8.4375C7.0625 8.18886 7.16127 7.9504 7.33709 7.77459C7.5129 7.59877 7.75136 7.5 8 7.5C8.24864 7.5 8.4871 7.59877 8.66291 7.77459C8.83873 7.9504 8.9375 8.18886 8.9375 8.4375V11.25C8.9375 11.4986 8.83873 11.7371 8.66291 11.9129C8.4871 12.0887 8.24864 12.1875 8 12.1875C7.75136 12.1875 7.5129 12.0887 7.33709 11.9129C7.16127 11.7371 7.0625 11.4986 7.0625 11.25V8.4375Z"
+                                               *ngIf="isValue == 4"  fill="#fff" stroke="#fff" />
+                                            <path
+                                                d="M4.25 1.40625H3.3125C2.81522 1.40625 2.33831 1.60379 1.98667 1.95542C1.63504 2.30706 1.4375 2.78397 1.4375 3.28125V13.125C1.4375 13.6223 1.63504 14.0992 1.98667 14.4508C2.33831 14.8025 2.81522 15 3.3125 15H12.6875C13.1848 15 13.6617 14.8025 14.0133 14.4508C14.365 14.0992 14.5625 13.6223 14.5625 13.125V3.28125C14.5625 2.78397 14.365 2.30706 14.0133 1.95542C13.6617 1.60379 13.1848 1.40625 12.6875 1.40625H11.75V2.34375H12.6875C12.9361 2.34375 13.1746 2.44252 13.3504 2.61834C13.5262 2.79415 13.625 3.03261 13.625 3.28125V13.125C13.625 13.3736 13.5262 13.6121 13.3504 13.7879C13.1746 13.9637 12.9361 14.0625 12.6875 14.0625H3.3125C3.06386 14.0625 2.8254 13.9637 2.64959 13.7879C2.47377 13.6121 2.375 13.3736 2.375 13.125V3.28125C2.375 3.03261 2.47377 2.79415 2.64959 2.61834C2.8254 2.44252 3.06386 2.34375 3.3125 2.34375H4.25V1.40625Z"
+                                               *ngIf="isValue == 4"  fill="#fff" stroke="#fff" />
+                                            <path
+                                                d="M9.40625 0.9375C9.53057 0.9375 9.6498 0.986886 9.73771 1.07479C9.82561 1.1627 9.875 1.28193 9.875 1.40625V2.34375C9.875 2.46807 9.82561 2.5873 9.73771 2.67521C9.6498 2.76311 9.53057 2.8125 9.40625 2.8125H6.59375C6.46943 2.8125 6.3502 2.76311 6.26229 2.67521C6.17439 2.5873 6.125 2.46807 6.125 2.34375V1.40625C6.125 1.28193 6.17439 1.1627 6.26229 1.07479C6.3502 0.986886 6.46943 0.9375 6.59375 0.9375H9.40625ZM6.59375 0C6.22079 0 5.8631 0.148158 5.59938 0.411881C5.33566 0.675604 5.1875 1.03329 5.1875 1.40625V2.34375C5.1875 2.71671 5.33566 3.0744 5.59938 3.33812C5.8631 3.60184 6.22079 3.75 6.59375 3.75H9.40625C9.77921 3.75 10.1369 3.60184 10.4006 3.33812C10.6643 3.0744 10.8125 2.71671 10.8125 2.34375V1.40625C10.8125 1.03329 10.6643 0.675604 10.4006 0.411881C10.1369 0.148158 9.77921 0 9.40625 0L6.59375 0Z"
+                                               *ngIf="isValue == 4"  fill="#fff" stroke="#fff" />
+                                        </svg>&nbsp;&nbsp;&nbsp;View Data</a>
+                                    <ul>
+                                        <li class="sm-text">
+                                            <a [routerLink]="['/present-development']"
+                                                routerLinkActive="router-link-active" (click)="toggle(5)"
+                                                [ngClass]="{ 'active' : activeTabs.includes(5)}">Present Development</a>
+                                        </li>
+                                        <li class="sm-text">
+                                            <a [routerLink]="['/prospective-development']"
+                                                routerLinkActive="router-link-active" (click)="toggle(6)"
+                                                [ngClass]="{ 'active' : activeTabs.includes(6)}">Prospective
+                                                Development</a>
+                                        </li>
+
+
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a class="md-text" [routerLink]="['/comparative-result']"
+                                routerLinkActive="router-link-active" (click)="toggle(7)"
+                                [ngClass]="{ 'active' : isValue == 7 }">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="29" height="29" viewBox="0 0 29 29"
+                                    fill="none">
+                                    <g filter="url(#filter0_d_1579_1196)">
+                                        <path d="M13.3291 9.59961L17.0913 17.3996H9.56688L13.3291 9.59961Z"
+                                            *ngIf="isValue == 7" fill="#fff" stroke="#fff" fill-opacity="0.95"
+                                            shape-rendering="crispEdges" />
+                                        <path d="M13.3291 9.59961L17.0913 17.3996H9.56688L13.3291 9.59961Z"
+                                            *ngIf="isValue != 7" fill="#5380CD" stroke="#5380CD" fill-opacity="0.95"
+                                            shape-rendering="crispEdges" />
+                                    </g>
+                                    <g filter="url(#filter1_d_1579_1196)">
+                                        <path d="M4.50001 5.09765L22.6381 13.2004" stroke="white" *ngIf="isValue == 7"
+                                            fill="white" stroke-opacity="0.95" shape-rendering="crispEdges" />
+                                        <path d="M4.50001 5.09765L22.6381 13.2004" stroke="#5380CD" *ngIf="isValue != 7"
+                                            fill="#5380CD" stroke-opacity="0.95" shape-rendering="crispEdges" />
+                                    </g>
+                                    <g filter="url(#filter2_d_1579_1196)">
+                                        <path
+                                            d="M8.98487 2.4C8.98487 3.72548 8.01238 4.8 6.81275 4.8C5.61312 4.8 4.64062 3.72548 4.64062 2.4C4.64062 1.07452 5.61312 0 6.81275 0C8.01238 0 8.98487 1.07452 8.98487 2.4Z"
+                                            stroke="#5380CD" fill="white" fill-opacity="0.95"
+                                            shape-rendering="crispEdges" />
+                                        <path
+                                            d="M8.48487 2.4C8.48487 3.49744 7.69047 4.3 6.81275 4.3C5.93502 4.3 5.14062 3.49744 5.14062 2.4C5.14062 1.30256 5.93502 0.5 6.81275 0.5C7.69047 0.5 8.48487 1.30256 8.48487 2.4Z"
+                                            *ngIf="isValue == 7" stroke="white" fill="white" stroke-opacity="0.95"
+                                            shape-rendering="crispEdges" />
+                                        <path
+                                            d="M8.48487 2.4C8.48487 3.49744 7.69047 4.3 6.81275 4.3C5.93502 4.3 5.14062 3.49744 5.14062 2.4C5.14062 1.30256 5.93502 0.5 6.81275 0.5C7.69047 0.5 8.48487 1.30256 8.48487 2.4Z"
+                                            *ngIf="isValue != 7" stroke="none" fill="white" stroke-opacity="0.95"
+                                            shape-rendering="crispEdges" />
+                                    </g>
+                                    <g filter="url(#filter3_d_1579_1196)">
+                                        <path
+                                            d="M24 7.19922C24 9.25776 22.7239 10.6992 21.397 10.6992C20.0701 10.6992 18.7939 9.25776 18.7939 7.19922C18.7939 5.14067 20.0701 3.69922 21.397 3.69922C22.7239 3.69922 24 5.14067 24 7.19922Z"
+                                            *ngIf="isValue == 7" stroke="white" fill="#5380CD" stroke-opacity="0.95"
+                                            shape-rendering="crispEdges" />
+                                        <path
+                                            d="M24 7.19922C24 9.25776 22.7239 10.6992 21.397 10.6992C20.0701 10.6992 18.7939 9.25776 18.7939 7.19922C18.7939 5.14067 20.0701 3.69922 21.397 3.69922C22.7239 3.69922 24 5.14067 24 7.19922Z"
+                                            *ngIf="isValue != 7" stroke="#5380CD" fill="white" stroke-opacity="0.95"
+                                            shape-rendering="crispEdges" />
+                                    </g>
+                                    <defs>
+                                        <filter id="filter0_d_1579_1196" x="2.56689" y="6.59961" width="21.5244"
+                                            height="21.8008" filterUnits="userSpaceOnUse"
+                                            color-interpolation-filters="sRGB">
+                                            <feFlood flood-opacity="0" result="BackgroundImageFix" />
+                                            <feColorMatrix in="SourceAlpha" type="matrix"
+                                                values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha" />
+                                            <feOffset dy="4" />
+                                            <feGaussianBlur stdDeviation="3.5" />
+                                            <feComposite in2="hardAlpha" operator="out" />
+                                            <feColorMatrix type="matrix"
+                                                values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0" />
+                                            <feBlend mode="normal" in2="BackgroundImageFix"
+                                                result="effect1_dropShadow_1579_1196" />
+                                            <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_1579_1196"
+                                                result="shape" />
+                                        </filter>
+                                        <filter id="filter1_d_1579_1196" x="0.384033" y="4.58203" width="26.3701"
+                                            height="17.1348" filterUnits="userSpaceOnUse"
+                                            color-interpolation-filters="sRGB">
+                                            <feFlood flood-opacity="0" result="BackgroundImageFix" />
+                                            <feColorMatrix in="SourceAlpha" type="matrix"
+                                                values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha" />
+                                            <feOffset dy="4" />
+                                            <feGaussianBlur stdDeviation="2" />
+                                            <feComposite in2="hardAlpha" operator="out" />
+                                            <feColorMatrix type="matrix"
+                                                values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0" />
+                                            <feBlend mode="normal" in2="BackgroundImageFix"
+                                                result="effect1_dropShadow_1579_1196" />
+                                            <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_1579_1196"
+                                                result="shape" />
+                                        </filter>
+                                        <filter id="filter2_d_1579_1196" x="0.640625" y="0" width="12.3442"
+                                            height="12.8008" filterUnits="userSpaceOnUse"
+                                            color-interpolation-filters="sRGB">
+                                            <feFlood flood-opacity="0" result="BackgroundImageFix" />
+                                            <feColorMatrix in="SourceAlpha" type="matrix"
+                                                values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha" />
+                                            <feOffset dy="4" />
+                                            <feGaussianBlur stdDeviation="2" />
+                                            <feComposite in2="hardAlpha" operator="out" />
+                                            <feColorMatrix type="matrix"
+                                                values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0" />
+                                            <feBlend mode="normal" in2="BackgroundImageFix"
+                                                result="effect1_dropShadow_1579_1196" />
+                                            <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_1579_1196"
+                                                result="shape" />
+                                        </filter>
+                                        <filter id="filter3_d_1579_1196" x="14.2939" y="3.19922" width="14.2061"
+                                            height="16" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+                                            <feFlood flood-opacity="0" result="BackgroundImageFix" />
+                                            <feColorMatrix in="SourceAlpha" type="matrix"
+                                                values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha" />
+                                            <feOffset dy="4" />
+                                            <feGaussianBlur stdDeviation="2" />
+                                            <feComposite in2="hardAlpha" operator="out" />
+                                            <feColorMatrix type="matrix"
+                                                values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0" />
+                                            <feBlend mode="normal" in2="BackgroundImageFix"
+                                                result="effect1_dropShadow_1579_1196" />
+                                            <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_1579_1196"
+                                                result="shape" />
+                                        </filter>
+                                    </defs>
+                                </svg>
+                                Comparative Result</a>
+                        </li>
+                    </ul>
+                </li>
+                <!-- <li>
+                    <a (click)="toggle(2)" [ngClass]="{ 'active' : isValue == 2 }" href="javascript:void(0);"><svg
+                            xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 25 25" fill="none">
+                            <g clip-path="url(#clip0_1993_21586)">
+                                <path
+                                    d="M24.6582 0.152623C24.8861 0.338635 25 0.5851 25 0.89202V20.5349C25 20.7209 24.9552 20.8883 24.8657 21.0371C24.7762 21.1859 24.6582 21.2929 24.5117 21.358L16.6992 24.9294C16.5039 25.0317 16.3086 25.0317 16.1133 24.9294L8.59375 21.4975L1.07422 24.9294C0.992839 24.9759 0.895182 24.9992 0.78125 24.9992C0.626628 24.9992 0.480143 24.948 0.341797 24.8457C0.113932 24.6597 0 24.4132 0 24.1063V4.46345C0 4.27744 0.0447591 4.11002 0.134277 3.96122C0.223796 3.81241 0.341797 3.70545 0.488281 3.64034L8.30078 0.0689174C8.49609 -0.0333891 8.69141 -0.0333891 8.88672 0.0689174L16.4062 3.50084L23.9258 0.0689174C24.1862 -0.0519903 24.4303 -0.0240885 24.6582 0.152623ZM8.98438 2.03599V19.7536L16.0156 22.9623V5.2447L8.98438 2.03599ZM1.5625 5.06334V22.781L8.20312 19.7536V2.03599L1.5625 5.06334ZM23.4375 19.935V2.21735L16.7969 5.2447V22.9623L23.4375 19.935Z"
+                                    fill="white" fill-opacity="0.8" />
+                                <rect x="7" y="10" width="4" height="4" rx="2" transform="rotate(90 7 10)" fill="white"
+                                    fill-opacity="0.8" stroke="white" stroke-opacity="0.8" stroke-width="2" />
+                                <rect x="18" y="9" width="4" height="4" rx="2" transform="rotate(-90 18 9)" fill="white"
+                                    fill-opacity="0.8" stroke="white" stroke-opacity="0.8" stroke-width="2" />
+                                <path
+                                    d="M19 9L17.5 10.5C16.4829 11.5171 15.9744 12.0256 15.3628 12.1384C15.1229 12.1826 14.8771 12.1826 14.6372 12.1384C14.0256 12.0256 13.5171 11.5171 12.5 10.5V10.5C11.4829 9.48295 10.9744 8.97442 10.3628 8.8616C10.1229 8.81737 9.87705 8.81737 9.63723 8.8616C9.02558 8.97442 8.51705 9.48295 7.5 10.5L6 12"
+                                    stroke="white" stroke-opacity="0.8" />
+                                <rect x="6" y="16" width="4" height="4" rx="2" transform="rotate(90 6 16)" stroke="white"
+                                    stroke-opacity="0.8" />
+                                <rect x="18" y="16" width="4" height="4" rx="2" transform="rotate(-90 18 16)" stroke="white"
+                                    stroke-opacity="0.8" />
+                                <path
+                                    d="M19 15L17.5 16.5C16.4829 17.5171 15.9744 18.0256 15.3628 18.1384C15.1229 18.1826 14.8771 18.1826 14.6372 18.1384C14.0256 18.0256 13.5171 17.5171 12.5 16.5V16.5C11.4829 15.4829 10.9744 14.9744 10.3628 14.8616C10.1229 14.8174 9.87705 14.8174 9.63723 14.8616C9.02558 14.9744 8.51705 15.4829 7.5 16.5L6 18"
+                                    stroke="white" stroke-opacity="0.8" />
+                            </g>
+                            <defs>
+                                <clipPath id="clip0_1993_21586">
+                                    <rect width="25" height="25" fill="white" />
+                                </clipPath>
+                            </defs>
+                        </svg>&nbsp;&nbsp;&nbsp;Digital R&D Map</a>
+                </li> -->
+            </ul>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,268 @@
+.two-column-layout .container-fluid {
+    margin-top: 45px;
+}
+.panel-heading {
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.panel-heading h2 {
+    margin-bottom: 0;
+    color: rgba(0, 0, 0, 0.23);
+    font-weight: 700;
+}
+
+.panel-heading button {
+    border-color: #128FFE !important;
+    color: #128FFE !important;
+    font-weight: normal;
+    font-size: 12px;
+    border-radius: 6px;
+    height: 32px;
+    line-height: 20px;
+}
+
+.panel {
+    padding: 25px 15px;
+    box-shadow: 0px 0px 9px 1px rgb(204 204 204 / 50%);
+    margin-bottom: 30px;
+}
+
+.health-card {
+    padding: 20px 15px;
+    border: none;
+    box-shadow: 0px 0px 8px 1px rgb(204 204 204 / 70%);
+    border-radius: 10px;
+}
+
+.top-card {
+    background: #CED6E3;
+    text-align: center;
+    color: #717171;
+    font-weight: 500;
+    padding: 3px 0px;
+    border-radius: 25px;
+}
+
+.bottom-card .col .progress-style {
+    background: #CED6E3;
+    padding: 5px 10px;
+    border-radius: 5px;
+}
+
+.bottom-card span {
+    font-weight: 500;
+    font-size: 12px;
+}
+
+.progress {
+    height: 10px;
+    box-shadow: 0px 0px 6px 1px #93a6c3;
+    margin: 5px 0px;
+}
+
+.mat-search a {
+    padding: 0;
+    width: 30px !important;
+    margin-right: 10px;
+    background: transparent !important;
+}
+
+/* language filter start */
+.example-sidenav-content {
+    display: flex;
+    height: 38px;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    right: 0;
+    z-index: 33;
+    top:0px;
+}
+
+.example-sidenav {
+    padding: 20px;
+}
+
+::ng-deep mat-drawer-container.mat-drawer-container {
+    height: 100vh;
+    position: absolute;
+    right: 0;
+    z-index: 999;
+}
+
+::ng-deep .mat-drawer.mat-drawer-side {
+    background: #fff;
+    width: 250px;
+    padding: 10px;
+}
+
+.selected-language {
+    display: flex;
+    align-items: center;
+    padding-right: 15px;
+}
+
+.example-sidenav-content button {
+    box-shadow: -3px 2px 6px 2px rgb(204 204 204 / 50%);
+    border-top-left-radius: 25px;
+    border-bottom-left-radius: 25px;
+    height: 39px;
+    padding: 0;
+}
+
+.selected-language img {
+    width: 30px;
+    margin-right: 5px;
+}
+
+.mat-search {
+    display: flex;
+    align-items: center;
+    position: sticky;
+    background: #fff;
+    top: 0;
+}
+
+.mat-serach-input input {
+    border: transparent;
+    padding: 0 10px;
+    font-size: 12px;
+    height: 35px;
+    border-radius: 25px;
+    background: #F5F5F5;
+    font-weight: 500;
+    width: 100%;
+}
+
+.mat-serach-input {
+    display: inline-block;
+    width: 100%;
+}
+
+.mat-serach-input input::placeholder {
+    color: #B8B8B8;
+}
+
+.mat-serach-input input:focus {
+    outline: none;
+    box-shadow: none;
+}
+
+.mat-search a .mat-icon {
+    height: 35px;
+    font-size: 30px;
+    color: #128FFE;
+}
+
+.mat-search a {
+    position: relative;
+    top: 3px;
+    cursor: pointer;
+}
+
+.country-list ul {
+    padding: 0;
+    margin: 0;
+}
+
+.country-list ul li {
+    padding: 10px 0px;
+    font-weight: 500;
+    list-style: none;
+}
+
+.country-list {
+    padding: 20px;
+}
+
+.selected-language .mat-icon {
+    color: #128FFE;
+    font-size: 30px;
+    height: 32px;
+    margin-right: 10px;
+}
+
+.showTab {
+    display: block;
+}
+
+.hideTtab {
+    display: none;
+}
+
+.active {
+    background: #dbdbdb;
+}
+/* tooltip css start */
+.tooltip-inner p {
+    font-size: 11px;
+    line-height: 14px !important;
+}
+.tooltip-inner a {
+    color: #fff;
+    font-size: 12px;
+    width: 100%;
+    text-align: right;
+    display: inline-block;
+}
+.tooltip-inner {
+    color: #fff;
+    text-align: left;
+    background-color: #0078D4;
+    position: absolute;
+    width: 200px;
+    right: 0;
+    margin-top: -56px;
+}
+.arrow.is-left {
+    -moz-transform: rotate(314deg);
+    -ms-transform: rotate(314deg);
+    -webkit-transform: rotate(314deg);
+    transform: rotate(314deg);
+}
+.tooltip-option.left .arrow {
+    margin: 0;
+    display: inline-block;
+    height: 12px;
+    position: absolute;
+    width: 12px;
+    right: -6px;
+    top: -6px;
+}
+.tooltip-option{
+    position: relative;
+    right: 15px;
+    display: none;
+}
+
+.example-sidenav-content:hover .tooltip-option{
+    display: block;
+}
+.arrow.is-triangle::after, .arrow .arrow.is-triangle::after {
+    border-color: transparent;
+    border-bottom-color: #0078D4;
+}
+.arrow.is-triangle::after {
+    border-style: solid;
+    border-width: 0 0 12px 12px;
+    height: 0;
+    width: 0;
+}
+.arrow::before, .arrow .arrow::before {
+    background-color: #0078D4;
+}
+.arrow::after {
+    border-bottom-style: solid;
+    border-bottom-width: 2px;
+    border-right-style: solid;
+    border-right-width: 2px;
+    content: "";
+    display: inline-block;
+    height: 12px;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 12px;
+}
