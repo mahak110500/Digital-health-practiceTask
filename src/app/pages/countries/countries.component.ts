@@ -38,7 +38,13 @@ export class CountriesComponent implements OnInit, AfterViewInit {
 
 
 	public chart: am4charts.PieChart3D = new PieChart3D;
-	@ViewChild('chartContainer', { static: true }) chartContainer!: ElementRef;
+	// @ViewChild('chartContainer', { static: false }) chartContainer!: ElementRef;
+	@ViewChild('chartContainer1') chartContainer1!: ElementRef;
+
+	@ViewChild('chartContainer2') chartContainer2!: ElementRef;
+	@ViewChild('chartContainer3') chartContainer3!: ElementRef;
+	@ViewChild('chartContainer4') chartContainer4!: ElementRef;
+
 
 
 
@@ -89,23 +95,23 @@ export class CountriesComponent implements OnInit, AfterViewInit {
 		// And, for a good measure, let's add a legend
 		chart.legend = new am4charts.Legend();
 
-		// this.utilities.governanceTypeSource.subscribe((governanceId) => {
+		this.utilities.governanceTypeSource.subscribe((governanceId) => {
 
-		// 	this.health_taxonomy_present = [];
-		// 	this.health_taxonomy_prospective = [];
+			this.health_taxonomy_present = [];
+			this.health_taxonomy_prospective = [];
 
-		// 	if (this.triggerInit) {
-		// 		this.getCountriesDetails(governanceId);
-		// 	}
+			if (this.triggerInit) {
+				this.getCountriesDetails(governanceId);
+			}
 
-		// });
+		});
 
-		// this.utilities.showHeaderMenu.next(true);
+		this.utilities.showHeaderMenu.next(true);
 
-		// //to get all countries name and flag
-		// this.common.getAllCountries().subscribe((res) => {
-		// 	this.country_list = res;
-		// })
+		//to get all countries name and flag
+		this.common.getAllCountries().subscribe((res) => {
+			this.country_list = res;
+		})
 
 	}
 
@@ -139,12 +145,11 @@ export class CountriesComponent implements OnInit, AfterViewInit {
 				localStorage.setItem('year', JSON.stringify(this.currentYear));
 			}
 		}
-
+		this.getCountriesDetails(this.governance_id);
 	}
 
 
 	getCountriesDetails(governanceId: any) {
-
 		this.newArray = [];
 		this.health_taxonomy_prospective = [];
 		this.health_taxonomy_present = [];
@@ -158,6 +163,7 @@ export class CountriesComponent implements OnInit, AfterViewInit {
 		this.governance_id = JSON.parse(localStorage.getItem('governance_id') || '');
 		this.currentYear = JSON.parse(localStorage.getItem('year') || '');
 
+		console.log(this.country_id);
 
 		this.common.getNdhsCountriesDetails(governanceId, this.country_id, this.currentYear).subscribe((result) => {
 
@@ -373,97 +379,86 @@ export class CountriesComponent implements OnInit, AfterViewInit {
 	}
 
 	ngAfterViewInit() {
-
 		if (this.governance_id == 1) {
-			this.createCharts(this.health_taxonomy_present, 'chartdiv_health_present', '#1181B2', '#05D5AA');
-			this.createCharts(this.health_taxonomy_prospective, 'chartdiv_health_prospective', '#2F4770', '#0860FE');
+			setTimeout(() => {
+				this.createCharts(this.health_taxonomy_present, 'chartdiv_health_present', ['#1181B2', '#05D5AA', '#E2E2E4'], 1);
+				this.createCharts(this.health_taxonomy_prospective, 'chartdiv_health_prospective', ['#2F4770', '#0860FE', '#E2E2E4'], 1);
+
+			}, 2000);
 		} else {
-			this.createCharts(this.digital_taxonomy_present, 'chartdiv_digital_present', '#71ADB5', '#1F914F');
-			this.createCharts(this.digital_taxonomy_prospective, 'chartdiv_digital_prospective', '#14CCAA', '#41565A');
+			setTimeout(() => {
+				this.createCharts(this.digital_taxonomy_present, 'chartdiv_digital_present', ['#71ADB5', '#1F914F', '#E2E2E4'], 6);
+				this.createCharts(this.digital_taxonomy_prospective, 'chartdiv_digital_prospective', ['#14CCAA', '#41565A', '#E2E2E4'], 6);
+
+			}, 2000);
 		}
 	}
 
+	createCharts(data: any[], chartIdPrefix: string, colors: string[], startIndex: number) {
 
+		data.forEach((taxonomy: any, index: number) => {
 
-	createCharts(taxonomyData: any[], containerId: string, color1: string, color2: string) {
+			const i = startIndex + index;
+			const chartId = chartIdPrefix + i;
+			const chart = am4core.create(chartId, am4charts.PieChart3D);
 
-
-		taxonomyData.forEach((taxonomy: any, index: number) => {
-			const chartContainer = document.createElement('div');
-			chartContainer.id = containerId + index;
-
-			console.log(chartContainer);
-
-			console.log(this.chartContainer);
-
-			if (this.chartContainer && this.chartContainer.nativeElement) {
-				this.chartContainer.nativeElement.appendChild(chartContainer);
-				const chart = am4core.create(chartContainer.id, am4charts.PieChart3D);
-
+			if (taxonomy.development_type === 'present' || chartIdPrefix === 'chartdiv_digital_present') {
 				chart.data = [
-					{
-						taxonomy: 'Readiness',
-						percentage: taxonomy.readiness_percentage,
-					},
-					{
-						taxonomy: 'Availability',
-						percentage: taxonomy.availability_percentage,
-					},
-					{
-						percentage: taxonomy.remaining_percentage,
-					},
+					{ taxonomy: 'Readiness', percentage: taxonomy.readiness_percentage },
+					{ taxonomy: 'Availability', percentage: taxonomy.availability_percentage },
+					{ percentage: taxonomy.remaining_percentage },
 				];
 
-				chart.innerRadius = 40;
-				chart.depth = 10;
-
-				const series = chart.series.push(new am4charts.PieSeries3D());
-				series.dataFields.value = 'percentage';
-				series.dataFields.category = 'taxonomy';
-
-				series.slices.template.tooltipText = '{category}';
-				series.labels.template.text = '{taxonomy}';
-				series.labels.template.maxWidth = 70;
-				series.labels.template.wrap = true;
-
-				series.colors.list = [
-					new (am4core.color as any)(color1),
-					new (am4core.color as any)(color2),
-					'#E2E2E4'
+			} else {
+				chart.data = [
+					{ taxonomy: 'Capacity Building', percentage: taxonomy.capacity_building_percentage },
+					{ taxonomy: 'Development Strategy', percentage: taxonomy.development_strategy_percentage },
+					{ percentage: taxonomy.remaining_percentage },
 				];
-
-				const label = series.createChild(am4core.Label);
-
-				label.text =
-					taxonomy.readiness_percentage +
-					taxonomy.availability_percentage +
-					'%';
-				label.horizontalCenter = 'middle';
-				label.verticalCenter = 'middle';
-				label.fontSize = 26;
-				label.fontWeight = 'normal';
-
-				series.ticks.template.events.on('ready', hideSmall);
-				series.ticks.template.events.on('visibilitychanged', hideSmall);
-				series.labels.template.events.on('ready', hideSmall);
-				series.labels.template.events.on('visibilitychanged', hideSmall);
-
-				function hideSmall(ev: any) {
-					if (!ev.target.dataItem.hasProperties || ev.target.dataItem.dataContext.percentage === 0) {
-						ev.target.hide();
-					} else {
-						ev.target.show();
-					}
-				}
-
-
 			}
+
+			// Configure chart properties
+			chart.innerRadius = 40;
+			chart.depth = 10;
+
+			const series = chart.series.push(new am4charts.PieSeries3D());
+			series.dataFields.value = 'percentage';
+			series.dataFields.category = 'taxonomy';
+			series.colors.list = colors.map((color) => new (am4core.color as any)(color));
+
+			// Add labels and tooltips
+			const label = series.createChild(am4core.Label);
+			if (taxonomy.development_type === 'present' || chartIdPrefix === 'chartdiv_digital_present') {
+				label.text = taxonomy.readiness_percentage + taxonomy.availability_percentage + '%';
+			} else {
+				label.text = taxonomy.development_strategy_percentage + taxonomy.capacity_building_percentage + '%';
+			}
+			label.horizontalCenter = 'middle';
+			label.verticalCenter = 'middle';
+			label.fontSize = 26;
+			label.fontWeight = 'normal';
+
+			series.ticks.template.events.on('ready', hideSmall);
+			series.ticks.template.events.on('visibilitychanged', hideSmall);
+			series.labels.template.events.on('ready', hideSmall);
+			series.labels.template.events.on('visibilitychanged', hideSmall);
+			series.labels.template.maxWidth = 70;
+			series.labels.template.wrap = true;
+
+			function hideSmall(ev: any) {
+				if (ev.target.dataItem.hasProperties == false || ev.target.dataItem.dataContext.percentage == 0) {
+					ev.target.hide();
+				} else {
+					ev.target.show();
+				}
+			}
+
+			series.labels.template.text = '{taxonomy}';
+			series.slices.template.tooltipText = '{category}';
+			series.fontSize = '9';
+			series.fontWeight = 'bold';
 		});
 	}
-
-
-
-
 
 
 
