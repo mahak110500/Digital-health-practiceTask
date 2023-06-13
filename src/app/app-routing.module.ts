@@ -4,6 +4,7 @@ import { LayoutComponent } from './components/common/layout/layout.component';
 import { ViewDataComponent } from './pages/view-data/view-data.component';
 import { HomePageComponent } from './pages/home-page/home-page.component';
 import { CountriesComponent } from './pages/countries/countries.component';
+import { NdhsMapComponent } from './pages/ndhs-map/ndhs-map.component';
 
 const routes: Routes = [
 
@@ -16,6 +17,11 @@ const routes: Routes = [
         path: '',
         component: LayoutComponent,
         children: [
+            {
+                path: 'ndhs-map',
+                component: NdhsMapComponent,
+                data: { title: 'NDHS-Map' },
+            },
             {
                 path: 'home',
                 component: HomePageComponent,

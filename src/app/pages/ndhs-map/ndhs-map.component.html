@@ -1,0 +1,53 @@
+<div class="two-column-layout">
+    <div class="container-fluid">
+        <div class="panel">
+            <div class="panel-heading d-flex">
+                <h2>Countries List</h2>
+            </div>
+            <div class="panel-content">
+                <div class="list-year">
+                    <div class="form-check">
+                        <input (click)="getSelectedYear($event)" class="form-check-input" type="checkbox"
+                            value="2021" id="flexCheckChecked" [checked]="year2021" [disabled]="!year2022">
+                        <label class="form-check-label" for="flexCheckChecked" mat-raised-button>
+                            2021
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input (click)="getSelectedYear($event)" class="form-check-input" type="checkbox"
+                            value="2022" id="flexCheckDefault" [checked]="year2022" [disabled]="!year2021">
+                        <label class="form-check-label" for="flexCheckDefault" for="flexCheckChecked" mat-raised-button>
+                            2022
+                        </label>
+                    </div>
+                    <div class="tooltip-main">
+                        <div class="tooltip-option right">
+                            <span class="arrow is-triangle is-left"></span>
+                            <div class="tooltip-inner">
+                                <h5>Check out our new feature</h5>
+                                <p>You can display comparison results by selecting two countries from the list of
+                                    countries.</p>
+                                <a>Got it!</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="map-legends">
+                    <span *ngIf="year.includes('2021')" class="material-icons blue-legend">
+                        fiber_manual_record
+                    </span><span *ngIf="year.includes('2021')" >&nbsp;2021</span>&nbsp;&nbsp;&nbsp;
+                    <span *ngIf="year.includes('2022')" class="material-icons text-danger" >
+                        fiber_manual_record
+                    </span><span *ngIf="year.includes('2022')">&nbsp;2022</span>
+                </div>
+                <div class="countries-map">
+                    <div class="loading" *ngIf="isLoading">
+                        <div class="spinner"></div>
+                    </div>
+                    <div id="chartdiv" style="width: 100%; height: 500px"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

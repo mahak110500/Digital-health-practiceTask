@@ -21,6 +21,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { HomePageComponent } from './pages/home-page/home-page.component';
 import { CountriesComponent } from './pages/countries/countries.component';
 import { PieChartCardComponent } from './pages/pie-chart-card/pie-chart-card.component';
+import { NdhsMapComponent } from './pages/ndhs-map/ndhs-map.component';
 
 
 @NgModule({
@@ -34,6 +35,7 @@ import { PieChartCardComponent } from './pages/pie-chart-card/pie-chart-card.com
     HomePageComponent,
     CountriesComponent,
     PieChartCardComponent,
+    NdhsMapComponent,
   ],
   imports: [
     BrowserModule,
