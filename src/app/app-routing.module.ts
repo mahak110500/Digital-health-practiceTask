@@ -1,10 +1,12 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { LayoutComponent } from './components/common/layout/layout.component';
-import { ViewDataComponent } from './pages/view-data/view-data.component';
+import { ViewDataComponent } from './pages/countries-data/view-data/view-data.component';
 import { HomePageComponent } from './pages/home-page/home-page.component';
 import { CountriesComponent } from './pages/countries/countries.component';
 import { NdhsMapComponent } from './pages/ndhs-map/ndhs-map.component';
+import { PresentDevelopmentComponent } from './pages/countries-data/present-development/present-development.component';
+import { ProspectiveDevelopmentComponent } from './pages/countries-data/prospective-development/prospective-development.component';
 
 const routes: Routes = [
 
@@ -31,6 +33,16 @@ const routes: Routes = [
                 path: 'view-data',
                 component: ViewDataComponent,
                 data: { title: 'View-Data' },
+            },
+            {
+                path: 'present-development',
+                component: PresentDevelopmentComponent,
+                data: { title: 'Present-Development' },
+            },
+            {
+                path: 'prospective-development',
+                component: ProspectiveDevelopmentComponent,
+                data: { title: 'Prospective-Development' },
             },
 			{
                 path: 'countries',

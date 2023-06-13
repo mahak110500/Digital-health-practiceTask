@@ -5,7 +5,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { ViewDataComponent } from './pages/view-data/view-data.component';
+import { ViewDataComponent } from './pages/countries-data/view-data/view-data.component';
 import { HeaderComponent } from './components/common/header/header.component';
 import { HeaderInnerComponent } from './components/common/header-inner/header-inner.component';
 import { LayoutComponent } from './components/common/layout/layout.component';
@@ -16,12 +16,15 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import { MatDialogModule } from '@angular/material/dialog';
+import {MatTabsModule} from '@angular/material/tabs';
 
 
 import { HomePageComponent } from './pages/home-page/home-page.component';
 import { CountriesComponent } from './pages/countries/countries.component';
 import { PieChartCardComponent } from './pages/pie-chart-card/pie-chart-card.component';
 import { NdhsMapComponent } from './pages/ndhs-map/ndhs-map.component';
+import { PresentDevelopmentComponent } from './pages/countries-data/present-development/present-development.component';
+import { ProspectiveDevelopmentComponent } from './pages/countries-data/prospective-development/prospective-development.component';
 
 
 @NgModule({
@@ -36,6 +39,8 @@ import { NdhsMapComponent } from './pages/ndhs-map/ndhs-map.component';
     CountriesComponent,
     PieChartCardComponent,
     NdhsMapComponent,
+    PresentDevelopmentComponent,
+    ProspectiveDevelopmentComponent,
   ],
   imports: [
     BrowserModule,
@@ -48,7 +53,8 @@ import { NdhsMapComponent } from './pages/ndhs-map/ndhs-map.component';
     MatTooltipModule,
     MatIconModule,
     MatSidenavModule,
-    MatDialogModule
+    MatDialogModule,
+    MatTabsModule
 
   ],
   providers: [],
