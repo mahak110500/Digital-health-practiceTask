@@ -1,0 +1,161 @@
+.panel-heading h2 {
+    margin-bottom: 0;
+    color: rgb(9 25 62 / 60%);
+}
+
+.panel-heading button {
+    border-color: #128FFE !important;
+    color: #128FFE !important;
+    font-weight: normal;
+    font-size: 12px;
+}
+
+.panel {
+    padding: 15px;
+    box-shadow: 0px 0px 9px 1px rgb(204 204 204 / 50%);
+    margin-bottom: 30px;
+    margin-top: 10px;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.data-heading h3 {
+    font-weight: 700;
+    color: rgb(0 0 0 / 70%);
+    font-size: 23px;
+    margin: 5px 0px;
+}
+
+.data-heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+}
+
+.divider-vertical {
+    height: 30px;
+    width: 1px;
+    background: rgb(0 0 0 / 27%);
+    position: absolute;
+    margin-top: -5px;
+}
+
+::ng-deep .mat-tab-label-active {
+    color: #09193E;
+    opacity: 1;
+}
+
+::ng-deep .mat-ink-bar {
+    background-color: #09193E !important;
+}
+
+.status-badge ul {
+    padding: 0;
+    margin: 0;
+}
+
+.status-badge ul li {
+    list-style: none;
+    display: inline-block;
+    padding: 0 10px;
+    font-size: 15px;
+    font-weight: 600;
+    color: rgb(0 0 0 / 60%);
+}
+
+.status-badge ul li span,
+.circle_badge {
+    width: 10px;
+    height: 10px;
+    display: inline-block;
+    border-radius: 25px;
+    margin-right: 10px;
+}
+
+.status-badge ul li span.success,
+.circle_badge.success {
+    background-color: #04BF20;
+}
+
+.status-badge ul li span.danger,
+.circle_badge.danger {
+    background-color: #FF5E00;
+}
+
+.status-badge ul li span.disable-status,
+.circle_badge.disable-status {
+    background-color: #BFBFB6;
+}
+
+.data-status h2 {
+    font-weight: normal;
+}
+
+.data-table table th {
+    font-size: 20px;
+    color: rgba(76, 77, 73, 0.85);
+    font-weight: 600;
+}
+
+.data-table table td {
+    color: rgba(0, 0, 0, 0.45);
+    font-size: 14px;
+    font-weight: 400;
+    padding: 12px 10px 12px 0px !important;
+}
+
+.table-badge {
+    text-align: right;
+}
+
+tr.border-less td {
+    padding-bottom: 0 !important;
+    padding-top: 0 !important;
+}
+
+.data-table tbody {
+    border-top: transparent !important;
+}
+
+tr.border-less {
+    border-bottom: transparent;
+}
+
+.print-btn a {
+    background: #333 !important;
+    color: #fff;
+}
+
+.print-btn svg {
+    margin-right: 10px;
+}
+
+.print-btn {
+    display: flex;
+    justify-content: flex-end;
+    position: absolute;
+    right: 0;
+}
+
+.print-btn-inner {
+    position: relative;
+    z-index: 999;
+    width: 100px;
+}
+
+::ng-deep .mat-tab-label-container {
+    margin-right: 100px;
+}
+
+.data-table table {
+    table-layout: fixed;
+}
+
+.data-table {
+    margin-bottom: 30px;
+}
+
+.with-boder {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+}
