@@ -7,6 +7,7 @@ import { CountriesComponent } from './pages/countries/countries.component';
 import { NdhsMapComponent } from './pages/ndhs-map/ndhs-map.component';
 import { PresentDevelopmentComponent } from './pages/countries-data/present-development/present-development.component';
 import { ProspectiveDevelopmentComponent } from './pages/countries-data/prospective-development/prospective-development.component';
+import { ComparativeResultsComponent } from './pages/comparative-results/comparative-results.component';
 
 const routes: Routes = [
 
@@ -48,6 +49,11 @@ const routes: Routes = [
                 path: 'countries',
                 component: CountriesComponent,
                 data: { title: 'countries' },
+            },
+            {
+                path: 'comparative-results',
+                component: ComparativeResultsComponent,
+                data: { title: 'Comparative-Results' },
             },
         ],
     },

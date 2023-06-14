@@ -125,5 +125,4 @@ export class ViewDataComponent implements OnInit {
 		});
 	}
 
-
 }

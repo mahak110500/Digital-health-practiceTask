@@ -1,0 +1,271 @@
+.panel-heading {
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.panel-heading h2 {
+    margin-bottom: 0;
+}
+
+.panel-heading button {
+    border-color: #128FFE !important;
+    color: #128FFE !important;
+    font-weight: normal;
+    font-size: 12px;
+}
+
+.panel.country-selector {
+    padding: 15px;
+}
+
+.panel {
+    padding: 25px 15px;
+    box-shadow: 0px 0px 9px 1px rgb(204 204 204 / 50%);
+    margin-bottom: 30px;
+}
+
+.example-additional-selection {
+    opacity: 0.75;
+    font-size: 0.75em;
+}
+
+.select-country-area {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.country-label {
+    font-size: 14px;
+    color: black;
+    font-weight: 500;
+}
+
+::ng-deep .mat-form-field-wrapper {
+    padding-bottom: 0;
+}
+
+::ng-deep .mat-form-field-appearance-fill .mat-form-field-underline::before {
+    position: inherit !important;
+    background: transparent !important;
+}
+
+::ng-deep .mat-form-field-appearance-fill:not(.mat-form-field-disabled) .mat-form-field-flex:hover~.mat-form-field-underline .mat-form-field-ripple {
+    opacity: 0 !important;
+    display: none !important;
+}
+
+::ng-deep .mat-form-field-ripple {
+    background-color: transparent !important;
+}
+
+::ng-deep .mat-form-field-appearance-fill .mat-form-field-flex {
+    padding: 0em 0.75em 0 0.75em !important;
+    height: 33px;
+}
+
+.detail-btn a {
+    font-size: 9px !important;
+    color: #00C4DF;
+    height: 21px;
+    line-height: 18px;
+    border-color: #00C4DF !important;
+}
+
+.detail-btn {
+    text-align: right;
+}
+
+.status-badge ul {
+    padding: 0;
+    margin: 0;
+}
+
+.status-badge ul li {
+    list-style: none;
+    display: inline-block;
+    padding: 0 10px;
+    font-size: 15px;
+    font-weight: 500;
+    color: rgb(0 0 0 / 45%);
+}
+
+.status-badge ul li span,
+.circle_badge {
+    width: 10px;
+    height: 10px;
+    display: inline-block;
+    border-radius: 25px;
+    margin-right: 10px;
+}
+
+.status-badge ul li span.success,
+.circle_badge.success {
+    background-color: #05D5AA;
+}
+
+.status-badge ul li span.danger,
+.circle_badge.danger {
+    background-color: #FF5E00;
+}
+
+.status-badge ul li span.disable-status,
+.circle_badge.disable-status {
+    background-color: #BFBFB6;
+}
+
+.table-details-heading h5 {
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.table-details-heading {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+}
+
+tr.border-less {
+    border-bottom: transparent;
+}
+
+.table-com tbody {
+    border-top: transparent !important;
+}
+
+td.com-data-heading {
+    font-size: 15px;
+    font-weight: 500;
+    color: rgb(0 0 0 / 50%);
+}
+
+.panel.comparative-details {
+    padding: 15px;
+}
+
+table.table.align-middle {
+    margin-bottom: 0;
+}
+
+span.square-badge.success,
+span.square-badge.danger {
+    background: #05d5aa;
+    padding: 3px;
+    color: #fff;
+    margin-right: 4px;
+    max-width: 20px;
+    min-width: 42px;
+    display: inline-block;
+    text-align: center;
+}
+
+span.square-badge.danger {
+    background-color: #FF5E00;
+}
+
+@media only screen and (max-width:1680px) {
+    .table-com th {
+        font-size: 11px;
+        line-height: 11px;
+    }
+
+    .table-com table td span,
+    .table-com table td {
+        font-size: 10px;
+    }
+
+    span.square-badge.success,
+    span.square-badge.danger {
+        padding: 2px;
+    }
+
+    .status-badge ul li {
+        padding: 0 5px;
+        font-size: 11px;
+    }
+
+    .status-badge ul li span,
+    .circle_badge {
+        margin-right: 5px;
+    }
+    span.square-badge.success,
+span.square-badge.danger {
+    max-width: 10px !important;
+    min-width: 31px !important;
+}
+}
+
+@media only screen and (max-width:1500px) {
+
+    .table-com table td span,
+    .table-com table td {
+        font-size: 9px;
+        margin-right: 4px !important;
+        padding-right: 0 !important;
+        padding-left: 0;
+    }
+
+    span.square-badge.success,
+    span.square-badge.danger {
+        margin-right: 5px;
+        max-width: 25px;
+        display: inline-block;
+        text-align: center;
+        font-size: 8px !important;
+        width: 25px;
+        margin-bottom: 5px;
+    }
+
+    .table-com span.circle_badge.success {
+        width: 5px;
+        height: 5px;
+    }
+
+    .table-com th {
+        font-size: 9px;
+        line-height: 13px;
+    }
+
+    td.com-data-heading {
+        font-size: 12px !important;
+    }
+}
+
+@media only screen and (max-width:1024px) {
+    .col-md-8 {
+        flex: 0 0 auto;
+        width: 100%;
+    }
+
+    .col-md-4 {
+        flex: 0 0 auto;
+        width: 100%;
+    }
+
+    .table-com table td span,
+    .table-com table td {
+        font-size: 12px;
+    }
+
+    .table-com span.circle_badge.success {
+        width: 8px;
+        height: 8px;
+    }
+
+    .left-content.col-md-7 {
+        width: 100%;
+    }
+
+    ::ng-deep .content-inner .mat-expansion-panel .mat-expansion-panel-header .mat-content {
+        display: initial !important;
+    }
+}
+/* #chartdiv {
+    width: 100%;
+    height: 95vh;
+  }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  }
+   */

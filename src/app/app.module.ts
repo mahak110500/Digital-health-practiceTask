@@ -19,12 +19,23 @@ import { MatDialogModule } from '@angular/material/dialog';
 import {MatTabsModule} from '@angular/material/tabs';
 
 
+
+import { MatButtonModule } from '@angular/material/button';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatSelectModule } from '@angular/material/select';
+import { MatExpansionModule } from '@angular/material/expansion';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import { MatButtonToggleModule } from "@angular/material/button-toggle";
+
+
 import { HomePageComponent } from './pages/home-page/home-page.component';
 import { CountriesComponent } from './pages/countries/countries.component';
 import { PieChartCardComponent } from './pages/pie-chart-card/pie-chart-card.component';
 import { NdhsMapComponent } from './pages/ndhs-map/ndhs-map.component';
 import { PresentDevelopmentComponent } from './pages/countries-data/present-development/present-development.component';
 import { ProspectiveDevelopmentComponent } from './pages/countries-data/prospective-development/prospective-development.component';
+import { ComparativeResultsComponent } from './pages/comparative-results/comparative-results.component';
 
 
 @NgModule({
@@ -41,6 +52,7 @@ import { ProspectiveDevelopmentComponent } from './pages/countries-data/prospect
     NdhsMapComponent,
     PresentDevelopmentComponent,
     ProspectiveDevelopmentComponent,
+    ComparativeResultsComponent,
   ],
   imports: [
     BrowserModule,
@@ -54,7 +66,9 @@ import { ProspectiveDevelopmentComponent } from './pages/countries-data/prospect
     MatIconModule,
     MatSidenavModule,
     MatDialogModule,
-    MatTabsModule
+    MatTabsModule,
+    MatFormFieldModule,
+    MatSelectModule
 
   ],
   providers: [],

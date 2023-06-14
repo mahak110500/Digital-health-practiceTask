@@ -14,7 +14,7 @@ export class ViewDataService {
 
 	getViewData(data: any): Observable<any> {
 		return this.http.post(
-			this.baseUrl + 'ndhs-master/overview', data
+			this.baseUrl + 'ndhs-master/overview', data 
 		);
 	}
 }
