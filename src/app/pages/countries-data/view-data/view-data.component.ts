@@ -64,6 +64,8 @@ export class ViewDataComponent implements OnInit {
 
 			const res = await this.viewdataService.getViewData(data).toPromise();
 			this.isLoading = false;
+			console.log(res);
+			
 
 			const developmentTypes: [string, any][] = Object.entries(res);
 
@@ -84,13 +86,9 @@ export class ViewDataComponent implements OnInit {
 			});
 
 			this.Availability = Object.entries(presentData["Availability"]);
-			console.log(this.Availability );
-			
 			this.dataAvailability = this.getNestedEntries(this.Availability);
-			console.log(this.dataAvailability);
-			
 			this.processDataArray(this.dataAvailability, this.availabilityArray);
-			console.log(this.availabilityArray);
+			
 
 			this.Readiness = Object.entries(presentData["Readiness"]);
 			this.dataReadiness = this.getNestedEntries(this.Readiness);

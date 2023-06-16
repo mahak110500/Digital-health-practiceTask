@@ -11,12 +11,12 @@ import { HeaderInnerComponent } from './components/common/header-inner/header-in
 import { LayoutComponent } from './components/common/layout/layout.component';
 import { SidebarComponent } from './components/common/sidebar/sidebar.component';
 
-import {MatToolbarModule} from '@angular/material/toolbar';
+import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
-import {MatSidenavModule} from '@angular/material/sidenav';
+import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatDialogModule } from '@angular/material/dialog';
-import {MatTabsModule} from '@angular/material/tabs';
+import { MatTabsModule } from '@angular/material/tabs';
 
 
 
@@ -25,7 +25,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
 import { MatExpansionModule } from '@angular/material/expansion';
-import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatButtonToggleModule } from "@angular/material/button-toggle";
 
 
@@ -36,7 +36,7 @@ import { NdhsMapComponent } from './pages/ndhs-map/ndhs-map.component';
 import { PresentDevelopmentComponent } from './pages/countries-data/present-development/present-development.component';
 import { ProspectiveDevelopmentComponent } from './pages/countries-data/prospective-development/prospective-development.component';
 import { ComparativeResultsComponent } from './pages/comparative-results/comparative-results.component';
-
+import { NgxEchartsModule } from 'ngx-echarts';
 
 @NgModule({
   declarations: [
@@ -68,7 +68,11 @@ import { ComparativeResultsComponent } from './pages/comparative-results/compara
     MatDialogModule,
     MatTabsModule,
     MatFormFieldModule,
-    MatSelectModule
+    MatSelectModule,
+    MatExpansionModule,
+    NgxEchartsModule.forRoot({
+      echarts: () => import('echarts'),
+    }),
 
   ],
   providers: [],

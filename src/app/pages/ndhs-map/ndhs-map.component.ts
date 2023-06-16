@@ -170,21 +170,21 @@ export class NdhsMapComponent implements OnInit {
 
 
 	getSelectedYear(ev: any) {
-		this.year2021 = true;
-		this.year = this.year.filter((v: any, i: any, a: any) => a.indexOf(v) === i);
-		
-		if (!this.year.includes(ev.target.value)) {
-			this.year.push(ev.target.value);
-
-			localStorage.removeItem('selected_years');
-			localStorage.setItem('selected_years', JSON.stringify(this.year));
-		}
-		else {
-			this.year.splice(this.year.indexOf(ev.target.value), 1);
-
-			localStorage.removeItem('selected_years');
-			localStorage.setItem('selected_years', JSON.stringify(this.year));
-		}
+	
+        this.year2021 = true;
+        this.year = this.year.filter((v: any, i: any, a: any) => a.indexOf(v) === i);
+        if (!this.year.includes(ev.target.value)) {
+            this.year.push(ev.target.value);
+            
+        localStorage.removeItem('selected_years');
+            localStorage.setItem('selected_years',JSON.stringify(this.year));
+        } 
+        else {
+            this.year.splice(this.year.indexOf(ev.target.value), 1);
+            
+        localStorage.removeItem('selected_years');
+            localStorage.setItem('selected_years',JSON.stringify(this.year));
+        }
 		this.getMapData();
 	}
 
