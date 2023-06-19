@@ -511,7 +511,7 @@
             <div class="col-md-12 col-sm-7 col-xs-12">
                 <div class="panel country-selector">
                     <div class="chart-heading">
-                        <h2>{{developmentName[0]}}</h2>
+                        <h2>{{developmentName[1]}}</h2>
                     </div>
                     <div class='md-padding main-head' layout="row" layout-wrap style="margin-left: 60px;">
                         <div class="bar-chart-card">
@@ -525,7 +525,7 @@
             <div class="col-md-12 col-sm-7 col-xs-12">
                 <div class="panel country-selector">
                     <div class="chart-heading">
-                        <h2>{{developmentName[1]}}</h2>
+                        <h2>{{developmentName[0]}}</h2>
                     </div>
                     <div class='md-padding main-head' layout="row" layout-wrap style="margin-left: 60px;">
                         <div class="bar-chart-card">
@@ -539,11 +539,29 @@
 
         <div class="row">
             <div class="col-md-12 col-sm-7 col-xs-12">
-                <div class="panel country-selector">
-                  <div #topChart style="width: 100%; height: 500px;"></div>
+
+                <div class="panel country-selector" id="chartContainer">
+                    <div class="chart-heading">
+                        <h3 style="color: rgb(6, 6, 92); font-weight: bold;">Average By Country</h3>
+                        <h2>{{developmentName[0]}}</h2>
+
+                    </div>
+                    <div id="chartContainer1">
+                        <div *ngFor="let category of extractedObjects; let i = index" >
+                            <div [id]="'chartdiv-' + i" style="width: 500px; height: 300px;"></div>
+                        </div>
+                    </div>
+                    <div id="chartContainer2">
+                        <div *ngFor="let category of extractedObjects; let i = index" >
+                            <div [id]="'chartdiv-' + i" style="width: 500px; height: 300px;"></div>
+                        </div>
+                    </div>
+                   
+
+
                 </div>
-              </div>
-              
+            </div>
+
 
         </div>
     </div>

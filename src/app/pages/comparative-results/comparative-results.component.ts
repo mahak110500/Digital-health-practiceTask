@@ -8,11 +8,13 @@ import * as am5 from '@amcharts/amcharts5';
 import * as am5map from '@amcharts/amcharts5/map';
 import am5themes_Animated from '@amcharts/amcharts5/themes/Animated';
 import am5geodata_worldLow from '@amcharts/amcharts5-geodata/worldLow';
-
 import * as echarts from 'echarts';
 import am4themes_animated from '@amcharts/amcharts4/themes/animated';
 import * as am4core from '@amcharts/amcharts4/core';
 import * as am4plugins_forceDirected from '@amcharts/amcharts4/plugins/forceDirected';
+import * as am4charts from '@amcharts/amcharts4/charts';
+
+
 
 
 
@@ -22,7 +24,7 @@ import * as am4plugins_forceDirected from '@amcharts/amcharts4/plugins/forceDire
     templateUrl: './comparative-results.component.html',
     styleUrls: ['./comparative-results.component.css']
 })
-export class ComparativeResultsComponent implements OnInit, AfterViewInit {
+export class ComparativeResultsComponent implements OnInit, AfterViewInit, OnDestroy {
     countriesToShow: any;
     countrySelected: any;
     selectedYear: any = [];
@@ -61,6 +63,9 @@ export class ComparativeResultsComponent implements OnInit, AfterViewInit {
     presentType: any[] = [];
     prospectiveType: any[] = [];
     dom: any;
+    newDataArray: any[] = [];
+    extractedObjects: any = [];
+
 
 
     step = 0;
@@ -89,7 +94,7 @@ export class ComparativeResultsComponent implements OnInit, AfterViewInit {
 
 
     ngAfterViewInit(): void {
-        this.getTopTenData(this.governance_id)
+        this.getTopTenData(this.governance_id);
 
         this.mapData();
         this.createNetworkChart();
@@ -149,8 +154,9 @@ export class ComparativeResultsComponent implements OnInit, AfterViewInit {
 
     }
 
-    getTopTenData(governanceId: any) {
 
+
+    getTopTenData(governanceId: any) {
         let data = {
             countries: this.countrySelected,
             governanceId: governanceId,
@@ -177,9 +183,9 @@ export class ComparativeResultsComponent implements OnInit, AfterViewInit {
             });
 
             this.Availability = Object.entries(presentData["Availability"]);
-            // console.log(this.Availability);
-
-            const extractedObjects: any = [];
+            this.Readiness = Object.entries(presentData["Readiness"]);
+            this.CapacityBuilding = Object.entries(prospectiveData["Capacity Building"]);
+            this.DevelopmentStrat = Object.entries(prospectiveData["Development Strategy"]);
 
             this.Availability.forEach((arr: any) => {
                 const category = arr[0];
@@ -195,56 +201,136 @@ export class ComparativeResultsComponent implements OnInit, AfterViewInit {
                 // Sort combined objects based on their score in descending order
                 combinedObjects.sort((a, b) => b.score - a.score);
 
-                extractedObjects.push([category, combinedObjects]);
+                this.extractedObjects.push({ categoryName: category, data: combinedObjects });
+                console.log(this.extractedObjects);
+
+                if (this.extractedObjects.length > 0) {
+                    this.displayTopTen(this.extractedObjects,'container1');
+                }
+
             });
 
 
-            console.log(extractedObjects);
+            this.extractedObjects = [];
+            this.Readiness.forEach((arr: any) => {
+                const category = arr[0];
+                const innerArray = arr[1];
+                const firstObject = innerArray[0];
+                const lastObject = innerArray[innerArray.length - 1];
 
-            extractedObjects.forEach((categoryData: any) => {
-                const category = categoryData[0];
-                const data = categoryData[1];
-        
-                const chart = echarts.init(this.chartElement.nativeElement);
-        
-                const option = {
-                  title: {
-                    text: category
-                  },
-                  tooltip: {
-                    trigger: 'axis',
-                    axisPointer: {
-                      type: 'shadow'
-                    },
-                    formatter: '{b}: {c}%'
-                  },
-                  xAxis: {
-                    type: 'value',
-                    axisLabel: {
-                      formatter: '{value}%'
-                    }
-                  },
-                  yAxis: {
-                    type: 'category',
-                    data: data.map((item: any) => item.country_name)
-                  },
-                  series: [{
-                    type: 'bar',
-                    data: data.map((item: any) => item.score)
-                  }]
-                };
-        
-                chart.setOption(option);
-              });
+                const matchingObjects = innerArray.filter((obj: any) => this.mySelections.includes(obj.country_id));
+
+                // Combine first object, last object, and matching objects
+                const combinedObjects = [firstObject, lastObject, ...matchingObjects];
+
+                // Sort combined objects based on their score in descending order
+                combinedObjects.sort((a, b) => b.score - a.score);
+
+                  this.extractedObjects.push({ categoryName: category, data: combinedObjects });
+                console.log(this.extractedObjects);
+
+                if (this.extractedObjects.length > 0) {
+                    this.displayTopTen(this.extractedObjects,'container2');
+                }
+
+            });
 
 
 
+           
 
         })
+
     }
 
 
+    displayTopTen(data:any[],id:any) {
+        console.log(data);
+        
+        am4core.useTheme(am4themes_animated);
+
+        // const apiResponse = this.extractedObjects;
+
+        this.newDataArray = this.extractedObjects.map((obj: any) => obj.data);
+
+        const apiResponse = this.newDataArray;
+
+        // Iterate over each category in the API response
+        for (let i = 0; i < apiResponse.length; i++) {
+
+            const category = apiResponse[i];
+
+            // Create a new div for each category
+            const divId = `chartdiv-${i}`;
+            const chartDiv = document.createElement('div');
+            chartDiv.setAttribute('id', divId);
+            chartDiv.style.width = '100%';
+            chartDiv.style.height = '500px';
+
+            const chartContainer: any = document.getElementById('chartContainer');
+            chartContainer.appendChild(chartDiv);
+
+            // Use setTimeout to delay the chart creation
+            setTimeout(() => {
+                // Create the chart inside the corresponding div
+                let chart = am4core.create(divId, am4charts.XYChart);
+                chart.hiddenState.properties.opacity = 0; // this creates initial fade-in
+
+                chart.data = category;
+
+                let categoryAxis = chart.xAxes.push(new am4charts.CategoryAxis());
+                categoryAxis.renderer.grid.template.location = 0;
+                categoryAxis.dataFields.category = "country_name";
+                categoryAxis.renderer.minGridDistance = 30;
+                categoryAxis.fontSize = 11;
+                categoryAxis.renderer.labels.template.dy = 5;
+
+
+
+                let image = new am4core.Image();
+                image.horizontalCenter = "middle";
+                image.width = 12;
+                image.height = 12;
+                image.verticalCenter = "middle";
+                image.adapter.add("href", (href, target: any) => {
+                    let category = target.dataItem.category;
+                    if (category) {
+                        return "https://www.amcharts.com/wp-content/uploads/flags/" + category.split(" ").join("-").toLowerCase() + ".svg";
+                    }
+                    return href;
+                })
+                categoryAxis.dataItems.template.bullet = image;
+
+                let valueAxis = chart.yAxes.push(new am4charts.ValueAxis());
+                valueAxis.min = 0;
+                valueAxis.renderer.minGridDistance = 35;
+                valueAxis.renderer.baseGrid.disabled = true;
+
+
+                let series = chart.series.push(new am4charts.ColumnSeries());
+                series.dataFields.categoryX = "country_name";
+                series.dataFields.valueY = "score";
+                series.columns.template.tooltipText = "{valueY.value}";
+                series.columns.template.tooltipY = 0;
+                series.columns.template.strokeOpacity = 0;
+                series.columns.template.width = am4core.percent(22);
+
+                // as by default columns of the same series are of the same color, we add adapter which takes colors from chart.colors color set
+                series.columns.template.adapter.add("fill", function (fill, target: any) {
+                    return chart.colors.getIndex(target.dataItem.index);
+                });
+
+            }, 0);
+
+        }
+    }
+
+
+
+
+
     BarGraph(categoryName: string, data: any[], id: any) {
+
         if (id === 'present-chart-container') {
             this.dom = document.getElementById('present-chart-container');
 
@@ -269,6 +355,7 @@ export class ComparativeResultsComponent implements OnInit, AfterViewInit {
 
         const ultimateNames = data.map((item) => item.ultimate_name);
         const ultimateNamesSet = Array.from(new Set(ultimateNames)); // Get unique ultimate names
+
 
         const option = {
             tooltip: {
@@ -366,6 +453,7 @@ export class ComparativeResultsComponent implements OnInit, AfterViewInit {
                     }
                 }
             }
+
             this.presentType.forEach((category: any) => {
                 this.BarGraph(category.categoryName, category.data, 'present-chart-container');
             });
@@ -636,68 +724,7 @@ export class ComparativeResultsComponent implements OnInit, AfterViewInit {
     }
 
 
-    // createRadarChart(governanceId: any) {
 
-    //     let data = {
-    //         countries: this.countrySelected,
-    //         developmentId: this.isValue,
-    //         governance_id: governanceId
-    //     }
-
-    //     this.comparativeServices.getChartData(data).subscribe(res => {
-    //         console.log(res);
-
-
-    //         let response = Object.entries(res);
-    //         response.forEach((element: any, index: any) => {
-    //             this.taxonomyData = Object.entries(element[1]);
-    //             console.log(this.taxonomyData);
-
-    //         });
-
-    //     })
-
-
-
-    //     this.chart2 = echarts.init(this.radarChartContainer.nativeElement);
-    //     this.option = {
-    //         // title: {
-    //         //     text: 'Basic Radar Chart'
-    //         // },
-    //         legend: {
-    //             data: ['Allocated Budget', 'Actual Spending']
-    //         },
-    //         radar: {
-    //             // shape: 'circle',
-    //             indicator: [
-    //                 { name: 'AI Workforce/Infrastructure', max: 38000 },
-    //                 { name: 'Healthcare Governance', max: 16000 },
-    //                 { name: 'Healthcare workforce and Infrastructure', max: 30000 },
-    //                 { name: 'IT Governance', max: 42000 },
-    //                 { name: 'IT Workforce & Infrastructure', max: 52000 },
-
-    //             ]
-    //         },
-    //         series: [
-    //             {
-    //                 name: 'Budget vs spending',
-    //                 type: 'radar',
-    //                 data: [
-    //                     {
-    //                         value: [4200, 3000, 20000, 35000, 50000, 18000],
-    //                         name: 'Allocated Budget'
-    //                     },
-    //                     {
-    //                         value: [5000, 14000, 28000, 26000, 42000, 21000],
-    //                         name: 'Actual Spending'
-    //                     }
-    //                 ]
-    //             }
-    //         ]
-    //     };
-    //     this.chart2.setOption(this.option);
-
-    // }
 
 
     createRadarChart(governanceId: any) {
@@ -836,8 +863,10 @@ export class ComparativeResultsComponent implements OnInit, AfterViewInit {
     }
 
 
-
-
+    ngOnDestroy() {
+        // Dispose of the charts when the component is destroyed
+        am4core.disposeAllCharts();
+    }
 
 }
 
