@@ -18,7 +18,6 @@ import * as am4charts from '@amcharts/amcharts4/charts';
 
 
 
-
 @Component({
     selector: 'app-comparative-results',
     templateUrl: './comparative-results.component.html',
@@ -77,7 +76,7 @@ export class ComparativeResultsComponent implements OnInit, AfterViewInit, OnDes
     }
     @ViewChild('mySelect') mySelect: ElementRef | any;
     @ViewChild('radarChartContainer', { static: true }) radarChartContainer!: ElementRef;
-    @ViewChild('topChart', { static: true })chartElement!: ElementRef;
+    @ViewChild('topChart', { static: true }) chartElement!: ElementRef;
     constructor(
         private mapService: CountriesService,
         private utilityService: UtilitiesService,
@@ -137,6 +136,7 @@ export class ComparativeResultsComponent implements OnInit, AfterViewInit, OnDes
 
         this.utilityService.governanceTypeSource.subscribe((governanceId) => {
             this.governance_id = governanceId;
+            this.fetchNetworkData(this.governance_id)
             this.getTopTenData(this.governance_id)
             this.BarGraphData(this.governance_id)
             this.comparativeOverViewData(this.governance_id);
@@ -438,7 +438,11 @@ export class ComparativeResultsComponent implements OnInit, AfterViewInit, OnDes
             countries: this.countrySelected,
             governance_id: governanceId
         }
+        console.log(data);
+
         this.comparativeServices.getComparativeOverview(data).subscribe(res => {
+            console.log(res);
+
 
             const developmentTypes: [string, any][] = Object.entries(res);
 
@@ -479,6 +483,23 @@ export class ComparativeResultsComponent implements OnInit, AfterViewInit, OnDes
         })
 
     }
+
+
+
+    fetchNetworkData(governanceId: any) {
+
+        let data = {
+            countries: this.countrySelected,
+            governance_id: governanceId
+        }
+
+        this.comparativeServices.getComparativeOverview(data).subscribe(res => {
+            // const transformData = this.transformData(res)
+
+        })
+
+    }
+
 
 
     toggle(num: number) {
@@ -763,41 +784,154 @@ export class ComparativeResultsComponent implements OnInit, AfterViewInit, OnDes
         });
     }
 
+
+
+
     createNetworkChart() {
+        am4core.useTheme(am4themes_animated);
 
-        // Create chart
-        var chart = am4core.create("networkChart", am4plugins_forceDirected.ForceDirectedTree);
+        let chart = am4core.create("networkChart", am4plugins_forceDirected.ForceDirectedTree);
+        chart.legend = new am4charts.Legend();
 
-        // Create series
-        var series = chart.series.push(new am4plugins_forceDirected.ForceDirectedSeries())
+        let networkSeries = chart.series.push(new am4plugins_forceDirected.ForceDirectedSeries());
 
-        // Set data
-        series.data = [{
-            "name": "Digital Health",
-            "children": [{
-                "name": "Present Development",
-                "value": 100
-            }, {
-                "name": "Prospective Development",
-                "value": 100
-            }]
-        }];
+        // Disable drag functionality
+        networkSeries.nodes.template.draggable = false;
+        networkSeries.nodes.template.inert = true;
 
-        // Set up data fields
-        series.dataFields.value = "value";
-        series.dataFields.name = "name";
-        series.dataFields.children = "children";
+        // Disable rotation
+        networkSeries.nodes.template.rotation = 0;
 
 
 
-        // Add labels
-        series.nodes.template.label.text = "{name}";
-        series.fontSize = 10;
-        series.minRadius = 15;
-        series.maxRadius = 40;
+        networkSeries.data = [
+            {
+                name: 'Health & It',
+                fixed: true,
+                children: [
+                    {
+                        name: 'Present Development',
+                        fixed: true,
 
-        series.centerStrength = 0.5;
+                        children: [
+                            {
+                                name: 'Availability',
+                                fixed: true,
+                                children: [
+                                    {
+                                        name: 'It Governance',
+                                        fixed: true
+                                    },
+                                    {
+                                        name: 'AI Workforce & Infrastructure',
+                                        fixed: true
+                                    },
+                                    {
+                                        name: 'Health Governance',
+                                        fixed: true
+                                    }
+                                ]
+                            },
+                            {
+                                name: 'Readiness',
+                                fixed: true,
+
+                                children: [
+                                    {
+                                        name: 'It Governance',
+                                        fixed: true
+                                    },
+                                    {
+                                        name: 'AI Workforce & Infrastructure',
+                                        fixed: true
+                                    },
+                                    {
+                                        name: 'Health Governance',
+                                        fixed: true
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        name: 'Prospective Development',
+                        fixed: true,
+                        children: [
+                            {
+                                name: 'Capacity Building',
+                                fixed: true,
+                                children: [
+                                    {
+                                        name: 'It Governance',
+                                        fixed: true
+                                    },
+                                    {
+                                        name: 'AI Workforce & Infrastructure',
+                                        fixed: true
+                                    },
+                                    {
+                                        name: 'Health Governance',
+                                        fixed: true
+                                    }
+                                ]
+                            },
+                            {
+                                name: 'Development Startegy',
+                                fixed: true,
+
+                                children: [
+                                    {
+                                        name: 'It Governance',
+                                        fixed: true
+                                    },
+                                    {
+                                        name: 'AI Workforce & Infrastructure',
+                                        fixed: true
+                                    },
+                                    {
+                                        name: 'Health Governance',
+                                        fixed: true
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            }
+        ];
+
+        networkSeries.dataFields.linkWith = "linkWith";
+        networkSeries.dataFields.name = "name";
+        networkSeries.dataFields.id = "name";
+        networkSeries.dataFields.value = "value";
+        networkSeries.dataFields.children = "children";
+
+
+        // Set node properties
+        let nodeTemplate = networkSeries.nodes.template;
+        nodeTemplate.tooltipText = "{name}";
+        networkSeries.nodes.template.fillOpacity = 1;
+        networkSeries.nodes.template.label.text = "{name}"
+        networkSeries.fontSize = 8;
+        networkSeries.maxLevels = 2;
+        networkSeries.nodes.template.label.hideOversized = true;
+        networkSeries.nodes.template.label.truncate = true;
+
+
+
+
+        // Configure forces to create a tree-like structure
+        networkSeries.minRadius = 15;
+        networkSeries.maxRadius = 50;
+        networkSeries.links.template.distance = 2;
+
+        chart.zoomable = false; // Disable chart zooming
+
+
     }
+
+
+
 
     ngOnDestroy() {
         console.log('OnDestroy executed');
