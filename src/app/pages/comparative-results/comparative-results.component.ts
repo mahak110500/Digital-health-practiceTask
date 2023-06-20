@@ -65,8 +65,9 @@ export class ComparativeResultsComponent implements OnInit, AfterViewInit, OnDes
     dom: any;
     newDataArray: any[] = [];
     extractedObjects: any = [];
-
-
+    extractedObjects2: any[] = [];
+    extractedObjects3: any[] = [];
+    extractedObjects4: any[] = [];
 
     step = 0;
     stepinner = 0;
@@ -74,17 +75,9 @@ export class ComparativeResultsComponent implements OnInit, AfterViewInit, OnDes
     setStep(index: number) {
         this.step = index;
     }
-
-    setStepInner(index: number) {
-        this.stepinner = index;
-    }
-
     @ViewChild('mySelect') mySelect: ElementRef | any;
     @ViewChild('radarChartContainer', { static: true }) radarChartContainer!: ElementRef;
-    @ViewChild('topChart', { static: true })
-    chartElement!: ElementRef;
-
-
+    @ViewChild('topChart', { static: true })chartElement!: ElementRef;
     constructor(
         private mapService: CountriesService,
         private utilityService: UtilitiesService,
@@ -94,8 +87,6 @@ export class ComparativeResultsComponent implements OnInit, AfterViewInit, OnDes
 
 
     ngAfterViewInit(): void {
-        this.getTopTenData(this.governance_id);
-
         this.mapData();
         this.createNetworkChart();
     }
@@ -142,19 +133,17 @@ export class ComparativeResultsComponent implements OnInit, AfterViewInit, OnDes
             };
 
             this.setCountry();
-            // this.getComparitive();
         });
 
         this.utilityService.governanceTypeSource.subscribe((governanceId) => {
             this.governance_id = governanceId;
+            this.getTopTenData(this.governance_id)
             this.BarGraphData(this.governance_id)
             this.comparativeOverViewData(this.governance_id);
             this.createRadarChart(this.governance_id);
         });
 
     }
-
-
 
     getTopTenData(governanceId: any) {
         let data = {
@@ -170,15 +159,14 @@ export class ComparativeResultsComponent implements OnInit, AfterViewInit, OnDes
 
             const presentData: { [key: string]: any } = {};
             const prospectiveData: { [key: string]: any } = {};
+
             Object.entries(this.developmentType).forEach(([key, value]) => {
                 if (key === "0") {
                     prospectiveData["Capacity Building"] = (value as { [key: string]: any })["Capacity Building"];
                     prospectiveData["Development Strategy"] = (value as { [key: string]: any })["Development Strategy"];
-
                 } else if (key === "1") {
                     presentData["Availability"] = (value as { [key: string]: any })["Availability"];
                     presentData["Readiness"] = (value as { [key: string]: any })["Readiness"];
-
                 }
             });
 
@@ -187,146 +175,122 @@ export class ComparativeResultsComponent implements OnInit, AfterViewInit, OnDes
             this.CapacityBuilding = Object.entries(prospectiveData["Capacity Building"]);
             this.DevelopmentStrat = Object.entries(prospectiveData["Development Strategy"]);
 
-            this.Availability.forEach((arr: any) => {
-                const category = arr[0];
-                const innerArray = arr[1];
-                const firstObject = innerArray[0];
-                const lastObject = innerArray[innerArray.length - 1];
+            this.extractedObjects = this.extractObjectsData(this.Availability);
+            if (this.extractedObjects.length > 0) {
+                this.displayTopTen(this.extractedObjects, 'chartContainer1');
+            }
 
-                const matchingObjects = innerArray.filter((obj: any) => this.mySelections.includes(obj.country_id));
+            this.extractedObjects2 = this.extractObjectsData(this.Readiness);
+            if (this.extractedObjects2.length > 0) {
+                this.displayTopTen(this.extractedObjects2, 'chartContainer2');
+            }
 
-                // Combine first object, last object, and matching objects
-                const combinedObjects = [firstObject, lastObject, ...matchingObjects];
+            this.extractedObjects3 = this.extractObjectsData(this.CapacityBuilding);
+            if (this.extractedObjects3.length > 0) {
+                this.displayTopTen(this.extractedObjects3, 'chartContainer3');
+            }
 
-                // Sort combined objects based on their score in descending order
-                combinedObjects.sort((a, b) => b.score - a.score);
-
-                this.extractedObjects.push({ categoryName: category, data: combinedObjects });
-                console.log(this.extractedObjects);
-
-                if (this.extractedObjects.length > 0) {
-                    this.displayTopTen(this.extractedObjects,'container1');
-                }
-
-            });
-
-
-            this.extractedObjects = [];
-            this.Readiness.forEach((arr: any) => {
-                const category = arr[0];
-                const innerArray = arr[1];
-                const firstObject = innerArray[0];
-                const lastObject = innerArray[innerArray.length - 1];
-
-                const matchingObjects = innerArray.filter((obj: any) => this.mySelections.includes(obj.country_id));
-
-                // Combine first object, last object, and matching objects
-                const combinedObjects = [firstObject, lastObject, ...matchingObjects];
-
-                // Sort combined objects based on their score in descending order
-                combinedObjects.sort((a, b) => b.score - a.score);
-
-                  this.extractedObjects.push({ categoryName: category, data: combinedObjects });
-                console.log(this.extractedObjects);
-
-                if (this.extractedObjects.length > 0) {
-                    this.displayTopTen(this.extractedObjects,'container2');
-                }
-
-            });
-
-
-
-           
-
-        })
-
+            this.extractedObjects4 = this.extractObjectsData(this.DevelopmentStrat);
+            if (this.extractedObjects4.length > 0) {
+                this.displayTopTen(this.extractedObjects4, 'chartContainer4');
+            }
+        });
     }
 
 
-    displayTopTen(data:any[],id:any) {
-        console.log(data);
-        
+
+    extractObjectsData(entries: any[]): any[] {
+        const extractedObjects: any[] = [];
+
+        entries.forEach((arr: any) => {
+            const category = arr[0];
+            const innerArray = arr[1];
+            const firstObject = innerArray[0];
+            const lastObject = innerArray[innerArray.length - 1];
+
+            const matchingObjects = innerArray.filter((obj: any) => this.mySelections.includes(obj.country_id));
+
+            const combinedObjects = [firstObject, lastObject, ...matchingObjects];
+
+            combinedObjects.sort((a, b) => b.score - a.score);
+
+            extractedObjects.push({ categoryName: category, data: combinedObjects });
+        });
+        return extractedObjects;
+    }
+
+    displayTopTen(data: any[], containerId: string) {
         am4core.useTheme(am4themes_animated);
-
-        // const apiResponse = this.extractedObjects;
-
-        this.newDataArray = this.extractedObjects.map((obj: any) => obj.data);
-
+        this.newDataArray = data.map((obj: any) => obj.data);
         const apiResponse = this.newDataArray;
 
         // Iterate over each category in the API response
         for (let i = 0; i < apiResponse.length; i++) {
-
             const category = apiResponse[i];
+            const divId = `${containerId}-${i}`;
 
-            // Create a new div for each category
-            const divId = `chartdiv-${i}`;
+            // Display ultimate_field and taxonomy_name above the chart
+            const categoryInfoDiv = document.createElement('div');
+            categoryInfoDiv.style.textAlign = 'center';
+            categoryInfoDiv.style.marginBottom = '10px';
+            categoryInfoDiv.innerHTML = `<b>${category[0]?.ultimate_field}</b>&nbsp;&nbsp;&nbsp;&nbsp;<b>${category[0]?.taxonomy_name}</b> `;
+            const chartContainer: any = document.getElementById(containerId); //imp
+            chartContainer.appendChild(categoryInfoDiv);
+
             const chartDiv = document.createElement('div');
             chartDiv.setAttribute('id', divId);
-            chartDiv.style.width = '100%';
-            chartDiv.style.height = '500px';
-
-            const chartContainer: any = document.getElementById('chartContainer');
+            chartDiv.style.width = '400px';
+            chartDiv.style.height = '300px';
             chartContainer.appendChild(chartDiv);
 
-            // Use setTimeout to delay the chart creation
-            setTimeout(() => {
-                // Create the chart inside the corresponding div
-                let chart = am4core.create(divId, am4charts.XYChart);
-                chart.hiddenState.properties.opacity = 0; // this creates initial fade-in
+            // Create the chart inside the corresponding div
+            let chart = am4core.create(divId, am4charts.XYChart);
+            chart.hiddenState.properties.opacity = 0; // this creates initial fade-in
 
-                chart.data = category;
+            chart.data = category;
 
-                let categoryAxis = chart.xAxes.push(new am4charts.CategoryAxis());
-                categoryAxis.renderer.grid.template.location = 0;
-                categoryAxis.dataFields.category = "country_name";
-                categoryAxis.renderer.minGridDistance = 30;
-                categoryAxis.fontSize = 11;
-                categoryAxis.renderer.labels.template.dy = 5;
+            let categoryAxis = chart.xAxes.push(new am4charts.CategoryAxis());
+            categoryAxis.renderer.grid.template.location = 0;
+            categoryAxis.dataFields.category = "country_name";
+            categoryAxis.renderer.minGridDistance = 30;
+            categoryAxis.fontSize = 11;
+            categoryAxis.renderer.labels.template.dy = 5;
 
+            let image = new am4core.Image();
+            image.horizontalCenter = "middle";
+            image.width = 12;
+            image.height = 12;
+            image.verticalCenter = "middle";
+            image.adapter.add("href", (href, target: any) => {
+                let category = target.dataItem.category;
+                if (category) {
+                    return "https://www.amcharts.com/wp-content/uploads/flags/" + category.split(" ").join("-").toLowerCase() + ".svg";
+                }
+                return href;
+            })
+            categoryAxis.dataItems.template.bullet = image;
 
-
-                let image = new am4core.Image();
-                image.horizontalCenter = "middle";
-                image.width = 12;
-                image.height = 12;
-                image.verticalCenter = "middle";
-                image.adapter.add("href", (href, target: any) => {
-                    let category = target.dataItem.category;
-                    if (category) {
-                        return "https://www.amcharts.com/wp-content/uploads/flags/" + category.split(" ").join("-").toLowerCase() + ".svg";
-                    }
-                    return href;
-                })
-                categoryAxis.dataItems.template.bullet = image;
-
-                let valueAxis = chart.yAxes.push(new am4charts.ValueAxis());
-                valueAxis.min = 0;
-                valueAxis.renderer.minGridDistance = 35;
-                valueAxis.renderer.baseGrid.disabled = true;
+            let valueAxis = chart.yAxes.push(new am4charts.ValueAxis());
+            valueAxis.min = 0;
+            valueAxis.renderer.minGridDistance = 35;
+            valueAxis.renderer.baseGrid.disabled = true;
 
 
-                let series = chart.series.push(new am4charts.ColumnSeries());
-                series.dataFields.categoryX = "country_name";
-                series.dataFields.valueY = "score";
-                series.columns.template.tooltipText = "{valueY.value}";
-                series.columns.template.tooltipY = 0;
-                series.columns.template.strokeOpacity = 0;
-                series.columns.template.width = am4core.percent(22);
+            let series = chart.series.push(new am4charts.ColumnSeries());
+            series.dataFields.categoryX = "country_name";
+            series.dataFields.valueY = "score";
+            series.columns.template.tooltipText = "{valueY.value}";
+            series.columns.template.tooltipY = 0;
+            series.columns.template.strokeOpacity = 0;
+            series.columns.template.width = am4core.percent(22);
 
-                // as by default columns of the same series are of the same color, we add adapter which takes colors from chart.colors color set
-                series.columns.template.adapter.add("fill", function (fill, target: any) {
-                    return chart.colors.getIndex(target.dataItem.index);
-                });
-
-            }, 0);
-
+            // as by default columns of the same series are of the same color, we add adapter which takes colors from chart.colors color set
+            series.columns.template.adapter.add("fill", function (fill, target: any) {
+                return chart.colors.getIndex(target.dataItem.index);
+            });
         }
+
     }
-
-
-
 
 
     BarGraph(categoryName: string, data: any[], id: any) {
@@ -495,12 +459,6 @@ export class ComparativeResultsComponent implements OnInit, AfterViewInit, OnDes
 
 
             this.Availability = Object.entries(presentData["Availability"]);
-            // const formattedResponse = this.Availability .map(([name, indicator]: [string, Record<string, any>]) => ({
-            //     name,
-            //     indicator: Object.entries(indicator).map(([key, value]) => ({ key, value }))
-            //   }));
-
-            // console.log(formattedResponse);
             this.dataAvailability = this.getNestedEntries(this.Availability);
             this.processDataArray(this.dataAvailability, this.availabilityArray);
 
@@ -615,8 +573,6 @@ export class ComparativeResultsComponent implements OnInit, AfterViewInit, OnDes
 
                 }
             }
-            console.log(this.mySelections);
-
             this.toppings.setValue(this.mySelections);
         }
         this.getTopTenData(this.governance_id)
@@ -724,9 +680,6 @@ export class ComparativeResultsComponent implements OnInit, AfterViewInit, OnDes
     }
 
 
-
-
-
     createRadarChart(governanceId: any) {
         let data = {
             countries: this.countrySelected,
@@ -798,8 +751,6 @@ export class ComparativeResultsComponent implements OnInit, AfterViewInit, OnDes
         return indicatorNames.map(name => ({ name: name, max: 60000 }));
     }
 
-
-
     getNestedEntries(entries: [string, any][]): [string, any][][] {
         return entries.map(([, entry]) => Object.entries(entry));
     }
@@ -846,28 +797,12 @@ export class ComparativeResultsComponent implements OnInit, AfterViewInit, OnDes
         series.maxRadius = 40;
 
         series.centerStrength = 0.5;
-
-        // series.colors.list = am4core.color("#F42B03");
-        // series.colors.wrap = false;
-
-        // Set color based on governance_id
-        //  if (governanceId === 1) {
-        //      // Green color
-        //      series.colors.list = [am4core.color("#00FF00")];
-        //      series.colors.wrap = false;
-        //  } else if (governanceId === 2) {
-        //      // Blue color
-        //      series.colors.list = [am4core.color("#0000FF")];
-        //      series.colors.wrap = false;
-        //  }
     }
-
 
     ngOnDestroy() {
-        // Dispose of the charts when the component is destroyed
+        console.log('OnDestroy executed');
         am4core.disposeAllCharts();
     }
-
 }
 
 
