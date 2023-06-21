@@ -114,7 +114,7 @@
                                     </mat-accordion>
                                 </div>
 
-                                <div class="list" id="two">
+                                <div class="list" id="two" >
                                     <h1>{{developmentName[1]}}</h1>
                                     <mat-accordion>
                                         <ng-container *ngFor="let taxonomy of CapacityBuilding; let i=index;">
@@ -130,7 +130,7 @@
                                             </mat-expansion-panel>
                                         </ng-container>
 
-                                        <!-- Readiness Start -->
+                                       
                                         <ng-container *ngFor="let taxonomy of DevelopmentStrat; let i=index;">
                                             <mat-expansion-panel [expanded]="step === i" (opened)="setStep(i)"
                                                 hideToggle>
@@ -144,7 +144,6 @@
 
                                             </mat-expansion-panel>
                                         </ng-container>
-                                        <!-- Readiness ends -->
                                     </mat-accordion>
                                 </div>
                             </div>

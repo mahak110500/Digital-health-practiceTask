@@ -14,6 +14,12 @@ import * as am4core from '@amcharts/amcharts4/core';
 import * as am4plugins_forceDirected from '@amcharts/amcharts4/plugins/forceDirected';
 import * as am4charts from '@amcharts/amcharts4/charts';
 
+interface IDataContext {
+    governance_id: string;
+    development_id: string;
+    ultimate_id: string;
+    taxonomy_id: string;
+}
 
 
 
@@ -67,6 +73,7 @@ export class ComparativeResultsComponent implements OnInit, AfterViewInit, OnDes
     extractedObjects2: any[] = [];
     extractedObjects3: any[] = [];
     extractedObjects4: any[] = [];
+    payloadObj: any = {};
 
     step = 0;
     stepinner = 0;
@@ -134,25 +141,46 @@ export class ComparativeResultsComponent implements OnInit, AfterViewInit, OnDes
             this.setCountry();
         });
 
+
+
         this.utilityService.governanceTypeSource.subscribe((governanceId) => {
             this.governance_id = governanceId;
-            this.fetchNetworkData(this.governance_id)
-            this.getTopTenData(this.governance_id)
-            this.BarGraphData(this.governance_id)
-            this.comparativeOverViewData(this.governance_id);
+
+            this.payloadObj = {
+                countries: this.countrySelected,
+                governance_id: governanceId
+            }
+
+            this.getTopTenData(this.payloadObj)
+            this.BarGraphData(this.payloadObj)
+            this.comparativeOverViewData(this.payloadObj);
             this.createRadarChart(this.governance_id);
         });
 
     }
 
-    getTopTenData(governanceId: any) {
-        let data = {
-            countries: this.countrySelected,
-            governanceId: governanceId,
-            year: this.selectedYear
-        }
+    getTopTenData(data: any) {
+        let payloadDayta = data;
 
-        this.comparativeServices.getTopTen(data).subscribe(res => {
+        if (payloadDayta.hasOwnProperty('development_id')) {
+            this.payloadObj['developmentId'] = this.payloadObj['development_id'];
+            delete this.payloadObj['development_id'];
+        }
+        if (payloadDayta.hasOwnProperty('governance_id')) {
+            this.payloadObj['governanceId'] = this.payloadObj['governance_id'];
+            delete this.payloadObj['governance_id'];
+        }
+        if (payloadDayta.hasOwnProperty('taxonomy_id')) {
+            this.payloadObj['taxonomyId'] = this.payloadObj['taxonomy_id'];
+            delete this.payloadObj['taxonomy_id'];
+        }
+        if (payloadDayta.hasOwnProperty('ultimate_id')) {
+            this.payloadObj['ultimateId'] = this.payloadObj['ultimate_id'];
+            delete this.payloadObj['ultimate_id'];
+        }
+        
+        this.comparativeServices.getTopTen(payloadDayta).subscribe(res => {
+
             const developmentTypes: [string, any][] = Object.entries(res);
             this.developmentName = developmentTypes.map(([name]) => name);
             this.developmentType = developmentTypes.map(([, type]) => type);
@@ -293,6 +321,7 @@ export class ComparativeResultsComponent implements OnInit, AfterViewInit, OnDes
     }
 
 
+
     BarGraph(categoryName: string, data: any[], id: any) {
 
         if (id === 'present-chart-container') {
@@ -388,14 +417,23 @@ export class ComparativeResultsComponent implements OnInit, AfterViewInit, OnDes
 
 
 
-    BarGraphData(governanceId: any) {
+    BarGraphData(data: any) {
+        let payloadDayta = data;
 
-        let data = {
-            countries: this.countrySelected,
-            governance_id: governanceId
-        };
-
-        this.comparativeServices.getChartData(data).subscribe(res => {
+        if (payloadDayta.hasOwnProperty('development_id')) {
+            this.payloadObj['developmentId'] = this.payloadObj['development_id'];
+            delete this.payloadObj['development_id'];
+        }
+        if (payloadDayta.hasOwnProperty('taxonomy_id')) {
+            this.payloadObj['taxonomyId'] = this.payloadObj['taxonomy_id'];
+            delete this.payloadObj['taxonomy_id'];
+        }
+        if (payloadDayta.hasOwnProperty('ultimate_id')) {
+            this.payloadObj['ultimateId'] = this.payloadObj['ultimate_id'];
+            delete this.payloadObj['ultimate_id'];
+        }
+        
+        this.comparativeServices.getChartData(payloadDayta).subscribe(res => {
 
             const developmentTypes: [string, any][] = Object.entries(res);
 
@@ -431,26 +469,17 @@ export class ComparativeResultsComponent implements OnInit, AfterViewInit, OnDes
 
     }
 
-
-    comparativeOverViewData(governanceId: any) {
-
-        let data = {
-            countries: this.countrySelected,
-            governance_id: governanceId
-        }
-        console.log(data);
-
+    comparativeOverViewData(data: any) {
         this.comparativeServices.getComparativeOverview(data).subscribe(res => {
-            console.log(res);
-
-
             const developmentTypes: [string, any][] = Object.entries(res);
 
             this.developmentName = developmentTypes.map(([name]) => name);
             this.developmentType = developmentTypes.map(([, type]) => type);
 
+
             const presentData: { [key: string]: any } = {};
             const prospectiveData: { [key: string]: any } = {};
+
             Object.entries(this.developmentType).forEach(([key, value]) => {
                 if (key === "0") {
                     presentData["Availability"] = (value as { [key: string]: any })["Availability"];
@@ -471,34 +500,597 @@ export class ComparativeResultsComponent implements OnInit, AfterViewInit, OnDes
             this.dataReadiness = this.getNestedEntries(this.Readiness);
             this.processDataArray(this.dataReadiness, this.readinessArray);
 
+            if (prospectiveData) {
+                this.CapacityBuilding = Object.entries(prospectiveData["Capacity Building"]);
+                this.dataCapacityBuild = this.getNestedEntries(this.CapacityBuilding);
+                this.processDataArray(this.dataCapacityBuild, this.capacityBuildArray);
 
-            this.CapacityBuilding = Object.entries(prospectiveData["Capacity Building"]);
-            this.dataCapacityBuild = this.getNestedEntries(this.CapacityBuilding);
-            this.processDataArray(this.dataCapacityBuild, this.capacityBuildArray);
-
-            this.DevelopmentStrat = Object.entries(prospectiveData["Development Strategy"]);
-            this.dataDevelopmentStrat = this.getNestedEntries(this.DevelopmentStrat);
-            this.processDataArray(this.dataDevelopmentStrat, this.DevelopmentStratArray);
+                this.DevelopmentStrat = Object.entries(prospectiveData["Development Strategy"]);
+                this.dataDevelopmentStrat = this.getNestedEntries(this.DevelopmentStrat);
+                this.processDataArray(this.dataDevelopmentStrat, this.DevelopmentStratArray);
+            }
 
         })
+
+    }
+
+
+    createNetworkChart() {
+        // console.log(data);
+
+        am4core.useTheme(am4themes_animated);
+
+        var chart = am4core.create("networkChart", am4plugins_forceDirected.ForceDirectedTree);
+        var networkSeries = chart.series.push(new am4plugins_forceDirected.ForceDirectedSeries())
+
+        networkSeries.nodes.template.outerCircle.filters.push(new am4core.DropShadowFilter());
+        networkSeries.dataFields.linkWith = "linkWith";
+        networkSeries.dataFields.name = "name";
+        networkSeries.dataFields.id = "governance_id";
+        networkSeries.dataFields.value = "value";
+        networkSeries.dataFields.children = "children";
+        networkSeries.dataFields.color = "color";
+        networkSeries.dataFields.fixed = "fixed";
+        networkSeries.nodes.template.propertyFields.x = "x";
+        networkSeries.nodes.template.propertyFields.y = "y";
+        networkSeries.nodes.template.expandAll = false;
+
+        networkSeries.maxLevels = 2;
+        networkSeries.links.template.strength = 1;
+        networkSeries.manyBodyStrength = -20;
+        networkSeries.centerStrength = 0.4;
+
+        networkSeries.nodes.template.label.text = "{name}"
+        networkSeries.fontSize = 10;
+        networkSeries.minRadius = 10;
+        networkSeries.maxRadius = 24;
+
+        var nodeTemplate = networkSeries.nodes.template;
+        nodeTemplate.fillOpacity = 1;
+        nodeTemplate.label.hideOversized = true;
+        nodeTemplate.label.truncate = true;
+
+        var linkTemplate = networkSeries.links.template;
+        linkTemplate.strokeWidth = 2;
+        linkTemplate.distance = 1;
+
+        nodeTemplate.events.on("out", function (event) {
+            var dataItem = event.target.dataItem;
+            dataItem.childLinks.each(function (link) {
+                link.isHover = false;
+            })
+        })
+
+        networkSeries.events.on("inited", function () {
+            networkSeries.animate({
+                property: "velocityDecay",
+                to: 0.7
+            }, 3000);
+        });
+
+        networkSeries.data = [
+            {
+                "name": "Health & IT",
+                "value": 100,
+                "color": "#22bdad",
+                "fixed": true,
+                "governance_id": 1,
+                x: am4core.percent(50),
+                y: am4core.percent(20),
+                "children": [
+                    {
+                        "name": "Present \n Development",
+                        "value": 60,
+                        "governance_id": 1,
+                        "development_id": 1,
+                        "color": "#22bdad",
+                        "fixed": true,
+                        x: am4core.percent(30),
+                        y: am4core.percent(40),
+                        "children": [
+                            {
+                                "name": "Availability",
+                                "value": 40,
+                                "governance_id": 1,
+                                "development_id": 1,
+                                "ultimate_id": 2,
+                                "color": "#22bdad",
+                                "fixed": true,
+                                x: am4core.percent(15),
+                                y: am4core.percent(50),
+                                "children": [
+                                    {
+                                        "name": "AI Workforce/Infrastructure",
+                                        "value": 1,
+                                        "governance_id": 1,
+                                        "development_id": 1,
+                                        "ultimate_id": 2,
+                                        "taxonomy_id": 5,
+                                        "color": "#22bdad",
+                                        "fixed": true,
+                                        x: am4core.percent(3),
+                                        y: am4core.percent(70),
+                                    },
+                                    {
+                                        "name": "Healthcare Governance",
+                                        "value": 1,
+                                        "governance_id": 1,
+                                        "development_id": 1,
+                                        "ultimate_id": 2,
+                                        "taxonomy_id": 1,
+                                        "color": "#22bdad",
+                                        "fixed": true,
+                                        x: am4core.percent(8),
+                                        y: am4core.percent(70),
+                                    },
+                                    {
+                                        "name": "Healthcare workforce & Infrastructure",
+                                        "value": 1,
+                                        "governance_id": 1,
+                                        "development_id": 1,
+                                        "ultimate_id": 2,
+                                        "taxonomy_id": 4,
+                                        "color": "#22bdad",
+                                        "fixed": true,
+                                        x: am4core.percent(12),
+                                        y: am4core.percent(75),
+                                    },
+                                    {
+                                        "name": "IT workforce & Infrastructure",
+                                        "value": 1,
+                                        "governance_id": 1,
+                                        "development_id": 1,
+                                        "ultimate_id": 2,
+                                        "taxonomy_id": 3,
+                                        "color": "#22bdad",
+                                        "fixed": true,
+                                        x: am4core.percent(16),
+                                        y: am4core.percent(70),
+                                    },
+                                    {
+                                        "name": "IT Governance",
+                                        "value": 1,
+                                        "governance_id": 1,
+                                        "development_id": 1,
+                                        "ultimate_id": 2,
+                                        "taxonomy_id": 2,
+                                        "color": "#22bdad",
+                                        "fixed": true,
+                                        x: am4core.percent(21),
+                                        y: am4core.percent(70),
+                                    }
+                                ]
+                            },
+                            {
+                                "name": "Readiness",
+                                "value": 40,
+                                "governance_id": 1,
+                                "development_id": 1,
+                                "ultimate_id": 1,
+                                "color": "#22bdad",
+                                "fixed": true,
+                                x: am4core.percent(43),
+                                y: am4core.percent(53),
+                                "children": [
+                                    {
+                                        "name": "AI Workforce/Infrastructure",
+                                        "value": 1,
+                                        "governance_id": 1,
+                                        "development_id": 1,
+                                        "ultimate_id": 1,
+                                        "taxonomy_id": 5,
+                                        "color": "#22bdad",
+                                        "fixed": true,
+                                        x: am4core.percent(35),
+                                        y: am4core.percent(70),
+                                    },
+                                    {
+                                        "name": "Healthcare Governance",
+                                        "value": 1,
+                                        "governance_id": 1,
+                                        "development_id": 1,
+                                        "ultimate_id": 1,
+                                        "taxonomy_id": 1,
+                                        "color": "#22bdad",
+                                        "fixed": true,
+                                        x: am4core.percent(40),
+                                        y: am4core.percent(70),
+                                    },
+                                    {
+                                        "name": "Healthcare workforce & Infrastructure",
+                                        "value": 1,
+                                        "governance_id": 1,
+                                        "development_id": 1,
+                                        "ultimate_id": 1,
+                                        "taxonomy_id": 4,
+                                        "color": "#22bdad",
+                                        "fixed": true,
+                                        x: am4core.percent(43),
+                                        y: am4core.percent(76),
+                                    },
+                                    {
+                                        "name": "IT workforce & Infrastructure",
+                                        "value": 1,
+                                        "governance_id": 1,
+                                        "development_id": 1,
+                                        "ultimate_id": 1,
+                                        "taxonomy_id": 3,
+                                        "color": "#22bdad",
+                                        "fixed": true,
+                                        x: am4core.percent(47),
+                                        y: am4core.percent(70),
+                                    },
+                                    {
+                                        "name": "IT Governance",
+                                        "value": 1,
+                                        "governance_id": 1,
+                                        "development_id": 1,
+                                        "ultimate_id": 1,
+                                        "taxonomy_id": 2,
+                                        "color": "#22bdad",
+                                        "fixed": true,
+                                        x: am4core.percent(52),
+                                        y: am4core.percent(70),
+                                    }
+                                ]
+                            }
+
+                        ]
+                    },
+                    {
+                        "name": "Prospective \n Development",
+                        "color": "#22bdad",
+                        "value": 60,
+                        "governance_id": 1,
+                        "development_id": 2,
+                        "fixed": true,
+                        x: am4core.percent(70),
+                        y: am4core.percent(40),
+                        "children": [
+                            {
+                                "name": "Capacity \n Building",
+                                "value": 40,
+                                "governance_id": 1,
+                                "development_id": 2,
+                                "ultimate_id": 4,
+                                "color": "#22bdad",
+                                "fixed": true,
+                                x: am4core.percent(62),
+                                y: am4core.percent(60),
+                                "children": [
+                                    {
+                                        "name": "AI Workforce/Infrastructure",
+                                        "value": 1,
+                                        "governance_id": 1,
+                                        "development_id": 2,
+                                        "ultimate_id": 4,
+                                        "taxonomy_id": 5,
+                                        "color": "#22bdad",
+                                        "fixed": true,
+                                        x: am4core.percent(54),
+                                        y: am4core.percent(78),
+                                    },
+                                    {
+                                        "name": "Healthcare Governance",
+                                        "value": 1,
+                                        "governance_id": 1,
+                                        "development_id": 2,
+                                        "ultimate_id": 4,
+                                        "taxonomy_id": 1,
+                                        "color": "#22bdad",
+                                        "fixed": true,
+                                        x: am4core.percent(59),
+                                        y: am4core.percent(78),
+                                    },
+                                    {
+                                        "name": "Healthcare workforce & Infrastructure",
+                                        "value": 1,
+                                        "governance_id": 1,
+                                        "development_id": 2,
+                                        "ultimate_id": 4,
+                                        "taxonomy_id": 4,
+                                        "color": "#22bdad",
+                                        "fixed": true,
+                                        x: am4core.percent(63),
+                                        y: am4core.percent(82),
+                                    },
+                                    {
+                                        "name": "IT workforce & Infrastructure",
+                                        "value": 1,
+                                        "governance_id": 1,
+                                        "development_id": 2,
+                                        "ultimate_id": 4,
+                                        "taxonomy_id": 3,
+                                        "color": "#22bdad",
+                                        "fixed": true,
+                                        x: am4core.percent(67),
+                                        y: am4core.percent(78),
+
+                                    },
+                                    {
+                                        "name": "IT Governance",
+                                        "value": 1,
+                                        "governance_id": 1,
+                                        "development_id": 2,
+                                        "ultimate_id": 4,
+                                        "taxonomy_id": 2,
+                                        "color": "#22bdad",
+                                        "fixed": true,
+                                        x: am4core.percent(72),
+                                        y: am4core.percent(78),
+
+                                    }
+
+                                ]
+                            },
+                            {
+                                "name": "Development \n Strategy",
+                                "value": 40,
+                                "governance_id": 1,
+                                "development_id": 2,
+                                "ultimate_id": 3,
+                                "color": "#22bdad",
+                                "fixed": true,
+                                x: am4core.percent(87),
+                                y: am4core.percent(60),
+                                "children": [
+                                    {
+                                        "name": "AI Workforce/Infrastructure",
+                                        "value": 1,
+                                        "governance_id": 1,
+                                        "development_id": 2,
+                                        "ultimate_id": 3,
+                                        "taxonomy_id": 5,
+                                        "color": "#22bdad",
+                                        "fixed": true,
+                                        x: am4core.percent(80),
+                                        y: am4core.percent(78),
+                                    },
+                                    {
+                                        "name": "Healthcare Governance",
+                                        "value": 1,
+                                        "governance_id": 1,
+                                        "development_id": 2,
+                                        "ultimate_id": 3,
+                                        "taxonomy_id": 1,
+                                        "color": "#22bdad",
+                                        "fixed": true,
+                                        x: am4core.percent(85),
+                                        y: am4core.percent(78),
+                                    },
+                                    {
+                                        "name": "Healthcare workforce & Infrastructure",
+                                        "value": 2,
+                                        "governance_id": 1,
+                                        "development_id": 2,
+                                        "ultimate_id": 3,
+                                        "taxonomy_id": 4,
+                                        "color": "#22bdad",
+                                        "fixed": true,
+                                        x: am4core.percent(89),
+                                        y: am4core.percent(83),
+                                    },
+                                    {
+                                        "name": "IT workforce & Infrastructure",
+                                        "value": 1,
+                                        "governance_id": 1,
+                                        "development_id": 2,
+                                        "ultimate_id": 3,
+                                        "taxonomy_id": 3,
+                                        "color": "#22bdad",
+                                        "fixed": true,
+                                        x: am4core.percent(91.8),
+                                        y: am4core.percent(78),
+                                    },
+                                    {
+                                        "name": "IT Governance",
+                                        "value": 1,
+                                        "governance_id": 1,
+                                        "development_id": 2,
+                                        "ultimate_id": 3,
+                                        "taxonomy_id": 2,
+                                        "color": "#22bdad",
+                                        "fixed": true,
+                                        x: am4core.percent(97),
+                                        y: am4core.percent(78),
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            }
+        ];
+
+
+        nodeTemplate.events.on("hit", (event: any) => {
+            var dataItem = event.target.dataItem;
+            console.log(dataItem.dataContext);
+            var dataContext = dataItem.dataContext as IDataContext;
+
+            if (dataContext.governance_id) {
+                this.payloadObj
+            }
+            if (dataContext.development_id) {
+                this.payloadObj['development_id'] = dataContext.development_id;
+            }
+            if (dataContext.ultimate_id) {
+                this.payloadObj['ultimate_id'] = dataContext.ultimate_id;
+            }
+            if (dataContext.taxonomy_id) {
+                this.payloadObj['taxonomy_id'] = dataContext.taxonomy_id;
+            }
+
+            this.comparativeOverViewData(this.payloadObj);
+            this.BarGraphData(this.payloadObj);
+            this.getTopTenData(this.payloadObj);
+
+
+
+
+            // var governanceId = dataContext.governance_id;
+            // var developmentId = dataContext.development_id;
+            // var ultimateId = dataContext.ultimate_id;
+            // var taxonomyId = dataContext.taxonomy_id;
+
+
+            // this.getTopTenData(governanceId, developmentId, ultimateId, taxonomyId);
+            // this.BarGraph(governanceId, developmentId, ultimateId, taxonomyId);
+        });
+
 
     }
 
 
 
-    fetchNetworkData(governanceId: any) {
-
-        let data = {
-            countries: this.countrySelected,
-            governance_id: governanceId
-        }
-
-        this.comparativeServices.getComparativeOverview(data).subscribe(res => {
-            // const transformData = this.transformData(res)
-
-        })
-
+    sendNodeId(nodeId: any) {
+        // Implement the logic to send the nodeId to your desired destination
+        console.log("Clicked node ID:", nodeId);
+        // You can make an API call, trigger a function, or perform any action you want with the nodeId
     }
+
+    // createNetworkChart(data: any) {
+
+    //     am4core.useTheme(am4themes_animated);
+
+    //     let chart = am4core.create("networkChart", am4plugins_forceDirected.ForceDirectedTree);
+    //     chart.legend = new am4charts.Legend();
+
+    //     let networkSeries = chart.series.push(new am4plugins_forceDirected.ForceDirectedSeries());
+
+    //     // Disable drag functionality
+    //     networkSeries.nodes.template.draggable = false;
+    //     networkSeries.nodes.template.inert = true;
+
+    //     // Disable rotation
+    //     networkSeries.nodes.template.rotation = 0;
+
+    //     networkSeries.data = data
+    //     // networkSeries.data = [
+    //     //     {
+    //     //         name: 'Health & It',
+    //     //         fixed: true,
+    //     //         children: [
+    //     //             {
+    //     //                 name: 'Present Development',
+    //     //                 fixed: true,
+
+    //     //                 children: [
+    //     //                     {
+    //     //                         name: 'Availability',
+    //     //                         fixed: true,
+    //     //                         children: [
+    //     //                             {
+    //     //                                 name: 'It Governance',
+    //     //                                 fixed: true
+    //     //                             },
+    //     //                             {
+    //     //                                 name: 'AI Workforce & Infrastructure',
+    //     //                                 fixed: true
+    //     //                             },
+    //     //                             {
+    //     //                                 name: 'Health Governance',
+    //     //                                 fixed: true
+    //     //                             }
+    //     //                         ]
+    //     //                     },
+    //     //                     {
+    //     //                         name: 'Readiness',
+    //     //                         fixed: true,
+
+    //     //                         children: [
+    //     //                             {
+    //     //                                 name: 'It Governance',
+    //     //                                 fixed: true
+    //     //                             },
+    //     //                             {
+    //     //                                 name: 'AI Workforce & Infrastructure',
+    //     //                                 fixed: true
+    //     //                             },
+    //     //                             {
+    //     //                                 name: 'Health Governance',
+    //     //                                 fixed: true
+    //     //                             }
+    //     //                         ]
+    //     //                     }
+    //     //                 ]
+    //     //             },
+    //     //             {
+    //     //                 name: 'Prospective Development',
+    //     //                 fixed: true,
+    //     //                 children: [
+    //     //                     {
+    //     //                         name: 'Capacity Building',
+    //     //                         fixed: true,
+    //     //                         children: [
+    //     //                             {
+    //     //                                 name: 'It Governance',
+    //     //                                 fixed: true
+    //     //                             },
+    //     //                             {
+    //     //                                 name: 'AI Workforce & Infrastructure',
+    //     //                                 fixed: true
+    //     //                             },
+    //     //                             {
+    //     //                                 name: 'Health Governance',
+    //     //                                 fixed: true
+    //     //                             }
+    //     //                         ]
+    //     //                     },
+    //     //                     {
+    //     //                         name: 'Development Startegy',
+    //     //                         fixed: true,
+
+    //     //                         children: [
+    //     //                             {
+    //     //                                 name: 'It Governance',
+    //     //                                 fixed: true
+    //     //                             },
+    //     //                             {
+    //     //                                 name: 'AI Workforce & Infrastructure',
+    //     //                                 fixed: true
+    //     //                             },
+    //     //                             {
+    //     //                                 name: 'Health Governance',
+    //     //                                 fixed: true
+    //     //                             }
+    //     //                         ]
+    //     //                     }
+    //     //                 ]
+    //     //             }
+    //     //         ]
+    //     //     }
+    //     // ];
+
+    //     networkSeries.dataFields.linkWith = "linkWith";
+    //     networkSeries.dataFields.name = "name";
+    //     networkSeries.dataFields.id = "name";
+    //     networkSeries.dataFields.value = "value";
+    //     networkSeries.dataFields.children = "children";
+
+
+    //     // Set node properties
+    //     let nodeTemplate = networkSeries.nodes.template;
+    //     nodeTemplate.tooltipText = "{name}";
+    //     networkSeries.nodes.template.fillOpacity = 1;
+    //     networkSeries.nodes.template.label.text = "{name}"
+    //     networkSeries.fontSize = 8;
+    //     networkSeries.maxLevels = 2;
+    //     networkSeries.nodes.template.label.hideOversized = true;
+    //     networkSeries.nodes.template.label.truncate = true;
+
+
+
+
+    //     // Configure forces to create a tree-like structure
+    //     networkSeries.minRadius = 30;
+    //     networkSeries.maxRadius = 50;
+    //     networkSeries.links.template.distance = 2;
+
+    //     chart.zoomable = false; // Disable chart zooming
+
+
+    // }
 
 
 
@@ -596,8 +1188,8 @@ export class ComparativeResultsComponent implements OnInit, AfterViewInit, OnDes
             }
             this.toppings.setValue(this.mySelections);
         }
-        this.getTopTenData(this.governance_id)
-        this.BarGraphData(this.governance_id);
+        this.getTopTenData(this.payloadObj)
+        this.BarGraphData(this.payloadObj);
         this.createRadarChart(this.governance_id);
     }
 
@@ -783,154 +1375,6 @@ export class ComparativeResultsComponent implements OnInit, AfterViewInit, OnDes
             });
         });
     }
-
-
-
-
-    createNetworkChart() {
-        am4core.useTheme(am4themes_animated);
-
-        let chart = am4core.create("networkChart", am4plugins_forceDirected.ForceDirectedTree);
-        chart.legend = new am4charts.Legend();
-
-        let networkSeries = chart.series.push(new am4plugins_forceDirected.ForceDirectedSeries());
-
-        // Disable drag functionality
-        networkSeries.nodes.template.draggable = false;
-        networkSeries.nodes.template.inert = true;
-
-        // Disable rotation
-        networkSeries.nodes.template.rotation = 0;
-
-
-
-        networkSeries.data = [
-            {
-                name: 'Health & It',
-                fixed: true,
-                children: [
-                    {
-                        name: 'Present Development',
-                        fixed: true,
-
-                        children: [
-                            {
-                                name: 'Availability',
-                                fixed: true,
-                                children: [
-                                    {
-                                        name: 'It Governance',
-                                        fixed: true
-                                    },
-                                    {
-                                        name: 'AI Workforce & Infrastructure',
-                                        fixed: true
-                                    },
-                                    {
-                                        name: 'Health Governance',
-                                        fixed: true
-                                    }
-                                ]
-                            },
-                            {
-                                name: 'Readiness',
-                                fixed: true,
-
-                                children: [
-                                    {
-                                        name: 'It Governance',
-                                        fixed: true
-                                    },
-                                    {
-                                        name: 'AI Workforce & Infrastructure',
-                                        fixed: true
-                                    },
-                                    {
-                                        name: 'Health Governance',
-                                        fixed: true
-                                    }
-                                ]
-                            }
-                        ]
-                    },
-                    {
-                        name: 'Prospective Development',
-                        fixed: true,
-                        children: [
-                            {
-                                name: 'Capacity Building',
-                                fixed: true,
-                                children: [
-                                    {
-                                        name: 'It Governance',
-                                        fixed: true
-                                    },
-                                    {
-                                        name: 'AI Workforce & Infrastructure',
-                                        fixed: true
-                                    },
-                                    {
-                                        name: 'Health Governance',
-                                        fixed: true
-                                    }
-                                ]
-                            },
-                            {
-                                name: 'Development Startegy',
-                                fixed: true,
-
-                                children: [
-                                    {
-                                        name: 'It Governance',
-                                        fixed: true
-                                    },
-                                    {
-                                        name: 'AI Workforce & Infrastructure',
-                                        fixed: true
-                                    },
-                                    {
-                                        name: 'Health Governance',
-                                        fixed: true
-                                    }
-                                ]
-                            }
-                        ]
-                    }
-                ]
-            }
-        ];
-
-        networkSeries.dataFields.linkWith = "linkWith";
-        networkSeries.dataFields.name = "name";
-        networkSeries.dataFields.id = "name";
-        networkSeries.dataFields.value = "value";
-        networkSeries.dataFields.children = "children";
-
-
-        // Set node properties
-        let nodeTemplate = networkSeries.nodes.template;
-        nodeTemplate.tooltipText = "{name}";
-        networkSeries.nodes.template.fillOpacity = 1;
-        networkSeries.nodes.template.label.text = "{name}"
-        networkSeries.fontSize = 8;
-        networkSeries.maxLevels = 2;
-        networkSeries.nodes.template.label.hideOversized = true;
-        networkSeries.nodes.template.label.truncate = true;
-
-
-
-
-        // Configure forces to create a tree-like structure
-        networkSeries.minRadius = 15;
-        networkSeries.maxRadius = 50;
-        networkSeries.links.template.distance = 2;
-
-        chart.zoomable = false; // Disable chart zooming
-
-
-    }
-
-
 
 
     ngOnDestroy() {
