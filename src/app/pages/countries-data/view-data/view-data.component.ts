@@ -10,7 +10,7 @@ import { ViewDataService } from 'src/app/services/view-data.service';
 export class ViewDataComponent implements OnInit {
 	governance_id: any;
 
-	country_name: string = "Australia"
+	country_name: any ;
 	result: any = [];
 	development_type: any;
 	data: any;
@@ -46,7 +46,8 @@ export class ViewDataComponent implements OnInit {
 	ngOnInit(): void {
 
 		this._utilities.showHeaderMenu.next(true);
-		// this.governance_id = JSON.parse(localStorage.getItem('governance_id') || '');
+		this.country_name = JSON.parse(localStorage.getItem('country_name') || '');
+		
 
 		this._utilities.governanceTypeSource.subscribe((governanceId) => {
 			this.ViewData(governanceId);
@@ -86,8 +87,11 @@ export class ViewDataComponent implements OnInit {
 			});
 
 			this.Availability = Object.entries(presentData["Availability"]);
+			
 			this.dataAvailability = this.getNestedEntries(this.Availability);
 			this.processDataArray(this.dataAvailability, this.availabilityArray);
+			console.log( this.availabilityArray);
+			
 			
 
 			this.Readiness = Object.entries(presentData["Readiness"]);

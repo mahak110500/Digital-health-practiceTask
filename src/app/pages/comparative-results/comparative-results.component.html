@@ -76,26 +76,121 @@
                                 <div>
                                     <div id="networkChart" style=" width: 100%;height: 400px;"></div>
                                 </div>
-
                             </div>
 
                             <div class="col-md-7 col-sm-7 col-xs-12" style="height: 500px; overflow-y: scroll;">
                                 <div class="list" id="one">
                                     <h1>{{developmentName[0]}}</h1>
                                     <mat-accordion>
-                                        <ng-container *ngFor="let taxonomy of Availability; let i=index;">
-                                            <mat-expansion-panel [expanded]="step === i" (opened)="setStep(i)"
-                                                hideToggle>
-                                                <mat-expansion-panel-header>
-                                                    <mat-panel-title class="status-row">
-                                                        <p>Availability</p>
-                                                        <span>{{taxonomy[0]}}</span>
-
-                                                    </mat-panel-title>
-
-                                                </mat-expansion-panel-header>
-                                            </mat-expansion-panel>
-                                        </ng-container>
+                                       
+                                            <ng-container *ngFor="let taxonomy of Availability; let i=index;">
+                                                <mat-expansion-panel [expanded]="step === i" (opened)="setStep(i)"
+                                                    hideToggle>
+                                                    <mat-expansion-panel-header>
+                                                        <mat-panel-title class="status-row">
+                                                            <p>Availability</p>
+                                                            <span>{{taxonomy[0]}}</span>
+                                                        </mat-panel-title>
+                                                    </mat-expansion-panel-header>
+    
+                                                    <div class="accordion-content">
+                                                        <div class="content-row">
+                                                            <div class="panel-heading">
+                                                                <div class="data-heading">
+    
+                                                                    <div class="status-badge">
+                                                                        <div class="divider-vertical"></div>
+                                                                        <ul>
+                                                                            <li><span
+                                                                                    class="circle_badge success"></span>Yes
+                                                                            </li>
+                                                                            <li><span class="circle_badge danger"></span>No
+                                                                            </li>
+                                                                            <li><span
+                                                                                    class="circle_badge disable-status"></span>No
+                                                                                data available</li>
+                                                                        </ul>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+    
+                                                            <div class="panel-content">
+                                                                <div class="data-table">
+                                                                    <div class="table-responsive" style="height: 400px; overflow-y: scroll;">
+                                                                        <table class="table">
+                                                                            <thead>
+                                                                                <tr>
+                                                                                    <th scope="col" style="width: 30%;">
+                                                                                        Indicators</th>
+                                                                                    <th scope="col" style="width: 50%;">
+                                                                                        Questions</th>
+                                                                                    <th scope="col" style="width: 20%;">
+                                                                                        Canada</th>
+                                                                                    <th scope="col" class="text-end"
+                                                                                        style="width: 20%;">Jamica</th>
+                                                                                </tr>
+                                                                            </thead>
+                                                                            <tbody >
+                                                                                <ng-container
+                                                                                    *ngFor="let value of availabilityArray; let i=index" >
+                                                                                    <ng-container
+                                                                                        *ngFor="let val of value[1]; let j=index">
+                                                                                        <ng-container
+                                                                                            *ngIf="taxonomy[0]==val.taxonomy_name">
+                                                                                            <ng-container
+                                                                                                *ngIf="isFirstAvailQuestion(val.question_name, i, j)">
+                                                                                                <tr class="border-less">
+                                                                                                    <td style="width: 30%;">
+                                                                                                        <span
+                                                                                                            *ngIf="j==0">{{value[0]}}</span>
+                                                                                                    </td>
+                                                                                                    <td style="width: 50%;">
+                                                                                                        {{val.question_name}}
+                                                                                                    </td>
+                                                                                                    <td style="width: 20%;">
+                                                                                                        <div
+                                                                                                            class="table-badge">
+                                                                                                            <span
+                                                                                                                *ngIf="val.ststus == 'Yes'"
+                                                                                                                class="circle_badge success"></span>
+                                                                                                            <span
+                                                                                                                *ngIf="val.ststus == 'No'"
+                                                                                                                class="circle_badge danger"></span>
+                                                                                                            <span
+                                                                                                                *ngIf="val.ststus == 'Data not available'"
+                                                                                                                class="circle_badge disable-status"></span>
+                                                                                                        </div>
+                                                                                                    </td>
+                                                                                                    <td style="width: 20%;">
+                                                                                                        <div
+                                                                                                            class="table-badge">
+                                                                                                            <span
+                                                                                                                *ngIf="val.ststus == 'Yes'"
+                                                                                                                class="circle_badge success"></span>
+                                                                                                            <span
+                                                                                                                *ngIf="val.ststus == 'No'"
+                                                                                                                class="circle_badge danger"></span>
+                                                                                                            <span
+                                                                                                                *ngIf="val.ststus == 'Data not available'"
+                                                                                                                class="circle_badge disable-status"></span>
+                                                                                                        </div>
+                                                                                                    </td>
+                                                                                                </tr>
+                                                                                                <tr class="with-boder"></tr>
+                                                                                            </ng-container>
+                                                                                        </ng-container>
+                                                                                    </ng-container>
+                                                                                </ng-container>
+                                                                            </tbody>
+                                                                        </table>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </mat-expansion-panel>
+                                            </ng-container>
+                                    
 
                                         <!-- Readiness Start -->
                                         <ng-container *ngFor="let taxonomy of Readiness; let i=index;">
@@ -108,13 +203,109 @@
 
                                                     </mat-panel-title>
                                                 </mat-expansion-panel-header>
+
+                                                <div class="accordion-content">
+                                                    <div class="content-row">
+                                                        <div class="panel-heading">
+                                                            <div class="data-heading">
+
+                                                                <div class="status-badge">
+                                                                    <div class="divider-vertical"></div>
+                                                                    <ul>
+                                                                        <li><span
+                                                                                class="circle_badge success"></span>Yes
+                                                                        </li>
+                                                                        <li><span class="circle_badge danger"></span>No
+                                                                        </li>
+                                                                        <li><span
+                                                                                class="circle_badge disable-status"></span>No
+                                                                            data available</li>
+                                                                    </ul>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="panel-content">
+                                                            <div class="data-table">
+                                                                <div class="table-responsive" style="height: 400px; overflow-y: scroll;">
+                                                                    <table class="table">
+                                                                        <thead>
+                                                                            <tr>
+                                                                                <th scope="col" style="width: 30%;">
+                                                                                    Indicators</th>
+                                                                                <th scope="col" style="width: 50%;">
+                                                                                    Questions</th>
+                                                                                <th scope="col" style="width: 20%;">
+                                                                                    Canada</th>
+                                                                                <th scope="col" class="text-end"
+                                                                                    style="width: 20%;">Jamica</th>
+                                                                            </tr>
+                                                                        </thead>
+                                                                        <tbody>
+                                                                            <ng-container
+                                                                                *ngFor="let value of readinessArray; let i=index">
+                                                                                <ng-container
+                                                                                    *ngFor="let val of value[1]; let j=index">
+                                                                                    <ng-container
+                                                                                        *ngIf="taxonomy[0]==val.taxonomy_name">
+                                                                                        <ng-container
+                                                                                            *ngIf="isFirstReadiQuestion(val.question_name, i, j)">
+                                                                                            <tr class="border-less">
+                                                                                                <td style="width: 30%;">
+                                                                                                    <span
+                                                                                                        *ngIf="j==0">{{value[0]}}</span>
+                                                                                                </td>
+                                                                                                <td style="width: 50%;">
+                                                                                                    {{val.question_name}}
+                                                                                                </td>
+                                                                                                <td style="width: 20%;">
+                                                                                                    <div
+                                                                                                        class="table-badge">
+                                                                                                        <span
+                                                                                                            *ngIf="val.ststus == 'Yes'"
+                                                                                                            class="circle_badge success"></span>
+                                                                                                        <span
+                                                                                                            *ngIf="val.ststus == 'No'"
+                                                                                                            class="circle_badge danger"></span>
+                                                                                                        <span
+                                                                                                            *ngIf="val.ststus == 'Data not available'"
+                                                                                                            class="circle_badge disable-status"></span>
+                                                                                                    </div>
+                                                                                                </td>
+                                                                                                <td style="width: 20%;">
+                                                                                                    <div
+                                                                                                        class="table-badge">
+                                                                                                        <span
+                                                                                                            *ngIf="val.ststus == 'Yes'"
+                                                                                                            class="circle_badge success"></span>
+                                                                                                        <span
+                                                                                                            *ngIf="val.ststus == 'No'"
+                                                                                                            class="circle_badge danger"></span>
+                                                                                                        <span
+                                                                                                            *ngIf="val.ststus == 'Data not available'"
+                                                                                                            class="circle_badge disable-status"></span>
+                                                                                                    </div>
+                                                                                                </td>
+                                                                                            </tr>
+                                                                                            <tr class="with-boder"></tr>
+                                                                                        </ng-container>
+                                                                                    </ng-container>
+                                                                                </ng-container>
+                                                                            </ng-container>
+                                                                        </tbody>
+                                                                    </table>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             </mat-expansion-panel>
                                         </ng-container>
                                         <!-- Readiness ends -->
                                     </mat-accordion>
                                 </div>
 
-                                <div class="list" id="two" >
+                                <div class="list" id="two">
                                     <h1>{{developmentName[1]}}</h1>
                                     <mat-accordion>
                                         <ng-container *ngFor="let taxonomy of CapacityBuilding; let i=index;">
@@ -124,13 +315,107 @@
                                                     <mat-panel-title class="status-row">
                                                         <p>Capacity Building</p>
                                                         <span>{{taxonomy[0]}}</span>
-
                                                     </mat-panel-title>
                                                 </mat-expansion-panel-header>
+
+                                                <div class="accordion-content">
+                                                    <div class="content-row">
+                                                        <div class="panel-heading">
+                                                            <div class="data-heading">
+
+                                                                <div class="status-badge">
+                                                                    <div class="divider-vertical"></div>
+                                                                    <ul>
+                                                                        <li><span
+                                                                                class="circle_badge success"></span>Yes
+                                                                        </li>
+                                                                        <li><span class="circle_badge danger"></span>No
+                                                                        </li>
+                                                                        <li><span
+                                                                                class="circle_badge disable-status"></span>No
+                                                                            data available</li>
+                                                                    </ul>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="panel-content">
+                                                            <div class="data-table">
+                                                                <div class="table-responsive" style="height: 400px; overflow-y: scroll;">
+                                                                    <table class="table">
+                                                                        <thead>
+                                                                            <tr>
+                                                                                <th scope="col" style="width: 30%;">
+                                                                                    Indicators</th>
+                                                                                <th scope="col" style="width: 50%;">
+                                                                                    Questions</th>
+                                                                                <th scope="col" style="width: 20%;">
+                                                                                    Canada</th>
+                                                                                <th scope="col" class="text-end"
+                                                                                    style="width: 20%;">Jamica</th>
+                                                                            </tr>
+                                                                        </thead>
+                                                                        <tbody>
+                                                                            <ng-container
+                                                                                *ngFor="let value of capacityBuildArray; let i=index">
+                                                                                <ng-container
+                                                                                    *ngFor="let val of value[1]; let j=index">
+                                                                                    <ng-container
+                                                                                        *ngIf="taxonomy[0]==val.taxonomy_name">
+                                                                                        <ng-container
+                                                                                            *ngIf="isFirstCapacityQuestion(val.question_name, i, j)">
+                                                                                            <tr class="border-less">
+                                                                                                <td style="width: 30%;">
+                                                                                                    <span
+                                                                                                        *ngIf="j==0">{{value[0]}}</span>
+                                                                                                </td>
+                                                                                                <td style="width: 50%;">
+                                                                                                    {{val.question_name}}
+                                                                                                </td>
+                                                                                                <td style="width: 20%;">
+                                                                                                    <div
+                                                                                                        class="table-badge">
+                                                                                                        <span
+                                                                                                            *ngIf="val.ststus == 'Yes'"
+                                                                                                            class="circle_badge success"></span>
+                                                                                                        <span
+                                                                                                            *ngIf="val.ststus == 'No'"
+                                                                                                            class="circle_badge danger"></span>
+                                                                                                        <span
+                                                                                                            *ngIf="val.ststus == 'Data not available'"
+                                                                                                            class="circle_badge disable-status"></span>
+                                                                                                    </div>
+                                                                                                </td>
+                                                                                                <td style="width: 20%;">
+                                                                                                    <div
+                                                                                                        class="table-badge">
+                                                                                                        <span
+                                                                                                            *ngIf="val.ststus == 'Yes'"
+                                                                                                            class="circle_badge success"></span>
+                                                                                                        <span
+                                                                                                            *ngIf="val.ststus == 'No'"
+                                                                                                            class="circle_badge danger"></span>
+                                                                                                        <span
+                                                                                                            *ngIf="val.ststus == 'Data not available'"
+                                                                                                            class="circle_badge disable-status"></span>
+                                                                                                    </div>
+                                                                                                </td>
+                                                                                            </tr>
+                                                                                            <tr class="with-boder"></tr>
+                                                                                        </ng-container>
+                                                                                    </ng-container>
+                                                                                </ng-container>
+                                                                            </ng-container>
+                                                                        </tbody>
+                                                                    </table>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             </mat-expansion-panel>
                                         </ng-container>
 
-                                       
+
                                         <ng-container *ngFor="let taxonomy of DevelopmentStrat; let i=index;">
                                             <mat-expansion-panel [expanded]="step === i" (opened)="setStep(i)"
                                                 hideToggle>
@@ -138,9 +423,105 @@
                                                     <mat-panel-title class="status-row">
                                                         <p>Development Startegy</p>
                                                         <span>{{taxonomy[0]}}</span>
-
                                                     </mat-panel-title>
                                                 </mat-expansion-panel-header>
+
+                                                <div class="accordion-content">
+                                                    <div class="content-row">
+                                                        <div class="panel-heading">
+                                                            <div class="data-heading">
+
+                                                                <div class="status-badge">
+                                                                    <div class="divider-vertical"></div>
+                                                                    <ul>
+                                                                        <li><span
+                                                                                class="circle_badge success"></span>Yes
+                                                                        </li>
+                                                                        <li><span class="circle_badge danger"></span>No
+                                                                        </li>
+                                                                        <li><span
+                                                                                class="circle_badge disable-status"></span>No
+                                                                            data available</li>
+                                                                    </ul>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="panel-content">
+                                                            <div class="data-table">
+                                                                <div class="table-responsive" style="height: 400px; overflow-y: scroll;">
+                                                                    <table class="table">
+                                                                        <thead>
+                                                                            <tr>
+                                                                                <th scope="col" style="width: 30%;">
+                                                                                    Indicators</th>
+                                                                                <th scope="col" style="width: 50%;">
+                                                                                    Questions</th>
+                                                                                <th scope="col" style="width: 20%;">
+                                                                                    Canada</th>
+                                                                                <th scope="col" class="text-end"
+                                                                                    style="width: 20%;">Jamica</th>
+                                                                            </tr>
+                                                                        </thead>
+                                                                        <tbody>
+                                                                            <ng-container
+                                                                                *ngFor="let value of developmentStratArray; let i=index">
+                                                                                <ng-container
+                                                                                    *ngFor="let val of value[1]; let j=index">
+                                                                                    <ng-container
+                                                                                        *ngIf="taxonomy[0]==val.taxonomy_name">
+                                                                                        <ng-container
+                                                                                            *ngIf="isFirstDevelopmentQuestion(val.question_name, i, j)">
+                                                                                            <tr class="border-less">
+                                                                                                <td style="width: 30%;">
+                                                                                                    <span
+                                                                                                        *ngIf="j==0">{{value[0]}}</span>
+                                                                                                </td>
+                                                                                                <td style="width: 50%;">
+                                                                                                    {{val.question_name}}
+                                                                                                </td>
+                                                                                                <td style="width: 20%;">
+                                                                                                    <div
+                                                                                                        class="table-badge">
+                                                                                                        <span
+                                                                                                            *ngIf="val.ststus == 'Yes'"
+                                                                                                            class="circle_badge success"></span>
+                                                                                                        <span
+                                                                                                            *ngIf="val.ststus == 'No'"
+                                                                                                            class="circle_badge danger"></span>
+                                                                                                        <span
+                                                                                                            *ngIf="val.ststus == 'Data not available'"
+                                                                                                            class="circle_badge disable-status"></span>
+                                                                                                    </div>
+                                                                                                </td>
+                                                                                                <td style="width: 20%;">
+                                                                                                    <div
+                                                                                                        class="table-badge">
+                                                                                                        <span
+                                                                                                            *ngIf="val.ststus == 'Yes'"
+                                                                                                            class="circle_badge success"></span>
+                                                                                                        <span
+                                                                                                            *ngIf="val.ststus == 'No'"
+                                                                                                            class="circle_badge danger"></span>
+                                                                                                        <span
+                                                                                                            *ngIf="val.ststus == 'Data not available'"
+                                                                                                            class="circle_badge disable-status"></span>
+                                                                                                    </div>
+                                                                                                </td>
+                                                                                            </tr>
+                                                                                            <tr class="with-boder"></tr>
+                                                                                        </ng-container>
+                                                                                    </ng-container>
+                                                                                </ng-container>
+                                                                            </ng-container>
+                                                                        </tbody>
+                                                                    </table>
+
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
 
                                             </mat-expansion-panel>
                                         </ng-container>

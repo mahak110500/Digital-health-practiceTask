@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnDestroy, OnInit, ViewChild, ChangeDetectorRef } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { CommonService } from 'src/app/services/common.service';
 import { ComparativeResultService } from 'src/app/services/comparative-result.service';
@@ -61,7 +61,7 @@ export class ComparativeResultsComponent implements OnInit, AfterViewInit, OnDes
     availabilityArray: any = [];
     readinessArray: any = [];
     capacityBuildArray: any = [];
-    DevelopmentStratArray: any = [];
+    developmentStratArray: any = [];
     result1: any = [];
     option: any;
     chart2: any;
@@ -88,9 +88,13 @@ export class ComparativeResultsComponent implements OnInit, AfterViewInit, OnDes
         private mapService: CountriesService,
         private utilityService: UtilitiesService,
         private apiService: CommonService,
-        private comparativeServices: ComparativeResultService
+        private comparativeServices: ComparativeResultService,
+        private cdr: ChangeDetectorRef
     ) { }
 
+    ngAfterViewChecked() {
+        this.cdr.detectChanges();
+    }
 
     ngAfterViewInit(): void {
         this.mapData();
@@ -99,6 +103,7 @@ export class ComparativeResultsComponent implements OnInit, AfterViewInit, OnDes
 
     ngOnInit(): void {
         this.apiService.getAllCountries().subscribe((data) => (this.countriesToShow = data));
+
 
         this.countrySelected = localStorage.getItem('selected_country');
 
@@ -160,26 +165,28 @@ export class ComparativeResultsComponent implements OnInit, AfterViewInit, OnDes
     }
 
     getTopTenData(data: any) {
-        let payloadDayta = data;
+        const modifiedPayloadObj = { ... this.payloadObj };
 
-        if (payloadDayta.hasOwnProperty('development_id')) {
-            this.payloadObj['developmentId'] = this.payloadObj['development_id'];
-            delete this.payloadObj['development_id'];
+        if (modifiedPayloadObj.hasOwnProperty('governance_id')) {
+            modifiedPayloadObj['governanceId'] = modifiedPayloadObj['governance_id'];
+            delete modifiedPayloadObj['governance_id'];
         }
-        if (payloadDayta.hasOwnProperty('governance_id')) {
-            this.payloadObj['governanceId'] = this.payloadObj['governance_id'];
-            delete this.payloadObj['governance_id'];
+        if (modifiedPayloadObj.hasOwnProperty('development_id')) {
+            modifiedPayloadObj['developmentId'] = modifiedPayloadObj['development_id'];
+            delete modifiedPayloadObj['development_id'];
         }
-        if (payloadDayta.hasOwnProperty('taxonomy_id')) {
-            this.payloadObj['taxonomyId'] = this.payloadObj['taxonomy_id'];
-            delete this.payloadObj['taxonomy_id'];
+        if (modifiedPayloadObj.hasOwnProperty('ultimate_id')) {
+            modifiedPayloadObj['ultimateId'] = modifiedPayloadObj['ultimate_id'];
+            delete modifiedPayloadObj['ultimate_id'];
         }
-        if (payloadDayta.hasOwnProperty('ultimate_id')) {
-            this.payloadObj['ultimateId'] = this.payloadObj['ultimate_id'];
-            delete this.payloadObj['ultimate_id'];
+        if (modifiedPayloadObj.hasOwnProperty('taxonomy_id')) {
+            modifiedPayloadObj['taxonomyId'] = modifiedPayloadObj['taxonomy_id'];
+            delete modifiedPayloadObj['taxonomy_id'];
         }
-        
-        this.comparativeServices.getTopTen(payloadDayta).subscribe(res => {
+
+        modifiedPayloadObj['year'] = this.selectedYear
+
+        this.comparativeServices.getTopTen(modifiedPayloadObj).subscribe(res => {
 
             const developmentTypes: [string, any][] = Object.entries(res);
             this.developmentName = developmentTypes.map(([name]) => name);
@@ -323,7 +330,6 @@ export class ComparativeResultsComponent implements OnInit, AfterViewInit, OnDes
 
 
     BarGraph(categoryName: string, data: any[], id: any) {
-
         if (id === 'present-chart-container') {
             this.dom = document.getElementById('present-chart-container');
 
@@ -416,25 +422,26 @@ export class ComparativeResultsComponent implements OnInit, AfterViewInit, OnDes
     }
 
 
-
     BarGraphData(data: any) {
-        let payloadDayta = data;
+        const modifiedPayload = { ... this.payloadObj };
 
-        if (payloadDayta.hasOwnProperty('development_id')) {
-            this.payloadObj['developmentId'] = this.payloadObj['development_id'];
-            delete this.payloadObj['development_id'];
+        if (modifiedPayload.hasOwnProperty('development_id')) {
+            modifiedPayload['developmentId'] = modifiedPayload['development_id'];
+            delete modifiedPayload['development_id'];
         }
-        if (payloadDayta.hasOwnProperty('taxonomy_id')) {
-            this.payloadObj['taxonomyId'] = this.payloadObj['taxonomy_id'];
-            delete this.payloadObj['taxonomy_id'];
+        if (modifiedPayload.hasOwnProperty('ultimate_id')) {
+            modifiedPayload['ultimateId'] = modifiedPayload['ultimate_id'];
+            delete modifiedPayload['ultimate_id'];
         }
-        if (payloadDayta.hasOwnProperty('ultimate_id')) {
-            this.payloadObj['ultimateId'] = this.payloadObj['ultimate_id'];
-            delete this.payloadObj['ultimate_id'];
+        if (modifiedPayload.hasOwnProperty('taxonomy_id')) {
+            modifiedPayload['taxonomyId'] = modifiedPayload['taxonomy_id'];
+            delete modifiedPayload['taxonomy_id'];
         }
-        
-        this.comparativeServices.getChartData(payloadDayta).subscribe(res => {
 
+        this.comparativeServices.getChartData(modifiedPayload).subscribe(res => {
+
+            console.log(res);
+            
             const developmentTypes: [string, any][] = Object.entries(res);
 
             this.developmentName = developmentTypes.map(([name]) => name);
@@ -463,60 +470,130 @@ export class ComparativeResultsComponent implements OnInit, AfterViewInit, OnDes
             this.prospectiveType.forEach((category: any) => {
                 this.BarGraph(category.categoryName, category.data, 'prospective-chart-container');
             });
-
-
         })
 
     }
 
     comparativeOverViewData(data: any) {
         this.comparativeServices.getComparativeOverview(data).subscribe(res => {
+
             const developmentTypes: [string, any][] = Object.entries(res);
 
             this.developmentName = developmentTypes.map(([name]) => name);
             this.developmentType = developmentTypes.map(([, type]) => type);
 
+            const availabilityObject: any = {};
+            const readinessObject: any = {};
+            const capacityBuildingObject: any = {};
+            const developmentStrategyObject: any = {};
 
-            const presentData: { [key: string]: any } = {};
-            const prospectiveData: { [key: string]: any } = {};
+            developmentTypes.forEach(([key, value]) => {
+                switch (key) {
+                    case 'Present Development':
+                        if (value['Availability']) {
+                            Object.assign(availabilityObject, value['Availability']);
+                        }
+                        if (value['Readiness']) {
+                            Object.assign(readinessObject, value['Readiness']);
+                        }
+                        break;
+                    case 'Prospective Development':
+                        if (value['Capacity Building']) {
+                            Object.assign(capacityBuildingObject, value['Capacity Building']);
+                        }
+                        if (value['Development Strategy']) {
+                            Object.assign(developmentStrategyObject, value['Development Strategy']);
 
-            Object.entries(this.developmentType).forEach(([key, value]) => {
-                if (key === "0") {
-                    presentData["Availability"] = (value as { [key: string]: any })["Availability"];
-                    presentData["Readiness"] = (value as { [key: string]: any })["Readiness"];
-                } else if (key === "1") {
-                    prospectiveData["Capacity Building"] = (value as { [key: string]: any })["Capacity Building"];
-                    prospectiveData["Development Strategy"] = (value as { [key: string]: any })["Development Strategy"];
+                        }
+                        break;
+                    default:
+                        break;
                 }
             });
 
-
-            this.Availability = Object.entries(presentData["Availability"]);
+            this.Availability = Object.entries(availabilityObject);
             this.dataAvailability = this.getNestedEntries(this.Availability);
             this.processDataArray(this.dataAvailability, this.availabilityArray);
+            this.availabilityArray = this.mapResponseData(this.availabilityArray);
 
-
-            this.Readiness = Object.entries(presentData["Readiness"]);
+            this.Readiness = Object.entries(readinessObject);
             this.dataReadiness = this.getNestedEntries(this.Readiness);
             this.processDataArray(this.dataReadiness, this.readinessArray);
+            this.readinessArray = this.mapResponseData(this.readinessArray);
 
-            if (prospectiveData) {
-                this.CapacityBuilding = Object.entries(prospectiveData["Capacity Building"]);
-                this.dataCapacityBuild = this.getNestedEntries(this.CapacityBuilding);
-                this.processDataArray(this.dataCapacityBuild, this.capacityBuildArray);
+            this.CapacityBuilding = Object.entries(capacityBuildingObject);
+            this.dataCapacityBuild = this.getNestedEntries(this.CapacityBuilding);
+            this.processDataArray(this.dataCapacityBuild, this.capacityBuildArray);
+            this.capacityBuildArray = this.mapResponseData(this.capacityBuildArray);
 
-                this.DevelopmentStrat = Object.entries(prospectiveData["Development Strategy"]);
-                this.dataDevelopmentStrat = this.getNestedEntries(this.DevelopmentStrat);
-                this.processDataArray(this.dataDevelopmentStrat, this.DevelopmentStratArray);
-            }
+            this.DevelopmentStrat = Object.entries(developmentStrategyObject);
+            this.dataDevelopmentStrat = this.getNestedEntries(this.DevelopmentStrat);
+            this.processDataArray(this.dataDevelopmentStrat, this.developmentStratArray);
+            this.developmentStratArray = this.mapResponseData(this.developmentStratArray);
 
         })
 
     }
 
+    mapResponseData(array: any[]): any[] {
+        return array.map((arr: any) => {
+            const arrayAtIndex1 = arr[1];
+            const objectsArray = Object.values(arrayAtIndex1).flat();
+            return [arr[0], objectsArray];
+        });
+    }
+
+
+    isFirstAvailQuestion(questionName: string, outerIndex: number, innerIndex: number): boolean {
+        // Check if the current question is the first occurrence
+        for (let i = 0; i < outerIndex; i++) {
+            const questions = this.availabilityArray[i][1];
+            if (questions.findIndex((val: any) => val.question_name === questionName) !== -1) {
+                return false; // Not the first occurrence
+            }
+        }
+        // If it's the first occurrence in the current array, check if it's the first occurrence in the inner array
+        return this.availabilityArray[outerIndex][1].findIndex((val: any, index: number) => index < innerIndex && val.question_name === questionName) === -1;
+    }
+
+    isFirstReadiQuestion(questionName: string, outerIndex: number, innerIndex: number): boolean {
+        for (let i = 0; i < outerIndex; i++) {
+            const questions = this.readinessArray[i][1];
+            if (questions.findIndex((val: any) => val.question_name === questionName) !== -1) {
+                return false;
+            }
+        }
+        return this.readinessArray[outerIndex][1].findIndex((val: any, index: number) => index < innerIndex && val.question_name === questionName) === -1;
+    }
+
+    isFirstCapacityQuestion(questionName: string, outerIndex: number, innerIndex: number): boolean {
+        for (let i = 0; i < outerIndex; i++) {
+            const questions = this.capacityBuildArray[i][1];
+            if (questions.findIndex((val: any) => val.question_name === questionName) !== -1) {
+                return false;
+            }
+        }
+
+        return this.capacityBuildArray[outerIndex][1].findIndex((val: any, index: number) => index < innerIndex && val.question_name === questionName) === -1;
+    }
+
+    isFirstDevelopmentQuestion(questionName: string, outerIndex: number, innerIndex: number): boolean {
+        for (let i = 0; i < outerIndex; i++) {
+            const questions = this.developmentStratArray[i][1];
+            if (questions.findIndex((val: any) => val.question_name === questionName) !== -1) {
+                return false;
+            }
+        }
+
+        return this.developmentStratArray[outerIndex][1].findIndex((val: any, index: number) => index < innerIndex && val.question_name === questionName) === -1;
+    }
+
+
+
+
+
 
     createNetworkChart() {
-        // console.log(data);
 
         am4core.useTheme(am4themes_animated);
 
@@ -905,7 +982,6 @@ export class ComparativeResultsComponent implements OnInit, AfterViewInit, OnDes
 
         nodeTemplate.events.on("hit", (event: any) => {
             var dataItem = event.target.dataItem;
-            console.log(dataItem.dataContext);
             var dataContext = dataItem.dataContext as IDataContext;
 
             if (dataContext.governance_id) {
@@ -941,13 +1017,6 @@ export class ComparativeResultsComponent implements OnInit, AfterViewInit, OnDes
 
     }
 
-
-
-    sendNodeId(nodeId: any) {
-        // Implement the logic to send the nodeId to your desired destination
-        console.log("Clicked node ID:", nodeId);
-        // You can make an API call, trigger a function, or perform any action you want with the nodeId
-    }
 
     // createNetworkChart(data: any) {
 
@@ -1177,8 +1246,6 @@ export class ComparativeResultsComponent implements OnInit, AfterViewInit, OnDes
                     this.utilityService.emitDefaultCountries.next(
                         defaultCountry
                     );
-
-                    // this.getComparitive();
 
                     localStorage.removeItem('selected_country');
                     localStorage.setItem('selected_country', this.countrySelected);
