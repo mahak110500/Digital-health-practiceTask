@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ElementRef, OnDestroy, OnInit, ViewChild, ChangeDetectorRef } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnDestroy, OnInit, ViewChild, ChangeDetectorRef, Renderer2, Input, ViewChildren, QueryList } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { CommonService } from 'src/app/services/common.service';
 import { ComparativeResultService } from 'src/app/services/comparative-result.service';
@@ -13,6 +13,7 @@ import am4themes_animated from '@amcharts/amcharts4/themes/animated';
 import * as am4core from '@amcharts/amcharts4/core';
 import * as am4plugins_forceDirected from '@amcharts/amcharts4/plugins/forceDirected';
 import * as am4charts from '@amcharts/amcharts4/charts';
+import { BarGraphComponent } from '../bar-graph/bar-graph.component';
 
 interface IDataContext {
     governance_id: string;
@@ -20,8 +21,6 @@ interface IDataContext {
     ultimate_id: string;
     taxonomy_id: string;
 }
-
-
 
 
 @Component({
@@ -77,13 +76,18 @@ export class ComparativeResultsComponent implements OnInit, AfterViewInit, OnDes
 
     step = 0;
     stepinner = 0;
+    chartContainer: any;
 
     setStep(index: number) {
         this.step = index;
     }
+
+    @ViewChild('yourLocalReferenceHTMLname')
+    private yourLocalReferenceHTMLname!: ElementRef;
+
     @ViewChild('mySelect') mySelect: ElementRef | any;
     @ViewChild('radarChartContainer', { static: true }) radarChartContainer!: ElementRef;
-    @ViewChild('topChart', { static: true }) chartElement!: ElementRef;
+
     constructor(
         private mapService: CountriesService,
         private utilityService: UtilitiesService,
@@ -103,7 +107,6 @@ export class ComparativeResultsComponent implements OnInit, AfterViewInit, OnDes
 
     ngOnInit(): void {
         this.apiService.getAllCountries().subscribe((data) => (this.countriesToShow = data));
-
 
         this.countrySelected = localStorage.getItem('selected_country');
 
@@ -192,23 +195,40 @@ export class ComparativeResultsComponent implements OnInit, AfterViewInit, OnDes
             this.developmentName = developmentTypes.map(([name]) => name);
             this.developmentType = developmentTypes.map(([, type]) => type);
 
-            const presentData: { [key: string]: any } = {};
-            const prospectiveData: { [key: string]: any } = {};
 
-            Object.entries(this.developmentType).forEach(([key, value]) => {
-                if (key === "0") {
-                    prospectiveData["Capacity Building"] = (value as { [key: string]: any })["Capacity Building"];
-                    prospectiveData["Development Strategy"] = (value as { [key: string]: any })["Development Strategy"];
-                } else if (key === "1") {
-                    presentData["Availability"] = (value as { [key: string]: any })["Availability"];
-                    presentData["Readiness"] = (value as { [key: string]: any })["Readiness"];
+            const availabilityObject: any = {};
+            const readinessObject: any = {};
+            const capacityBuildingObject: any = {};
+            const developmentStrategyObject: any = {};
+
+            developmentTypes.forEach(([key, value]) => {
+                switch (key) {
+                    case 'Present Development':
+                        if (value['Availability']) {
+                            Object.assign(availabilityObject, value['Availability']);
+                        }
+                        if (value['Readiness']) {
+                            Object.assign(readinessObject, value['Readiness']);
+                        }
+                        break;
+                    case 'Prospective Development':
+                        if (value['Capacity Building']) {
+                            Object.assign(capacityBuildingObject, value['Capacity Building']);
+                        }
+                        if (value['Development Strategy']) {
+                            Object.assign(developmentStrategyObject, value['Development Strategy']);
+
+                        }
+                        break;
+                    default:
+                        break;
                 }
             });
 
-            this.Availability = Object.entries(presentData["Availability"]);
-            this.Readiness = Object.entries(presentData["Readiness"]);
-            this.CapacityBuilding = Object.entries(prospectiveData["Capacity Building"]);
-            this.DevelopmentStrat = Object.entries(prospectiveData["Development Strategy"]);
+            this.Availability = Object.entries(availabilityObject);
+            this.Readiness = Object.entries(readinessObject);
+            this.CapacityBuilding = Object.entries(capacityBuildingObject);
+            this.DevelopmentStrat = Object.entries(developmentStrategyObject);
 
             this.extractedObjects = this.extractObjectsData(this.Availability);
             if (this.extractedObjects.length > 0) {
@@ -232,8 +252,6 @@ export class ComparativeResultsComponent implements OnInit, AfterViewInit, OnDes
         });
     }
 
-
-
     extractObjectsData(entries: any[]): any[] {
         const extractedObjects: any[] = [];
 
@@ -255,6 +273,8 @@ export class ComparativeResultsComponent implements OnInit, AfterViewInit, OnDes
     }
 
     displayTopTen(data: any[], containerId: string) {
+        // console.log(data);
+        this.newDataArray = []
         am4core.useTheme(am4themes_animated);
         this.newDataArray = data.map((obj: any) => obj.data);
         const apiResponse = this.newDataArray;
@@ -328,6 +348,61 @@ export class ComparativeResultsComponent implements OnInit, AfterViewInit, OnDes
     }
 
 
+    BarGraphData(data: any) {
+        const modifiedPayload = { ... this.payloadObj };
+
+        if (modifiedPayload.hasOwnProperty('development_id')) {
+            modifiedPayload['developmentId'] = modifiedPayload['development_id'];
+            delete modifiedPayload['development_id'];
+        }
+        if (modifiedPayload.hasOwnProperty('ultimate_id')) {
+            modifiedPayload['ultimateId'] = modifiedPayload['ultimate_id'];
+            delete modifiedPayload['ultimate_id'];
+        }
+        if (modifiedPayload.hasOwnProperty('taxonomy_id')) {
+            modifiedPayload['taxonomyId'] = modifiedPayload['taxonomy_id'];
+            delete modifiedPayload['taxonomy_id'];
+        }
+
+        this.comparativeServices.getChartData(modifiedPayload).subscribe(res => {
+
+            const developmentTypes: [string, any][] = Object.entries(res);
+
+            this.developmentName = developmentTypes.map(([name]) => name);
+
+            this.developmentType = developmentTypes.map(([, type]) => type);
+
+            // Clear the data arrays before populating them with new data
+            this.presentType = [];
+            this.prospectiveType = [];
+
+            for (let i = 0; i < this.developmentType.length; i++) {
+                const type = i === 0 ? this.presentType : this.prospectiveType;
+                const data = this.developmentType[i];
+                for (const key in data) {
+                    if (data.hasOwnProperty(key)) {
+                        if (key !== '[[Prototype]]') {
+                            type.push({ categoryName: key, data: data[key] });
+                        }
+                    }
+                }
+            }
+            console.log(this.presentType);
+            console.log(this.prospectiveType);
+
+
+            this.presentType.forEach((category: any) => {
+                this.BarGraph(category.categoryName, category.data, 'present-chart-container');
+            });
+
+            this.prospectiveType.forEach((category: any) => {
+                this.BarGraph(category.categoryName, category.data, 'prospective-chart-container');
+            });
+
+
+        })
+
+    }
 
     BarGraph(categoryName: string, data: any[], id: any) {
         if (id === 'present-chart-container') {
@@ -342,21 +417,29 @@ export class ComparativeResultsComponent implements OnInit, AfterViewInit, OnDes
             return;
         }
 
-        const chartContainer = document.createElement('div');
-        chartContainer.style.width = '70%';
-        chartContainer.style.height = '300px';
-        this.dom.appendChild(chartContainer);
 
-        const myChart = echarts.init(chartContainer, {
+        this.chartContainer = document.createElement('div');
+
+
+        this.chartContainer.style.width = '70%';
+        this.chartContainer.style.height = '300px';
+        this.dom.appendChild(this.chartContainer);
+
+        const myChart = echarts.init(this.chartContainer, {
             renderer: 'canvas',
             useDirtyRect: false
         });
 
-        const ultimateNames = data.map((item) => item.ultimate_name);
-        const ultimateNamesSet = Array.from(new Set(ultimateNames)); // Get unique ultimate names
+        const ultimateNames = Array.from(new Set(data.map((item) => item.ultimate_name)));
+        const countries = Array.from(new Set(data.map((item) => item.countries_name)));
 
+        const selectedCountry1 = countries[0];
+        const selectedCountry2 = countries[1];
+        const firstCountryArray = data.filter(obj => obj.countries_name === selectedCountry1);
+        const secondCountryArray = data.filter(obj => obj.countries_name === selectedCountry2);
 
-        const option = {
+        const option =
+        {
             tooltip: {
                 trigger: 'axis',
                 axisPointer: {
@@ -364,12 +447,12 @@ export class ComparativeResultsComponent implements OnInit, AfterViewInit, OnDes
                 }
             },
             legend: {
-                data: [categoryName]
+                data: []
             },
             xAxis: [
                 {
                     type: 'category',
-                    data: ultimateNamesSet,
+                    data: ultimateNames,
                     axisPointer: {
                         type: 'shadow'
                     }
@@ -387,15 +470,34 @@ export class ComparativeResultsComponent implements OnInit, AfterViewInit, OnDes
                     }
                 }
             ],
-            series: ultimateNamesSet.map((name) => ({
-                name: name,
-                type: 'bar',
-                barWidth: '12%', // Adjust the bar width here (e.g., '40%')
-                data: data
-                    .filter((item) => item.ultimate_name === name)
-                    .map((item) => Number(item.score))
-            }))
+            series: [
+                {
+                    name: countries[0],
+                    type: 'bar',
+                    barWidth: '12%',
+                    data: firstCountryArray.map((item) => ({
+                        name: item.ultimate_name,
+                        value: item.score,
+                        itemStyle: {
+                            color: item.countries_name === firstCountryArray[0].countries_name ? '#884dff' : ' #00e6b8'
+                        }
+                    }))
+                },
+                {
+                    name: countries[1],
+                    type: 'bar',
+                    barWidth: '12%',
+                    data: secondCountryArray.map((item) => ({
+                        name: item.ultimate_name,
+                        value: item.score,
+                        itemStyle: {
+                            color: item.countries_name === firstCountryArray[0].countries_name ? '#884dff' : ' #00e6b8'
+                        }
+                    }))
+                }
+            ]
         };
+
 
         //custom graphic to display category names
         myChart.setOption(option);
@@ -419,58 +521,6 @@ export class ComparativeResultsComponent implements OnInit, AfterViewInit, OnDes
         window.addEventListener('resize', () => {
             // myChart.resize();
         });
-    }
-
-
-    BarGraphData(data: any) {
-        const modifiedPayload = { ... this.payloadObj };
-
-        if (modifiedPayload.hasOwnProperty('development_id')) {
-            modifiedPayload['developmentId'] = modifiedPayload['development_id'];
-            delete modifiedPayload['development_id'];
-        }
-        if (modifiedPayload.hasOwnProperty('ultimate_id')) {
-            modifiedPayload['ultimateId'] = modifiedPayload['ultimate_id'];
-            delete modifiedPayload['ultimate_id'];
-        }
-        if (modifiedPayload.hasOwnProperty('taxonomy_id')) {
-            modifiedPayload['taxonomyId'] = modifiedPayload['taxonomy_id'];
-            delete modifiedPayload['taxonomy_id'];
-        }
-
-        this.comparativeServices.getChartData(modifiedPayload).subscribe(res => {
-
-            console.log(res);
-            
-            const developmentTypes: [string, any][] = Object.entries(res);
-
-            this.developmentName = developmentTypes.map(([name]) => name);
-            this.developmentType = developmentTypes.map(([, type]) => type);
-
-            // Clear the data arrays before populating them with new data
-            this.presentType = [];
-            this.prospectiveType = [];
-
-            for (let i = 0; i < this.developmentType.length; i++) {
-                const type = i === 0 ? this.presentType : this.prospectiveType;
-                const data = this.developmentType[i];
-                for (const key in data) {
-                    if (data.hasOwnProperty(key)) {
-                        if (key !== '[[Prototype]]') {
-                            type.push({ categoryName: key, data: data[key] });
-                        }
-                    }
-                }
-            }
-
-            this.presentType.forEach((category: any) => {
-                this.BarGraph(category.categoryName, category.data, 'present-chart-container');
-            });
-
-            this.prospectiveType.forEach((category: any) => {
-                this.BarGraph(category.categoryName, category.data, 'prospective-chart-container');
-            });
-        })
 
     }
 
@@ -511,10 +561,13 @@ export class ComparativeResultsComponent implements OnInit, AfterViewInit, OnDes
                 }
             });
 
-            this.Availability = Object.entries(availabilityObject);
-            this.dataAvailability = this.getNestedEntries(this.Availability);
-            this.processDataArray(this.dataAvailability, this.availabilityArray);
-            this.availabilityArray = this.mapResponseData(this.availabilityArray);
+            if (availabilityObject) {
+                this.Availability = Object.entries(availabilityObject);
+                this.dataAvailability = this.getNestedEntries(this.Availability);
+                this.processDataArray(this.dataAvailability, this.availabilityArray);
+                this.availabilityArray = this.mapResponseData(this.availabilityArray);
+            }
+
 
             this.Readiness = Object.entries(readinessObject);
             this.dataReadiness = this.getNestedEntries(this.Readiness);
@@ -588,13 +641,8 @@ export class ComparativeResultsComponent implements OnInit, AfterViewInit, OnDes
         return this.developmentStratArray[outerIndex][1].findIndex((val: any, index: number) => index < innerIndex && val.question_name === questionName) === -1;
     }
 
-
-
-
-
-
+    //Force Directed Tree
     createNetworkChart() {
-
         am4core.useTheme(am4themes_animated);
 
         var chart = am4core.create("networkChart", am4plugins_forceDirected.ForceDirectedTree);
@@ -981,6 +1029,15 @@ export class ComparativeResultsComponent implements OnInit, AfterViewInit, OnDes
 
 
         nodeTemplate.events.on("hit", (event: any) => {
+
+            // Clear previous chart
+            // if (this.dom.firstChild) {
+            //     while (this.dom.firstChild) {
+            //         this.dom.firstChild.remove();
+            //     }
+            // }
+
+
             var dataItem = event.target.dataItem;
             var dataContext = dataItem.dataContext as IDataContext;
 
@@ -996,22 +1053,13 @@ export class ComparativeResultsComponent implements OnInit, AfterViewInit, OnDes
             if (dataContext.taxonomy_id) {
                 this.payloadObj['taxonomy_id'] = dataContext.taxonomy_id;
             }
+            console.log(this.payloadObj);
+
 
             this.comparativeOverViewData(this.payloadObj);
             this.BarGraphData(this.payloadObj);
+
             this.getTopTenData(this.payloadObj);
-
-
-
-
-            // var governanceId = dataContext.governance_id;
-            // var developmentId = dataContext.development_id;
-            // var ultimateId = dataContext.ultimate_id;
-            // var taxonomyId = dataContext.taxonomy_id;
-
-
-            // this.getTopTenData(governanceId, developmentId, ultimateId, taxonomyId);
-            // this.BarGraph(governanceId, developmentId, ultimateId, taxonomyId);
         });
 
 

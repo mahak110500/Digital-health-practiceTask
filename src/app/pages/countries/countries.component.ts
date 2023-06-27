@@ -342,6 +342,7 @@ export class CountriesComponent implements OnInit, AfterViewInit {
 	}
 
 	ngAfterViewInit() {
+		
 		if (this.governance_id == 1) {
 			setTimeout(() => {
 				this.createCharts(this.health_taxonomy_present, 'chartdiv_health_present', ['#1181B2', '#05D5AA', '#E2E2E4'], 1);

@@ -37,6 +37,7 @@ import { PresentDevelopmentComponent } from './pages/countries-data/present-deve
 import { ProspectiveDevelopmentComponent } from './pages/countries-data/prospective-development/prospective-development.component';
 import { ComparativeResultsComponent } from './pages/comparative-results/comparative-results.component';
 import { NgxEchartsModule } from 'ngx-echarts';
+import { BarGraphComponent } from './pages/bar-graph/bar-graph.component';
 
 @NgModule({
   declarations: [
@@ -53,6 +54,7 @@ import { NgxEchartsModule } from 'ngx-echarts';
     PresentDevelopmentComponent,
     ProspectiveDevelopmentComponent,
     ComparativeResultsComponent,
+    BarGraphComponent,
   ],
   imports: [
     BrowserModule,
