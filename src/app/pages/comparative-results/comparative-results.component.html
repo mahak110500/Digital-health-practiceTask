@@ -538,7 +538,7 @@
             </div>
         </div>
 
-<!-- 
+        <!-- 
         <div class="row">
             <ng-container *ngFor="let category of presentType; let i = index">
                 <div class="col-md-12 col-sm-7 col-xs-12">
@@ -576,38 +576,42 @@
         </div> -->
 
 
+        <!-- HTML template code... -->
+
         <div class="row">
-        <!-- PRESENT-DEVELOPMENT STARTS -->
-        <div class="col-md-12 col-sm-7 col-xs-12" >
-                <div class="panel country-selector" >
+            <!-- PRESENT-DEVELOPMENT STARTS -->
+            <div class="col-md-12 col-sm-7 col-xs-12">
+                <div class="panel country-selector">
                     <div class="chart-heading">
-                        <h2>{{developmentName[0]}}</h2>
+                        <h2>{{development_name[0]}}</h2>
                     </div>
-                    <div class='md-padding main-head' layout="row" layout-wrap style="margin-left: 60px;">
-                        <div class="bar-chart-card">
-                            <div class="chart" id="present-chart-container"></div>
+                    <div class="md-padding main-head" layout="row" layout-wrap style="margin-left: 60px;">
+                        <div class="bar-chart-card" *ngFor="let category of presentType; let i = index">
+                            <h3>{{ category.categoryName }}</h3>
+                            <div class="chart" [id]="'present-chart-container-' + i"></div>
                         </div>
                     </div>
                 </div>
             </div>
-        <!-- PRESENT-DEVELOPMENT ENDS -->
-        <!-- PROSPECTIVE-DEVELOPMENT STARTS -->
-        <div class="col-md-12 col-sm-7 col-xs-12" >
-                <div class="panel country-selector" >
+            <!-- PRESENT-DEVELOPMENT ENDS -->
+            <!-- PROSPECTIVE-DEVELOPMENT STARTS -->
+            <div class="col-md-12 col-sm-7 col-xs-12">
+                <div class="panel country-selector">
                     <div class="chart-heading">
-                        <h2>{{developmentName[1]}}</h2>
+                        <h2>{{development_name[1]}}</h2>
                     </div>
-                    <div class='md-padding main-head' layout="row" layout-wrap style="margin-left: 60px;">
-                        <div class="bar-chart-card">
-                            <div class="chart" id="prospective-chart-container"></div>
+                    <div class="md-padding main-head" layout="row" layout-wrap style="margin-left: 60px;">
+                        <div class="bar-chart-card" *ngFor="let category of prospectiveType; let i = index">
+                            <h3>{{ category.categoryName }}</h3>
+                            <div class="chart" [id]="'prospective-chart-container-' + i"></div>
                         </div>
                     </div>
                 </div>
             </div>
-        <!-- PROSPECTIVE-DEVELOPMENT ENDS -->
+            <!-- PROSPECTIVE-DEVELOPMENT ENDS -->
         </div>
 
-
+        <!-- Rest of the HTML template code... -->
 
 
         <div class="row">
@@ -615,18 +619,22 @@
                 <div class="panel country-selector" id="chartContainer">
                     <div class="chart-heading">
                         <h3 style="color: rgb(6, 6, 92); font-weight: bold;">Average By Country</h3>
-                        <h2>{{developmentName[0]}}</h2>
+                        <h2>{{development_Name[1]}}</h2>
                     </div>
                     <div class="chart-container">
                         <div id="chartContainer1" class="bar-chart-card">
-                            <div *ngFor="let i = index">
-                                <div [id]="'chartdiv-' + i"></div>
+                            <div *ngFor="let objects of extractedObjects;let i = index">
+                                <h3>{{ objects.categoryName }}</h3>
+
+                                <div [id]="'present_availability_chart-' + i"></div>
                             </div>
                         </div>
 
                         <div id="chartContainer2" class="bar-chart-card">
-                            <div *ngFor="let i = index">
-                                <div [id]="'chartdiv2-' + i"></div>
+                            <div *ngFor="let objects of extractedObjects2;let i = index">
+                                <h3>{{ objects.categoryName }}</h3>
+
+                                <div [id]="'present_readiness_chart-' + i"></div>
                             </div>
                         </div>
                     </div>
@@ -639,18 +647,22 @@
                 <div class="panel country-selector" id="chartContainer">
                     <div class="chart-heading">
                         <h3 style="color: rgb(6, 6, 92); font-weight: bold;">Average By Country</h3>
-                        <h2>{{developmentName[1]}}</h2>
+                        <h2>{{development_Name[0]}}</h2>
                     </div>
                     <div class="chart-container">
                         <div id="chartContainer3" class="bar-chart-card">
-                            <div *ngFor=" let i = index">
-                                <div [id]="'chartdiv3-' + i"></div>
+                            <div *ngFor="let objects of extractedObjects3;let i = index">
+                                <h3>{{ objects.categoryName }}</h3>
+
+                                <div [id]="'prospective_capacity_chart-' + i"></div>
                             </div>
                         </div>
 
                         <div id="chartContainer4" class="bar-chart-card">
-                            <div *ngFor="let i = index">
-                                <div [id]="'chartdiv4-' + i"></div>
+                            <div *ngFor="let objects of extractedObjects4;let i = index">
+                                <h3>{{ objects.categoryName }}</h3>
+
+                                <div [id]="'prospective_development_chart-' + i"></div>
                             </div>
                         </div>
 

@@ -48,6 +48,8 @@ export class ComparativeResultsComponent implements OnInit, AfterViewInit, OnDes
     development_id: any;
     taxonomyData: any
     developmentName: string[] = [];
+    development_name: string[] = [];
+    development_Name: string[] = [];
     developmentType: any;
     Availability: any;
     Readiness: any;
@@ -101,6 +103,13 @@ export class ComparativeResultsComponent implements OnInit, AfterViewInit, OnDes
     }
 
     ngAfterViewInit(): void {
+
+        // setTimeout(() => {
+        //     console.log(this.presentType);
+        //     this.BarGraph(this.presentType, 'present-chart-container', 1);
+        //     this.BarGraph(this.prospectiveType, 'prospective-chart-container', 1);
+        // }, 1000);
+
         this.mapData();
         this.createNetworkChart();
     }
@@ -160,7 +169,9 @@ export class ComparativeResultsComponent implements OnInit, AfterViewInit, OnDes
             }
 
             this.getTopTenData(this.payloadObj)
-            this.BarGraphData(this.payloadObj)
+            // this.BarGraphData(this.payloadObj)
+            this.BarGraphData(this.payloadObj);
+
             this.comparativeOverViewData(this.payloadObj);
             this.createRadarChart(this.governance_id);
         });
@@ -192,7 +203,7 @@ export class ComparativeResultsComponent implements OnInit, AfterViewInit, OnDes
         this.comparativeServices.getTopTen(modifiedPayloadObj).subscribe(res => {
 
             const developmentTypes: [string, any][] = Object.entries(res);
-            this.developmentName = developmentTypes.map(([name]) => name);
+            this.development_Name = developmentTypes.map(([name]) => name);
             this.developmentType = developmentTypes.map(([, type]) => type);
 
 
@@ -231,24 +242,38 @@ export class ComparativeResultsComponent implements OnInit, AfterViewInit, OnDes
             this.DevelopmentStrat = Object.entries(developmentStrategyObject);
 
             this.extractedObjects = this.extractObjectsData(this.Availability);
-            if (this.extractedObjects.length > 0) {
-                this.displayTopTen(this.extractedObjects, 'chartContainer1');
-            }
+            setTimeout(() =>{
+                if (this.extractedObjects.length > 0) {
+                    this.displayTopTen(this.extractedObjects, 'present_availability_chart', 0);
+                }
+            },1000)
+            console.log(this.extractedObjects);
+            
+         
 
             this.extractedObjects2 = this.extractObjectsData(this.Readiness);
-            if (this.extractedObjects2.length > 0) {
-                this.displayTopTen(this.extractedObjects2, 'chartContainer2');
-            }
+            setTimeout(() =>{
+                if (this.extractedObjects2.length > 0) {
+                    this.displayTopTen(this.extractedObjects2, 'present_readiness_chart', 0);
+                }
+            },1000)
+          
 
             this.extractedObjects3 = this.extractObjectsData(this.CapacityBuilding);
-            if (this.extractedObjects3.length > 0) {
-                this.displayTopTen(this.extractedObjects3, 'chartContainer3');
-            }
+            setTimeout(() =>{
+                if (this.extractedObjects3.length > 0) {
+                    this.displayTopTen(this.extractedObjects3, 'prospective_capacity_chart', 0);
+                }
+            },1000)
+         
 
             this.extractedObjects4 = this.extractObjectsData(this.DevelopmentStrat);
-            if (this.extractedObjects4.length > 0) {
-                this.displayTopTen(this.extractedObjects4, 'chartContainer4');
-            }
+            setTimeout(() =>{
+                if (this.extractedObjects4.length > 0) {
+                    this.displayTopTen(this.extractedObjects4, 'prospective_development_chart', 0);
+                }
+            },1000)
+          
         });
     }
 
@@ -272,33 +297,40 @@ export class ComparativeResultsComponent implements OnInit, AfterViewInit, OnDes
         return extractedObjects;
     }
 
-    displayTopTen(data: any[], containerId: string) {
+
+
+    displayTopTen(data: any[], chartIdPrefix: string, startIndex: number) {
         // console.log(data);
+
         this.newDataArray = []
         am4core.useTheme(am4themes_animated);
         this.newDataArray = data.map((obj: any) => obj.data);
         const apiResponse = this.newDataArray;
 
-        // Iterate over each category in the API response
-        for (let i = 0; i < apiResponse.length; i++) {
+        apiResponse.forEach((categoryData: any, index: number) => {
+            const i = startIndex + index;
             const category = apiResponse[i];
-            const divId = `${containerId}-${i}`;
+            const divId: any = chartIdPrefix + '-' + i;
+            // console.log(divId);
 
             // Display ultimate_field and taxonomy_name above the chart
             const categoryInfoDiv = document.createElement('div');
             categoryInfoDiv.style.textAlign = 'center';
             categoryInfoDiv.style.marginBottom = '10px';
             categoryInfoDiv.innerHTML = `<b>${category[0]?.ultimate_field}</b>&nbsp;&nbsp;&nbsp;&nbsp;<b>${category[0]?.taxonomy_name}</b> `;
-            const chartContainer: any = document.getElementById(containerId); //imp
-            chartContainer.appendChild(categoryInfoDiv);
+            const chartContainer: any = document.getElementById(divId); //imp
+            // chartContainer.appendChild(categoryInfoDiv);
+
 
             const chartDiv = document.createElement('div');
             chartDiv.setAttribute('id', divId);
             chartDiv.style.width = '400px';
             chartDiv.style.height = '300px';
-            chartContainer.appendChild(chartDiv);
+            // chartContainer.appendChild(chartDiv);
 
             // Create the chart inside the corresponding div
+            console.log(divId);
+            
             let chart = am4core.create(divId, am4charts.XYChart);
             chart.hiddenState.properties.opacity = 0; // this creates initial fade-in
 
@@ -343,12 +375,84 @@ export class ComparativeResultsComponent implements OnInit, AfterViewInit, OnDes
             series.columns.template.adapter.add("fill", function (fill, target: any) {
                 return chart.colors.getIndex(target.dataItem.index);
             });
-        }
+
+
+
+        })
+
+
+        // Iterate over each category in the API response
+        // for (let i = 0; i < apiResponse.length; i++) {
+        //     const category = apiResponse[i];
+        //     const divId = `${containerId}-${i}`;
+        //     console.log(divId);
+
+
+        //     // Display ultimate_field and taxonomy_name above the chart
+        //     const categoryInfoDiv = document.createElement('div');
+        //     categoryInfoDiv.style.textAlign = 'center';
+        //     categoryInfoDiv.style.marginBottom = '10px';
+        //     categoryInfoDiv.innerHTML = `<b>${category[0]?.ultimate_field}</b>&nbsp;&nbsp;&nbsp;&nbsp;<b>${category[0]?.taxonomy_name}</b> `;
+        //     const chartContainer: any = document.getElementById(containerId); //imp
+        //     chartContainer.appendChild(categoryInfoDiv);
+
+        //     const chartDiv = document.createElement('div');
+        //     chartDiv.setAttribute('id', divId);
+        //     chartDiv.style.width = '400px';
+        //     chartDiv.style.height = '300px';
+        //     chartContainer.appendChild(chartDiv);
+
+        //     // Create the chart inside the corresponding div
+        //     let chart = am4core.create(divId, am4charts.XYChart);
+        //     chart.hiddenState.properties.opacity = 0; // this creates initial fade-in
+
+        //     chart.data = category;
+
+        //     let categoryAxis = chart.xAxes.push(new am4charts.CategoryAxis());
+        //     categoryAxis.renderer.grid.template.location = 0;
+        //     categoryAxis.dataFields.category = "country_name";
+        //     categoryAxis.renderer.minGridDistance = 30;
+        //     categoryAxis.fontSize = 11;
+        //     categoryAxis.renderer.labels.template.dy = 5;
+
+        //     let image = new am4core.Image();
+        //     image.horizontalCenter = "middle";
+        //     image.width = 12;
+        //     image.height = 12;
+        //     image.verticalCenter = "middle";
+        //     image.adapter.add("href", (href, target: any) => {
+        //         let category = target.dataItem.category;
+        //         if (category) {
+        //             return "https://www.amcharts.com/wp-content/uploads/flags/" + category.split(" ").join("-").toLowerCase() + ".svg";
+        //         }
+        //         return href;
+        //     })
+        //     categoryAxis.dataItems.template.bullet = image;
+
+        //     let valueAxis = chart.yAxes.push(new am4charts.ValueAxis());
+        //     valueAxis.min = 0;
+        //     valueAxis.renderer.minGridDistance = 35;
+        //     valueAxis.renderer.baseGrid.disabled = true;
+
+
+        //     let series = chart.series.push(new am4charts.ColumnSeries());
+        //     series.dataFields.categoryX = "country_name";
+        //     series.dataFields.valueY = "score";
+        //     series.columns.template.tooltipText = "{valueY.value}";
+        //     series.columns.template.tooltipY = 0;
+        //     series.columns.template.strokeOpacity = 0;
+        //     series.columns.template.width = am4core.percent(22);
+
+        //     // as by default columns of the same series are of the same color, we add adapter which takes colors from chart.colors color set
+        //     series.columns.template.adapter.add("fill", function (fill, target: any) {
+        //         return chart.colors.getIndex(target.dataItem.index);
+        //     });
+        // }
 
     }
 
-
     BarGraphData(data: any) {
+
         const modifiedPayload = { ... this.payloadObj };
 
         if (modifiedPayload.hasOwnProperty('development_id')) {
@@ -363,12 +467,11 @@ export class ComparativeResultsComponent implements OnInit, AfterViewInit, OnDes
             modifiedPayload['taxonomyId'] = modifiedPayload['taxonomy_id'];
             delete modifiedPayload['taxonomy_id'];
         }
-
         this.comparativeServices.getChartData(modifiedPayload).subscribe(res => {
 
             const developmentTypes: [string, any][] = Object.entries(res);
 
-            this.developmentName = developmentTypes.map(([name]) => name);
+            this.development_name = developmentTypes.map(([name]) => name);
 
             this.developmentType = developmentTypes.map(([, type]) => type);
 
@@ -387,139 +490,139 @@ export class ComparativeResultsComponent implements OnInit, AfterViewInit, OnDes
                     }
                 }
             }
-            console.log(this.presentType);
-            console.log(this.prospectiveType);
 
+            setTimeout(() => {
+                this.BarGraph(this.presentType, 'present-chart-container', 0);
+                this.BarGraph(this.prospectiveType, 'prospective-chart-container', 0);
+            }, 1000);
 
-            this.presentType.forEach((category: any) => {
-                this.BarGraph(category.categoryName, category.data, 'present-chart-container');
-            });
+        });
 
-            this.prospectiveType.forEach((category: any) => {
-                this.BarGraph(category.categoryName, category.data, 'prospective-chart-container');
-            });
-
-
-        })
 
     }
 
-    BarGraph(categoryName: string, data: any[], id: any) {
-        if (id === 'present-chart-container') {
-            this.dom = document.getElementById('present-chart-container');
+    BarGraph(data: any[], chartIdPrefix: string, startIndex: number) {
 
-        } else if (id === 'prospective-chart-container') {
-            this.dom = document.getElementById('prospective-chart-container');
-        }
+        data.forEach((categoryData: any, index: number) => {
 
-        if (!this.dom) {
-            console.error('Chart container element not found.');
-            return;
-        }
+            const i = startIndex + index;
+            const chartId: any = chartIdPrefix + '-' + i;
+
+            const chartElement: any = document.getElementById(chartId);
+
+            if (!chartElement) {
+                console.error(`Chart container element with ID ${chartId} not found.`);
+                return;
+            }
+
+            const myChart = echarts.init(chartElement, {
+                renderer: 'canvas',
+                useDirtyRect: false
+            });
+            chartElement.style.width = `80%`;
+            chartElement.style.height = `300px`;
 
 
-        this.chartContainer = document.createElement('div');
+
+            const ultimateNames = Array.from(new Set(categoryData.data.map((item: any) => item.ultimate_name)));
+
+            const countries = Array.from(new Set(categoryData.data.map((item: any) => item.countries_name)));
 
 
-        this.chartContainer.style.width = '70%';
-        this.chartContainer.style.height = '300px';
-        this.dom.appendChild(this.chartContainer);
+            const selectedCountry1 = countries[0];
+            const selectedCountry2 = countries[1];
 
-        const myChart = echarts.init(this.chartContainer, {
-            renderer: 'canvas',
-            useDirtyRect: false
-        });
+            const firstCountryArray = categoryData.data.filter((obj: any) => obj.countries_name === selectedCountry1);
+            const secondCountryArray = categoryData.data.filter((obj: any) => obj.countries_name === selectedCountry2);
 
-        const ultimateNames = Array.from(new Set(data.map((item) => item.ultimate_name)));
-        const countries = Array.from(new Set(data.map((item) => item.countries_name)));
-
-        const selectedCountry1 = countries[0];
-        const selectedCountry2 = countries[1];
-        const firstCountryArray = data.filter(obj => obj.countries_name === selectedCountry1);
-        const secondCountryArray = data.filter(obj => obj.countries_name === selectedCountry2);
-
-        const option =
-        {
-            tooltip: {
-                trigger: 'axis',
-                axisPointer: {
-                    type: 'shadow'
-                }
-            },
-            legend: {
-                data: []
-            },
-            xAxis: [
-                {
-                    type: 'category',
-                    data: ultimateNames,
+            const option =
+            {
+                tooltip: {
+                    trigger: 'axis',
                     axisPointer: {
                         type: 'shadow'
                     }
-                }
-            ],
-            yAxis: [
-                {
-                    type: 'value',
-                    name: '',
-                    min: 0,
-                    max: 100,
-                    interval: 20,
-                    axisLabel: {
-                        formatter: '{value}%'
-                    }
-                }
-            ],
-            series: [
-                {
-                    name: countries[0],
-                    type: 'bar',
-                    barWidth: '12%',
-                    data: firstCountryArray.map((item) => ({
-                        name: item.ultimate_name,
-                        value: item.score,
-                        itemStyle: {
-                            color: item.countries_name === firstCountryArray[0].countries_name ? '#884dff' : ' #00e6b8'
-                        }
-                    }))
                 },
-                {
-                    name: countries[1],
-                    type: 'bar',
-                    barWidth: '12%',
-                    data: secondCountryArray.map((item) => ({
-                        name: item.ultimate_name,
-                        value: item.score,
-                        itemStyle: {
-                            color: item.countries_name === firstCountryArray[0].countries_name ? '#884dff' : ' #00e6b8'
+                legend: {
+                    data: []
+                },
+                xAxis: [
+                    {
+                        type: 'category',
+                        data: ultimateNames,
+                        axisPointer: {
+                            type: 'shadow'
                         }
-                    }))
-                }
-            ]
-        };
-
-
-        //custom graphic to display category names
-        myChart.setOption(option);
-        myChart.setOption({
-            graphic: [
-                {
-                    type: 'text',
-                    left: 'center',
-                    top: 20, // Adjust the top position as needed
-                    style: {
-                        text: categoryName,
-                        textAlign: 'center',
-                        fill: '#000',
-                        fontWeight: 'bold'
                     }
-                }
-            ]
-        });
+                ],
+                yAxis: [
+                    {
+                        type: 'value',
+                        name: '',
+                        min: 0,
+                        max: 100,
+                        interval: 20,
+                        axisLabel: {
+                            formatter: '{value}%'
+                        }
+                    }
+                ],
+                series: [
+                    {
+                        name: countries[0],
+                        type: 'bar',
+                        barWidth: '12%',
+                        data: firstCountryArray.map((item: any) => ({
+                            name: item.ultimate_name,
+                            value: item.score,
+                            itemStyle: {
+                                color: item.countries_name === firstCountryArray[0].countries_name ? '#884dff' : ' #00e6b8'
+                            }
+                        }))
+                    },
+                    {
+                        name: countries[1],
+                        type: 'bar',
+                        barWidth: '12%',
+                        data: secondCountryArray.map((item: any) => ({
+                            name: item.ultimate_name,
+                            value: item.score,
+                            itemStyle: {
+                                color: item.countries_name === firstCountryArray[0].countries_name ? '#884dff' : ' #00e6b8'
+                            }
+                        }))
+                    }
+                ]
+            };
 
 
-        window.addEventListener('resize', () => {
-            // myChart.resize();
+            //custom graphic to display category names
+            myChart.setOption(option);
+            myChart.setOption({
+                graphic: [
+                    {
+                        type: 'text',
+                        left: 'center',
+                        top: 20, // Adjust the top position as needed
+                        style: {
+                            // text: categoryName,
+                            textAlign: 'center',
+                            fill: '#000',
+                            fontWeight: 'bold'
+                        }
+                    }
+                ]
+            });
+
+
+            window.addEventListener('resize', () => {
+                myChart.resize();
+            });
+            myChart.resize();
+
+
+
+
         });
 
     }
@@ -594,51 +697,6 @@ export class ComparativeResultsComponent implements OnInit, AfterViewInit, OnDes
             const objectsArray = Object.values(arrayAtIndex1).flat();
             return [arr[0], objectsArray];
         });
-    }
-
-
-    isFirstAvailQuestion(questionName: string, outerIndex: number, innerIndex: number): boolean {
-        // Check if the current question is the first occurrence
-        for (let i = 0; i < outerIndex; i++) {
-            const questions = this.availabilityArray[i][1];
-            if (questions.findIndex((val: any) => val.question_name === questionName) !== -1) {
-                return false; // Not the first occurrence
-            }
-        }
-        // If it's the first occurrence in the current array, check if it's the first occurrence in the inner array
-        return this.availabilityArray[outerIndex][1].findIndex((val: any, index: number) => index < innerIndex && val.question_name === questionName) === -1;
-    }
-
-    isFirstReadiQuestion(questionName: string, outerIndex: number, innerIndex: number): boolean {
-        for (let i = 0; i < outerIndex; i++) {
-            const questions = this.readinessArray[i][1];
-            if (questions.findIndex((val: any) => val.question_name === questionName) !== -1) {
-                return false;
-            }
-        }
-        return this.readinessArray[outerIndex][1].findIndex((val: any, index: number) => index < innerIndex && val.question_name === questionName) === -1;
-    }
-
-    isFirstCapacityQuestion(questionName: string, outerIndex: number, innerIndex: number): boolean {
-        for (let i = 0; i < outerIndex; i++) {
-            const questions = this.capacityBuildArray[i][1];
-            if (questions.findIndex((val: any) => val.question_name === questionName) !== -1) {
-                return false;
-            }
-        }
-
-        return this.capacityBuildArray[outerIndex][1].findIndex((val: any, index: number) => index < innerIndex && val.question_name === questionName) === -1;
-    }
-
-    isFirstDevelopmentQuestion(questionName: string, outerIndex: number, innerIndex: number): boolean {
-        for (let i = 0; i < outerIndex; i++) {
-            const questions = this.developmentStratArray[i][1];
-            if (questions.findIndex((val: any) => val.question_name === questionName) !== -1) {
-                return false;
-            }
-        }
-
-        return this.developmentStratArray[outerIndex][1].findIndex((val: any, index: number) => index < innerIndex && val.question_name === questionName) === -1;
     }
 
     //Force Directed Tree
@@ -1053,161 +1111,16 @@ export class ComparativeResultsComponent implements OnInit, AfterViewInit, OnDes
             if (dataContext.taxonomy_id) {
                 this.payloadObj['taxonomy_id'] = dataContext.taxonomy_id;
             }
-            console.log(this.payloadObj);
-
 
             this.comparativeOverViewData(this.payloadObj);
+            // this.BarGraphData(this.payloadObj);
             this.BarGraphData(this.payloadObj);
-
             this.getTopTenData(this.payloadObj);
         });
 
 
     }
 
-
-    // createNetworkChart(data: any) {
-
-    //     am4core.useTheme(am4themes_animated);
-
-    //     let chart = am4core.create("networkChart", am4plugins_forceDirected.ForceDirectedTree);
-    //     chart.legend = new am4charts.Legend();
-
-    //     let networkSeries = chart.series.push(new am4plugins_forceDirected.ForceDirectedSeries());
-
-    //     // Disable drag functionality
-    //     networkSeries.nodes.template.draggable = false;
-    //     networkSeries.nodes.template.inert = true;
-
-    //     // Disable rotation
-    //     networkSeries.nodes.template.rotation = 0;
-
-    //     networkSeries.data = data
-    //     // networkSeries.data = [
-    //     //     {
-    //     //         name: 'Health & It',
-    //     //         fixed: true,
-    //     //         children: [
-    //     //             {
-    //     //                 name: 'Present Development',
-    //     //                 fixed: true,
-
-    //     //                 children: [
-    //     //                     {
-    //     //                         name: 'Availability',
-    //     //                         fixed: true,
-    //     //                         children: [
-    //     //                             {
-    //     //                                 name: 'It Governance',
-    //     //                                 fixed: true
-    //     //                             },
-    //     //                             {
-    //     //                                 name: 'AI Workforce & Infrastructure',
-    //     //                                 fixed: true
-    //     //                             },
-    //     //                             {
-    //     //                                 name: 'Health Governance',
-    //     //                                 fixed: true
-    //     //                             }
-    //     //                         ]
-    //     //                     },
-    //     //                     {
-    //     //                         name: 'Readiness',
-    //     //                         fixed: true,
-
-    //     //                         children: [
-    //     //                             {
-    //     //                                 name: 'It Governance',
-    //     //                                 fixed: true
-    //     //                             },
-    //     //                             {
-    //     //                                 name: 'AI Workforce & Infrastructure',
-    //     //                                 fixed: true
-    //     //                             },
-    //     //                             {
-    //     //                                 name: 'Health Governance',
-    //     //                                 fixed: true
-    //     //                             }
-    //     //                         ]
-    //     //                     }
-    //     //                 ]
-    //     //             },
-    //     //             {
-    //     //                 name: 'Prospective Development',
-    //     //                 fixed: true,
-    //     //                 children: [
-    //     //                     {
-    //     //                         name: 'Capacity Building',
-    //     //                         fixed: true,
-    //     //                         children: [
-    //     //                             {
-    //     //                                 name: 'It Governance',
-    //     //                                 fixed: true
-    //     //                             },
-    //     //                             {
-    //     //                                 name: 'AI Workforce & Infrastructure',
-    //     //                                 fixed: true
-    //     //                             },
-    //     //                             {
-    //     //                                 name: 'Health Governance',
-    //     //                                 fixed: true
-    //     //                             }
-    //     //                         ]
-    //     //                     },
-    //     //                     {
-    //     //                         name: 'Development Startegy',
-    //     //                         fixed: true,
-
-    //     //                         children: [
-    //     //                             {
-    //     //                                 name: 'It Governance',
-    //     //                                 fixed: true
-    //     //                             },
-    //     //                             {
-    //     //                                 name: 'AI Workforce & Infrastructure',
-    //     //                                 fixed: true
-    //     //                             },
-    //     //                             {
-    //     //                                 name: 'Health Governance',
-    //     //                                 fixed: true
-    //     //                             }
-    //     //                         ]
-    //     //                     }
-    //     //                 ]
-    //     //             }
-    //     //         ]
-    //     //     }
-    //     // ];
-
-    //     networkSeries.dataFields.linkWith = "linkWith";
-    //     networkSeries.dataFields.name = "name";
-    //     networkSeries.dataFields.id = "name";
-    //     networkSeries.dataFields.value = "value";
-    //     networkSeries.dataFields.children = "children";
-
-
-    //     // Set node properties
-    //     let nodeTemplate = networkSeries.nodes.template;
-    //     nodeTemplate.tooltipText = "{name}";
-    //     networkSeries.nodes.template.fillOpacity = 1;
-    //     networkSeries.nodes.template.label.text = "{name}"
-    //     networkSeries.fontSize = 8;
-    //     networkSeries.maxLevels = 2;
-    //     networkSeries.nodes.template.label.hideOversized = true;
-    //     networkSeries.nodes.template.label.truncate = true;
-
-
-
-
-    //     // Configure forces to create a tree-like structure
-    //     networkSeries.minRadius = 30;
-    //     networkSeries.maxRadius = 50;
-    //     networkSeries.links.template.distance = 2;
-
-    //     chart.zoomable = false; // Disable chart zooming
-
-
-    // }
 
 
 
@@ -1489,6 +1402,51 @@ export class ComparativeResultsComponent implements OnInit, AfterViewInit, OnDes
                 resultArray.push(element2);
             });
         });
+    }
+
+
+    isFirstAvailQuestion(questionName: string, outerIndex: number, innerIndex: number): boolean {
+        // Check if the current question is the first occurrence
+        for (let i = 0; i < outerIndex; i++) {
+            const questions = this.availabilityArray[i][1];
+            if (questions.findIndex((val: any) => val.question_name === questionName) !== -1) {
+                return false; // Not the first occurrence
+            }
+        }
+        // If it's the first occurrence in the current array, check if it's the first occurrence in the inner array
+        return this.availabilityArray[outerIndex][1].findIndex((val: any, index: number) => index < innerIndex && val.question_name === questionName) === -1;
+    }
+
+    isFirstReadiQuestion(questionName: string, outerIndex: number, innerIndex: number): boolean {
+        for (let i = 0; i < outerIndex; i++) {
+            const questions = this.readinessArray[i][1];
+            if (questions.findIndex((val: any) => val.question_name === questionName) !== -1) {
+                return false;
+            }
+        }
+        return this.readinessArray[outerIndex][1].findIndex((val: any, index: number) => index < innerIndex && val.question_name === questionName) === -1;
+    }
+
+    isFirstCapacityQuestion(questionName: string, outerIndex: number, innerIndex: number): boolean {
+        for (let i = 0; i < outerIndex; i++) {
+            const questions = this.capacityBuildArray[i][1];
+            if (questions.findIndex((val: any) => val.question_name === questionName) !== -1) {
+                return false;
+            }
+        }
+
+        return this.capacityBuildArray[outerIndex][1].findIndex((val: any, index: number) => index < innerIndex && val.question_name === questionName) === -1;
+    }
+
+    isFirstDevelopmentQuestion(questionName: string, outerIndex: number, innerIndex: number): boolean {
+        for (let i = 0; i < outerIndex; i++) {
+            const questions = this.developmentStratArray[i][1];
+            if (questions.findIndex((val: any) => val.question_name === questionName) !== -1) {
+                return false;
+            }
+        }
+
+        return this.developmentStratArray[outerIndex][1].findIndex((val: any, index: number) => index < innerIndex && val.question_name === questionName) === -1;
     }
 
 
