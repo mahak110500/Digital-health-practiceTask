@@ -66,6 +66,7 @@ export class ComparativeResultsComponent implements OnInit, AfterViewInit, OnDes
     result1: any = [];
     option: any;
     chart2: any;
+    charts: any
     presentType: any[] = [];
     prospectiveType: any[] = [];
     dom: any;
@@ -162,7 +163,6 @@ export class ComparativeResultsComponent implements OnInit, AfterViewInit, OnDes
 
         this.utilityService.governanceTypeSource.subscribe((governanceId) => {
             this.governance_id = governanceId;
-
             this.payloadObj = {
                 countries: this.countrySelected,
                 governance_id: governanceId
@@ -199,6 +199,8 @@ export class ComparativeResultsComponent implements OnInit, AfterViewInit, OnDes
         }
 
         modifiedPayloadObj['year'] = this.selectedYear
+        console.log(modifiedPayloadObj);
+
 
         this.comparativeServices.getTopTen(modifiedPayloadObj).subscribe(res => {
 
@@ -228,7 +230,6 @@ export class ComparativeResultsComponent implements OnInit, AfterViewInit, OnDes
                         }
                         if (value['Development Strategy']) {
                             Object.assign(developmentStrategyObject, value['Development Strategy']);
-
                         }
                         break;
                     default:
@@ -242,38 +243,50 @@ export class ComparativeResultsComponent implements OnInit, AfterViewInit, OnDes
             this.DevelopmentStrat = Object.entries(developmentStrategyObject);
 
             this.extractedObjects = this.extractObjectsData(this.Availability);
-            setTimeout(() =>{
-                if (this.extractedObjects.length > 0) {
-                    this.displayTopTen(this.extractedObjects, 'present_availability_chart', 0);
-                }
-            },1000)
-            console.log(this.extractedObjects);
-            
-         
-
             this.extractedObjects2 = this.extractObjectsData(this.Readiness);
-            setTimeout(() =>{
-                if (this.extractedObjects2.length > 0) {
-                    this.displayTopTen(this.extractedObjects2, 'present_readiness_chart', 0);
-                }
-            },1000)
-          
-
             this.extractedObjects3 = this.extractObjectsData(this.CapacityBuilding);
-            setTimeout(() =>{
-                if (this.extractedObjects3.length > 0) {
-                    this.displayTopTen(this.extractedObjects3, 'prospective_capacity_chart', 0);
-                }
-            },1000)
-         
-
             this.extractedObjects4 = this.extractObjectsData(this.DevelopmentStrat);
-            setTimeout(() =>{
-                if (this.extractedObjects4.length > 0) {
+
+            let displayAllData = true; // Flag to control initial display
+
+            if (modifiedPayloadObj['ultimateId']) {
+                console.log(modifiedPayloadObj['ultimateId']);
+            }
+
+            // Display corresponding chart based on ultimateId
+            if (modifiedPayloadObj['ultimateId'] && modifiedPayloadObj['ultimateId'] === 2) {
+                setTimeout(() => {
+                    this.displayTopTen(this.extractedObjects, 'present_availability_chart', 0);
+
+                }, 1000)
+                displayAllData = false;
+            } else if (modifiedPayloadObj['ultimateId'] && modifiedPayloadObj['ultimateId'] === 1) {
+                setTimeout(() => {
+                    this.displayTopTen(this.extractedObjects2, 'present_readiness_chart', 0);
+                }, 1000)
+                displayAllData = false;
+            } else if (modifiedPayloadObj['ultimateId'] && modifiedPayloadObj['ultimateId'] === 3) {
+                setTimeout(() => {
                     this.displayTopTen(this.extractedObjects4, 'prospective_development_chart', 0);
-                }
-            },1000)
-          
+                }, 1000)
+                displayAllData = false;
+            } else if (modifiedPayloadObj['ultimateId'] && modifiedPayloadObj['ultimateId'] === 4) {
+                setTimeout(() => {
+                    this.displayTopTen(this.extractedObjects3, 'prospective_capacity_chart', 0);
+                }, 1000)
+                displayAllData = false;
+            }
+
+            // Display all data if the flag is still true
+            if (displayAllData) {
+                setTimeout(() => {
+                    this.displayTopTen(this.extractedObjects, 'present_availability_chart', 0);
+                    this.displayTopTen(this.extractedObjects2, 'present_readiness_chart', 0);
+                    this.displayTopTen(this.extractedObjects3, 'prospective_capacity_chart', 0);
+                    this.displayTopTen(this.extractedObjects4, 'prospective_development_chart', 0);
+                }, 1000)
+            }
+
         });
     }
 
@@ -300,8 +313,6 @@ export class ComparativeResultsComponent implements OnInit, AfterViewInit, OnDes
 
 
     displayTopTen(data: any[], chartIdPrefix: string, startIndex: number) {
-        // console.log(data);
-
         this.newDataArray = []
         am4core.useTheme(am4themes_animated);
         this.newDataArray = data.map((obj: any) => obj.data);
@@ -321,20 +332,20 @@ export class ComparativeResultsComponent implements OnInit, AfterViewInit, OnDes
             const chartContainer: any = document.getElementById(divId); //imp
             // chartContainer.appendChild(categoryInfoDiv);
 
-
             const chartDiv = document.createElement('div');
             chartDiv.setAttribute('id', divId);
-            chartDiv.style.width = '400px';
-            chartDiv.style.height = '300px';
+            chartDiv.style.width = '600px'; // Adjust the desired width here
+            chartDiv.style.height = '400px'; // Adjust the desired height here
             // chartContainer.appendChild(chartDiv);
 
             // Create the chart inside the corresponding div
-            console.log(divId);
-            
-            let chart = am4core.create(divId, am4charts.XYChart);
+            let chart: any;
+            if (chart) chart.destroy();
+            chart = am4core.create(divId, am4charts.XYChart);
             chart.hiddenState.properties.opacity = 0; // this creates initial fade-in
 
             chart.data = category;
+            // console.log(chart.data);
 
             let categoryAxis = chart.xAxes.push(new am4charts.CategoryAxis());
             categoryAxis.renderer.grid.template.location = 0;
@@ -342,6 +353,7 @@ export class ComparativeResultsComponent implements OnInit, AfterViewInit, OnDes
             categoryAxis.renderer.minGridDistance = 30;
             categoryAxis.fontSize = 11;
             categoryAxis.renderer.labels.template.dy = 5;
+
 
             let image = new am4core.Image();
             image.horizontalCenter = "middle";
@@ -371,83 +383,16 @@ export class ComparativeResultsComponent implements OnInit, AfterViewInit, OnDes
             series.columns.template.strokeOpacity = 0;
             series.columns.template.width = am4core.percent(22);
 
+            // Set the desired width and height for the chart container
+            chartContainer.style.width = '420px';
+            chartContainer.style.height = '400px';
+
             // as by default columns of the same series are of the same color, we add adapter which takes colors from chart.colors color set
-            series.columns.template.adapter.add("fill", function (fill, target: any) {
+            series.columns.template.adapter.add("fill", function (fill: any, target: any) {
                 return chart.colors.getIndex(target.dataItem.index);
             });
 
-
-
         })
-
-
-        // Iterate over each category in the API response
-        // for (let i = 0; i < apiResponse.length; i++) {
-        //     const category = apiResponse[i];
-        //     const divId = `${containerId}-${i}`;
-        //     console.log(divId);
-
-
-        //     // Display ultimate_field and taxonomy_name above the chart
-        //     const categoryInfoDiv = document.createElement('div');
-        //     categoryInfoDiv.style.textAlign = 'center';
-        //     categoryInfoDiv.style.marginBottom = '10px';
-        //     categoryInfoDiv.innerHTML = `<b>${category[0]?.ultimate_field}</b>&nbsp;&nbsp;&nbsp;&nbsp;<b>${category[0]?.taxonomy_name}</b> `;
-        //     const chartContainer: any = document.getElementById(containerId); //imp
-        //     chartContainer.appendChild(categoryInfoDiv);
-
-        //     const chartDiv = document.createElement('div');
-        //     chartDiv.setAttribute('id', divId);
-        //     chartDiv.style.width = '400px';
-        //     chartDiv.style.height = '300px';
-        //     chartContainer.appendChild(chartDiv);
-
-        //     // Create the chart inside the corresponding div
-        //     let chart = am4core.create(divId, am4charts.XYChart);
-        //     chart.hiddenState.properties.opacity = 0; // this creates initial fade-in
-
-        //     chart.data = category;
-
-        //     let categoryAxis = chart.xAxes.push(new am4charts.CategoryAxis());
-        //     categoryAxis.renderer.grid.template.location = 0;
-        //     categoryAxis.dataFields.category = "country_name";
-        //     categoryAxis.renderer.minGridDistance = 30;
-        //     categoryAxis.fontSize = 11;
-        //     categoryAxis.renderer.labels.template.dy = 5;
-
-        //     let image = new am4core.Image();
-        //     image.horizontalCenter = "middle";
-        //     image.width = 12;
-        //     image.height = 12;
-        //     image.verticalCenter = "middle";
-        //     image.adapter.add("href", (href, target: any) => {
-        //         let category = target.dataItem.category;
-        //         if (category) {
-        //             return "https://www.amcharts.com/wp-content/uploads/flags/" + category.split(" ").join("-").toLowerCase() + ".svg";
-        //         }
-        //         return href;
-        //     })
-        //     categoryAxis.dataItems.template.bullet = image;
-
-        //     let valueAxis = chart.yAxes.push(new am4charts.ValueAxis());
-        //     valueAxis.min = 0;
-        //     valueAxis.renderer.minGridDistance = 35;
-        //     valueAxis.renderer.baseGrid.disabled = true;
-
-
-        //     let series = chart.series.push(new am4charts.ColumnSeries());
-        //     series.dataFields.categoryX = "country_name";
-        //     series.dataFields.valueY = "score";
-        //     series.columns.template.tooltipText = "{valueY.value}";
-        //     series.columns.template.tooltipY = 0;
-        //     series.columns.template.strokeOpacity = 0;
-        //     series.columns.template.width = am4core.percent(22);
-
-        //     // as by default columns of the same series are of the same color, we add adapter which takes colors from chart.colors color set
-        //     series.columns.template.adapter.add("fill", function (fill, target: any) {
-        //         return chart.colors.getIndex(target.dataItem.index);
-        //     });
-        // }
 
     }
 
@@ -620,9 +565,6 @@ export class ComparativeResultsComponent implements OnInit, AfterViewInit, OnDes
             });
             myChart.resize();
 
-
-
-
         });
 
     }
@@ -701,57 +643,11 @@ export class ComparativeResultsComponent implements OnInit, AfterViewInit, OnDes
 
     //Force Directed Tree
     createNetworkChart() {
-        am4core.useTheme(am4themes_animated);
+        const governanceId :any = localStorage.getItem('governance_id');
+        console.log(governanceId);
 
-        var chart = am4core.create("networkChart", am4plugins_forceDirected.ForceDirectedTree);
-        var networkSeries = chart.series.push(new am4plugins_forceDirected.ForceDirectedSeries())
 
-        networkSeries.nodes.template.outerCircle.filters.push(new am4core.DropShadowFilter());
-        networkSeries.dataFields.linkWith = "linkWith";
-        networkSeries.dataFields.name = "name";
-        networkSeries.dataFields.id = "governance_id";
-        networkSeries.dataFields.value = "value";
-        networkSeries.dataFields.children = "children";
-        networkSeries.dataFields.color = "color";
-        networkSeries.dataFields.fixed = "fixed";
-        networkSeries.nodes.template.propertyFields.x = "x";
-        networkSeries.nodes.template.propertyFields.y = "y";
-        networkSeries.nodes.template.expandAll = false;
-
-        networkSeries.maxLevels = 2;
-        networkSeries.links.template.strength = 1;
-        networkSeries.manyBodyStrength = -20;
-        networkSeries.centerStrength = 0.4;
-
-        networkSeries.nodes.template.label.text = "{name}"
-        networkSeries.fontSize = 10;
-        networkSeries.minRadius = 10;
-        networkSeries.maxRadius = 24;
-
-        var nodeTemplate = networkSeries.nodes.template;
-        nodeTemplate.fillOpacity = 1;
-        nodeTemplate.label.hideOversized = true;
-        nodeTemplate.label.truncate = true;
-
-        var linkTemplate = networkSeries.links.template;
-        linkTemplate.strokeWidth = 2;
-        linkTemplate.distance = 1;
-
-        nodeTemplate.events.on("out", function (event) {
-            var dataItem = event.target.dataItem;
-            dataItem.childLinks.each(function (link) {
-                link.isHover = false;
-            })
-        })
-
-        networkSeries.events.on("inited", function () {
-            networkSeries.animate({
-                property: "velocityDecay",
-                to: 0.7
-            }, 3000);
-        });
-
-        networkSeries.data = [
+        let Health_and_It_data = [
             {
                 "name": "Health & IT",
                 "value": 100,
@@ -1085,16 +981,497 @@ export class ComparativeResultsComponent implements OnInit, AfterViewInit, OnDes
             }
         ];
 
+        let Digital_health_data =  [
+            {
+                "name": "Digital Health",
+                "value": 100,
+                "color": "#0000FF",
+                "fixed": true,
+                "governance_id": 2,
+                x: am4core.percent(50),
+                y: am4core.percent(20),
+                "children": [
+                    {
+                        "name": "Present \n Development",
+                        "value": 60,
+                        "governance_id": 2,
+                        "development_id": 1,
+                        "color": "#0000FF",
+                        "fixed": true,
+                        x: am4core.percent(30),
+                        y: am4core.percent(40),
+                        "children": [
+                            {
+                                "name": "Availability",
+                                "value": 40,
+                                "governance_id": 2,
+                                "development_id": 1,
+                                "ultimate_id": 2,
+                                "color": "#0000FF",
+                                "fixed": true,
+                                x: am4core.percent(15),
+                                y: am4core.percent(50),
+                                "children": [
+                                    {
+                                        "name": "DH Infrastructure",
+                                        "value": 0.6,
+                                        "governance_id": 2,
+                                        "development_id": 1,
+                                        "ultimate_id": 2,
+                                        "taxonomy_id": 7,
+                                        "color": "#0000FF",
+                                        "fixed": true,
+                                        x: am4core.percent(3),
+                                        y: am4core.percent(68),
+                                    },
+                                    {
+                                        "name": "Digital Health (DH) Governance",
+                                        "value": 0.6,
+                                        "governance_id": 2,
+                                        "development_id": 1,
+                                        "ultimate_id": 2,
+                                        "taxonomy_id": 6,
+                                        "color": "#0000FF",
+                                        "fixed": true,
+                                        x: am4core.percent(8),
+                                        y: am4core.percent(71),
+                                    },
+                                    {
+                                        "name": "Funding and resource",
+                                        "value": 0.6,
+                                        "governance_id": 2,
+                                        "development_id": 1,
+                                        "ultimate_id": 2,
+                                        "taxonomy_id": 9,
+                                        "color": "#0000FF",
+                                        "fixed": true,
+                                        x: am4core.percent(12),
+                                        y: am4core.percent(75),
+                                    },
+                                    {
+                                        "name": "Legal rules",
+                                        "value": 0.6,
+                                        "governance_id": 2,
+                                        "development_id": 1,
+                                        "ultimate_id": 2,
+                                        "taxonomy_id": 10,
+                                        "color": "#0000FF",
+                                        "fixed": true,
+                                        x: am4core.percent(16),
+                                        y: am4core.percent(78),
+                                    },
+                                    {
+                                        "name": "Literacy (patient+ workforce)",
+                                        "value": 0.6,
+                                        "governance_id": 2,
+                                        "development_id": 1,
+                                        "ultimate_id": 2,
+                                        "taxonomy_id": 12,
+                                        "color": "#0000FF",
+                                        "fixed": true,
+                                        x: am4core.percent(21),
+                                        y: am4core.percent(75),
+                                    },
+                                    {
+                                        "name": "Research Program and funding",
+                                        "value": 0.6,
+                                        "governance_id": 2,
+                                        "development_id": 1,
+                                        "ultimate_id": 2,
+                                        "taxonomy_id": 11,
+                                        "color": "#0000FF",
+                                        "fixed": true,
+                                        x: am4core.percent(25),
+                                        y: am4core.percent(71),
+                                    },
+                                    {
+                                        "name": "Workforce (Technical and Health care)",
+                                        "value": 0.6,
+                                        "governance_id": 2,
+                                        "development_id": 1,
+                                        "ultimate_id": 2,
+                                        "taxonomy_id": 8,
+                                        "color": "#0000FF",
+                                        "fixed": true,
+                                        x: am4core.percent(29),
+                                        y: am4core.percent(68),
+                                    }
+                                ]
+                            },
+                            {
+                                "name": "Readiness",
+                                "value": 40,
+                                "governance_id": 2,
+                                "development_id": 1,
+                                "ultimate_id": 1,
+                                "color": "#0000FF",
+                                "fixed": true,
+                                x: am4core.percent(43),
+                                y: am4core.percent(53),
+                                "children": [
+                                    {
+                                        "name": "DH Infrastructure",
+                                        "value": 0.6,
+                                        "governance_id": 2,
+                                        "development_id": 1,
+                                        "ultimate_id": 1,
+                                        "taxonomy_id": 7,
+                                        "color": "#0000FF",
+                                        "fixed": true,
+                                        x: am4core.percent(33),
+                                        y: am4core.percent(68),
+                                    },
+                                    {
+                                        "name": "Digital Health (DH) Governance",
+                                        "value": 0.6,
+                                        "governance_id": 2,
+                                        "development_id": 1,
+                                        "ultimate_id": 1,
+                                        "taxonomy_id": 6,
+                                        "color": "#0000FF",
+                                        "fixed": true,
+                                        x: am4core.percent(37),
+                                        y: am4core.percent(72),
+                                    },
+                                    {
+                                        "name": "Funding and resource",
+                                        "value": 0.6,
+                                        "governance_id": 2,
+                                        "development_id": 1,
+                                        "ultimate_id": 1,
+                                        "taxonomy_id": 9,
+                                        "color": "#0000FF",
+                                        "fixed": true,
+                                        x: am4core.percent(41),
+                                        y: am4core.percent(76),
+                                    },
+                                    {
+                                        "name": "Legal rules",
+                                        "value": 0.6,
+                                        "governance_id": 2,
+                                        "development_id": 1,
+                                        "ultimate_id": 1,
+                                        "taxonomy_id": 10,
+                                        "color": "#0000FF",
+                                        "fixed": true,
+                                        x: am4core.percent(45),
+                                        y: am4core.percent(80),
+                                    },
+                                    {
+                                        "name": "Literacy (patient+ workforce)",
+                                        "value": 0.6,
+                                        "governance_id": 2,
+                                        "development_id": 1,
+                                        "ultimate_id": 1,
+                                        "taxonomy_id": 12,
+                                        "color": "#0000FF",
+                                        "fixed": true,
+                                        x: am4core.percent(48),
+                                        y: am4core.percent(76),
+                                    },
+                                    {
+                                        "name": "Research Program and funding",
+                                        "value": 0.6,
+                                        "governance_id": 2,
+                                        "development_id": 1,
+                                        "ultimate_id": 1,
+                                        "taxonomy_id": 11,
+                                        "color": "#0000FF",
+                                        "fixed": true,
+                                        x: am4core.percent(52),
+                                        y: am4core.percent(72),
+                                    },
+                                    {
+                                        "name": " Workforce (Technical and Health care)",
+                                        "value": 0.6,
+                                        "governance_id": 2,
+                                        "development_id": 1,
+                                        "ultimate_id": 1,
+                                        "taxonomy_id": 8,
+                                        "color": "#0000FF",
+                                        "fixed": true,
+                                        x: am4core.percent(55),
+                                        y: am4core.percent(68),
+                                    }
+                                ]
+                            }
+
+                        ]
+                    },
+                    {
+                        "name": "Prospective \n Development",
+                        "color": "#0000FF",
+                        "value": 60,
+                        "governance_id": 2,
+                        "development_id": 2,
+                        "fixed": true,
+                        x: am4core.percent(70),
+                        y: am4core.percent(40),
+                        "children": [
+                            {
+                                "name": "Capacity \n Building",
+                                "value": 40,
+                                "governance_id": 2,
+                                "development_id": 2,
+                                "ultimate_id": 4,
+                                "color": "#0000FF",
+                                "fixed": true,
+                                x: am4core.percent(62),
+                                y: am4core.percent(60),
+                                "children": [
+                                    {
+                                        "name": "DH Infrastructure",
+                                        "value": 0.6,
+                                        "governance_id": 2,
+                                        "development_id": 2,
+                                        "ultimate_id": 4,
+                                        "taxonomy_id": 7,
+                                        "color": "#0000FF",
+                                        "fixed": true,
+                                        x: am4core.percent(53),
+                                        y: am4core.percent(77),
+                                    },
+                                    {
+                                        "name": "Digital Health (DH) Governance",
+                                        "value": 0.6,
+                                        "governance_id": 2,
+                                        "development_id": 2,
+                                        "ultimate_id": 4,
+                                        "taxonomy_id": 6,
+                                        "color": "#0000FF",
+                                        "fixed": true,
+                                        x: am4core.percent(57),
+                                        y: am4core.percent(80),
+                                    },
+                                    {
+                                        "name": "Funding and resource",
+                                        "value": 0.6,
+                                        "governance_id": 2,
+                                        "development_id": 2,
+                                        "ultimate_id": 4,
+                                        "taxonomy_id": 9,
+                                        "color": "#0000FF",
+                                        "fixed": true,
+                                        x: am4core.percent(60),
+                                        y: am4core.percent(83),
+                                    },
+                                    {
+                                        "name": "Legal rules",
+                                        "value": 0.6,
+                                        "governance_id": 2,
+                                        "development_id": 2,
+                                        "ultimate_id": 4,
+                                        "taxonomy_id": 10,
+                                        "color": "#0000FF",
+                                        "fixed": true,
+                                        x: am4core.percent(64),
+                                        y: am4core.percent(86),
+
+                                    },
+                                    {
+                                        "name": "Literacy (patient+ workforce)",
+                                        "value": 0.6,
+                                        "governance_id": 2,
+                                        "development_id": 2,
+                                        "ultimate_id": 4,
+                                        "taxonomy_id": 12,
+                                        "color": "#0000FF",
+                                        "fixed": true,
+                                        x: am4core.percent(68),
+                                        y: am4core.percent(83),
+
+                                    },
+                                    {
+                                        "name": "Research Program and funding",
+                                        "value": 0.6,
+                                        "governance_id": 2,
+                                        "development_id": 2,
+                                        "ultimate_id": 4,
+                                        "taxonomy_id": 11,
+                                        "color": "#0000FF",
+                                        "fixed": true,
+                                        x: am4core.percent(71),
+                                        y: am4core.percent(80),
+                                    },
+                                    {
+                                        "name": " Workforce (Technical and Health care)",
+                                        "value": 0.6,
+                                        "governance_id": 2,
+                                        "development_id": 2,
+                                        "ultimate_id": 4,
+                                        "taxonomy_id": 8,
+                                        "color": "#0000FF",
+                                        "fixed": true,
+                                        x: am4core.percent(74),
+                                        y: am4core.percent(77),
+                                    }
+
+                                ]
+                            },
+                            {
+                                "name": "Development \n Strategy",
+                                "value": 40,
+                                "governance_id": 2,
+                                "development_id": 2,
+                                "ultimate_id": 3,
+                                "color": "#0000FF",
+                                "fixed": true,
+                                x: am4core.percent(87),
+                                y: am4core.percent(60),
+                                "children": [
+                                    {
+                                        "name": "DH Infrastructure",
+                                        "value": 0.6,
+                                        "governance_id": 2,
+                                        "development_id": 2,
+                                        "ultimate_id": 3,
+                                        "taxonomy_id": 7,
+                                        "color": "#0000FF",
+                                        "fixed": true,
+                                        x: am4core.percent(78),
+                                        y: am4core.percent(76),
+                                    },
+                                    {
+                                        "name": "Digital Health (DH) Governance",
+                                        "value": 0.6,
+                                        "governance_id": 2,
+                                        "development_id": 2,
+                                        "ultimate_id": 3,
+                                        "taxonomy_id": 6,
+                                        "color": "#0000FF",
+                                        "fixed": true,
+                                        x: am4core.percent(82),
+                                        y: am4core.percent(79),
+                                    },
+                                    {
+                                        "name": "Funding and resource",
+                                        "value": 2,
+                                        "governance_id": 2,
+                                        "development_id": 2,
+                                        "ultimate_id": 3,
+                                        "taxonomy_id": 9,
+                                        "color": "#0000FF",
+                                        "fixed": true,
+                                        x: am4core.percent(85),
+                                        y: am4core.percent(83),
+                                    },
+                                    {
+                                        "name": "Legal rules",
+                                        "value": 0.6,
+                                        "governance_id": 2,
+                                        "development_id": 2,
+                                        "ultimate_id": 3,
+                                        "taxonomy_id": 10,
+                                        "color": "#0000FF",
+                                        "fixed": true,
+                                        x: am4core.percent(88),
+                                        y: am4core.percent(86),
+                                    },
+                                    {
+                                        "name": "Literacy (patient+ workforce)",
+                                        "value": 0.6,
+                                        "governance_id": 2,
+                                        "development_id": 2,
+                                        "ultimate_id": 3,
+                                        "taxonomy_id": 12,
+                                        "color": "#0000FF",
+                                        "fixed": true,
+                                        x: am4core.percent(91),
+                                        y: am4core.percent(83),
+                                    },
+                                    {
+                                        "name": "Research Program and funding",
+                                        "value": 0.6,
+                                        "governance_id": 2,
+                                        "development_id": 2,
+                                        "ultimate_id": 3,
+                                        "taxonomy_id": 11,
+                                        "color": "#0000FF",
+                                        "fixed": true,
+                                        x: am4core.percent(94),
+                                        y: am4core.percent(79),
+                                    },
+                                    {
+                                        "name": " Workforce (Technical and Health care)",
+                                        "value": 0.6,
+                                        "governance_id": 2,
+                                        "development_id": 2,
+                                        "ultimate_id": 3,
+                                        "taxonomy_id": 8,
+                                        "color": "#0000FF",
+                                        "fixed": true,
+                                        x: am4core.percent(98),
+                                        y: am4core.percent(76),
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            }
+        ];
+
+        am4core.useTheme(am4themes_animated);
+
+        var chart = am4core.create("networkChart", am4plugins_forceDirected.ForceDirectedTree);
+        var networkSeries = chart.series.push(new am4plugins_forceDirected.ForceDirectedSeries())
+
+
+        networkSeries.nodes.template.outerCircle.filters.push(new am4core.DropShadowFilter());
+        networkSeries.dataFields.linkWith = "linkWith";
+        networkSeries.dataFields.name = "name";
+        networkSeries.dataFields.id = "name";
+        networkSeries.dataFields.value = "value";
+        networkSeries.dataFields.children = "children";
+        networkSeries.dataFields.color = "color";
+        networkSeries.dataFields.fixed = "fixed";
+        networkSeries.nodes.template.propertyFields.x = "x";
+        networkSeries.nodes.template.propertyFields.y = "y";
+
+
+        networkSeries.nodes.template.expandAll = false;
+
+        networkSeries.maxLevels = 2;
+        networkSeries.links.template.strength = 1;
+        networkSeries.manyBodyStrength = -20;
+        networkSeries.centerStrength = 0.4;
+
+        networkSeries.nodes.template.label.text = "{name}"
+        networkSeries.fontSize = 10;
+        networkSeries.minRadius = 10;
+        networkSeries.maxRadius = 24;
+
+        var nodeTemplate = networkSeries.nodes.template;
+        nodeTemplate.fillOpacity = 1;
+        nodeTemplate.label.hideOversized = true;
+        nodeTemplate.label.truncate = true;
+
+        var linkTemplate = networkSeries.links.template;
+        linkTemplate.strokeWidth = 2;
+        linkTemplate.distance = 1;
+
+        nodeTemplate.events.on("out", function (event) {
+            var dataItem = event.target.dataItem;
+            dataItem.childLinks.each(function (link) {
+                link.isHover = false;
+            })
+        })
+
+        networkSeries.events.on("inited", function () {
+            networkSeries.animate({
+                property: "velocityDecay",
+                to: 0.7
+            }, 3000);
+        });
+
+        console.log(governanceId);
+        
+        // networkSeries.data = Health_and_It_data;  //changes on basis of governance_id
+        networkSeries.data = (governanceId == 1) ?  Health_and_It_data : Digital_health_data;
+
+
 
         nodeTemplate.events.on("hit", (event: any) => {
-
-            // Clear previous chart
-            // if (this.dom.firstChild) {
-            //     while (this.dom.firstChild) {
-            //         this.dom.firstChild.remove();
-            //     }
-            // }
-
 
             var dataItem = event.target.dataItem;
             var dataContext = dataItem.dataContext as IDataContext;
@@ -1113,7 +1490,6 @@ export class ComparativeResultsComponent implements OnInit, AfterViewInit, OnDes
             }
 
             this.comparativeOverViewData(this.payloadObj);
-            // this.BarGraphData(this.payloadObj);
             this.BarGraphData(this.payloadObj);
             this.getTopTenData(this.payloadObj);
         });

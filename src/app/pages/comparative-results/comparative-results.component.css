@@ -321,4 +321,11 @@ span.square-badge.danger {
 #networkChart {
     width: 300px;
     height: 300px;
-  }
+}
+
+
+.bar-chart {
+    width: 300px;
+    height: 400px;
+    margin-bottom: 20px;
+}

@@ -587,7 +587,7 @@
                     </div>
                     <div class="md-padding main-head" layout="row" layout-wrap style="margin-left: 60px;">
                         <div class="bar-chart-card" *ngFor="let category of presentType; let i = index">
-                            <h3>{{ category.categoryName }}</h3>
+                            <!-- <h3>{{ category.categoryName }}</h3> -->
                             <div class="chart" [id]="'present-chart-container-' + i"></div>
                         </div>
                     </div>
@@ -602,7 +602,7 @@
                     </div>
                     <div class="md-padding main-head" layout="row" layout-wrap style="margin-left: 60px;">
                         <div class="bar-chart-card" *ngFor="let category of prospectiveType; let i = index">
-                            <h3>{{ category.categoryName }}</h3>
+                            <!-- <h3>{{ category.categoryName }}</h3> -->
                             <div class="chart" [id]="'prospective-chart-container-' + i"></div>
                         </div>
                     </div>
@@ -622,22 +622,29 @@
                         <h2>{{development_Name[1]}}</h2>
                     </div>
                     <div class="chart-container">
+                        <!-- Availability STARTS -->
                         <div id="chartContainer1" class="bar-chart-card">
-                            <div *ngFor="let objects of extractedObjects;let i = index">
-                                <h3>{{ objects.categoryName }}</h3>
-
-                                <div [id]="'present_availability_chart-' + i"></div>
+                            <div *ngFor="let objects of extractedObjects; let i = index">
+                                <!-- <h3>{{ objects.categoryName }}</h3> -->
+                                <div  [id]="'present_availability_chart-' + i"
+                                    *ngIf="objects.data.length > 0"></div>
+                                
                             </div>
                         </div>
+                        <!-- Availability ENDS -->
 
+                        <!-- Readiness STARTS -->
                         <div id="chartContainer2" class="bar-chart-card">
-                            <div *ngFor="let objects of extractedObjects2;let i = index">
-                                <h3>{{ objects.categoryName }}</h3>
-
-                                <div [id]="'present_readiness_chart-' + i"></div>
+                            <div *ngFor="let objects of extractedObjects2; let i = index">
+                                <!-- <h3>{{ objects.categoryName }}</h3> -->
+                                <div [id]="'present_readiness_chart-' + i"
+                                    *ngIf="objects.data.length > 0"></div>
+                              
                             </div>
                         </div>
+                        <!-- Readiness ENDS -->
                     </div>
+
                 </div>
             </div>
         </div>
@@ -654,15 +661,14 @@
                             <div *ngFor="let objects of extractedObjects3;let i = index">
                                 <h3>{{ objects.categoryName }}</h3>
 
-                                <div [id]="'prospective_capacity_chart-' + i"></div>
+                                <div class="bar-chart" [id]="'prospective_capacity_chart-' + i"></div>
                             </div>
                         </div>
 
                         <div id="chartContainer4" class="bar-chart-card">
                             <div *ngFor="let objects of extractedObjects4;let i = index">
                                 <h3>{{ objects.categoryName }}</h3>
-
-                                <div [id]="'prospective_development_chart-' + i"></div>
+                                <div class="bar-chart" [id]="'prospective_development_chart-' + i"></div>
                             </div>
                         </div>
 
